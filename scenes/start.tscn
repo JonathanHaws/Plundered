@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://safr0287hjda"]
+
+[ext_resource type="Script" uid="uid://pm43grwmg3qo" path="res://scripts/menu/pause_toggle.gd" id="1_u80x2"]
+[ext_resource type="PackedScene" uid="uid://butlqj718j0gj" path="res://scenes/menu/main.tscn" id="2_u80x2"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1svla"]
+
+[node name="Start" type="Node3D" unique_id=214513969]
+
+[node name="Pause" type="Control" parent="." unique_id=1118921173]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u80x2")
+
+[node name="Main" parent="Pause" unique_id=1127001201 instance=ExtResource("2_u80x2")]
+layout_mode = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=548282033]
+transform = Transform3D(2.5266905, 0, 0, 0, 1, 0, 0, 0, 2.1928353, 0, 0, 0)
+mesh = SubResource("PlaneMesh_1svla")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=806780831]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2896433, 4.5527954)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D" unique_id=1605640328]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.5908117)

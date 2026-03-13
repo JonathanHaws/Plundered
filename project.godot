@@ -1,0 +1,39 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="GodotWild91"
+run/main_scene="uid://safr0287hjda"
+config/features=PackedStringArray("4.6", "Forward Plus")
+boot_splash/show_image=false
+
+[audio]
+
+buses/default_bus_layout="uid://bcbsw2ugh4pei"
+
+[autoload]
+
+Config="*uid://chbxdtl0hptu3"
+Save="*uid://dxcn412ybrplo"
+
+[display]
+
+window/size/mode=4
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
