@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://ygu7opd5je0u"]
+
+[ext_resource type="Script" uid="uid://hqtfeb3i78kr" path="res://scripts/player/player.gd" id="1_smehm"]
+[ext_resource type="Script" uid="uid://b7ftts4cntmsu" path="res://scripts/player/god_mode.gd" id="2_smehm"]
+[ext_resource type="Script" uid="uid://bqehmyoma1axh" path="res://scripts/components/audio_spawner.gd" id="2_ur7pv"]
+[ext_resource type="AudioStream" uid="uid://0eteiw5oeit" path="res://audio/Ambience.ogg" id="3_y4r1p"]
+[ext_resource type="AudioStream" uid="uid://6nprinh82ki0" path="res://audio/Steps_1.ogg" id="4_d2wvv"]
+[ext_resource type="AudioStream" uid="uid://bdxrr02lap7qd" path="res://audio/Steps_2.ogg" id="5_3v2ag"]
+[ext_resource type="AudioStream" uid="uid://5gyev66yjri4" path="res://audio/Steps_3.ogg" id="6_jej6c"]
+[ext_resource type="Script" uid="uid://duii60pm5jcdv" path="res://scripts/player/fov_lerp.gd" id="8_oprun"]
+
+[sub_resource type="Animation" id="Animation_tn317"]
+resource_name = "Idle"
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_smehm"]
+resource_name = "Jump"
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_ur7pv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:speed_multiplier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_8itgj"]
+resource_name = "Run"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Audio/Footsteps")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_random_child"
+}, {
+"args": [],
+"method": &"play_random_child"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_fjrip"]
+resource_name = "Steer"
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_m8nf6"]
+resource_name = "Walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Audio/Footsteps")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_random_child"
+}, {
+"args": [],
+"method": &"play_random_child"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tn317"]
+_data = {
+&"Idle": SubResource("Animation_tn317"),
+&"Jump": SubResource("Animation_smehm"),
+&"RESET": SubResource("Animation_ur7pv"),
+&"Run": SubResource("Animation_8itgj"),
+&"Steer": SubResource("Animation_fjrip"),
+&"Walk": SubResource("Animation_m8nf6")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0auqf"]
+radius = 0.37548828
+height = 1.8762207
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=2089436190 node_paths=PackedStringArray("anim", "cam", "fov_lerp") groups=["player"]]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+script = ExtResource("1_smehm")
+anim = NodePath("State")
+cam = NodePath("Camera3D")
+fov_lerp = NodePath("FovLerp")
+
+[node name="State" type="AnimationPlayer" parent="." unique_id=1299450944 groups=["player_anim"]]
+libraries/ = SubResource("AnimationLibrary_tn317")
+autoplay = &"Idle"
+next/Run = &"Idle"
+next/Walk = &"Idle"
+
+[node name="GodMode" type="Node" parent="." unique_id=24241003 node_paths=PackedStringArray("PLAYER", "CAMERA")]
+script = ExtResource("2_smehm")
+PLAYER = NodePath("..")
+CAMERA = NodePath("../Camera3D")
+
+[node name="Audio" type="Node" parent="." unique_id=669525923]
+script = ExtResource("2_ur7pv")
+
+[node name="Ambience" type="AudioStreamPlayer" parent="Audio" unique_id=1960844833]
+stream = ExtResource("3_y4r1p")
+autoplay = true
+bus = &"SFX"
+
+[node name="Footsteps" type="Node" parent="Audio" unique_id=1955976006]
+script = ExtResource("2_ur7pv")
+
+[node name="Step1" type="AudioStreamPlayer" parent="Audio/Footsteps" unique_id=848723444]
+stream = ExtResource("4_d2wvv")
+bus = &"SFX"
+
+[node name="Step2" type="AudioStreamPlayer" parent="Audio/Footsteps" unique_id=30627649]
+stream = ExtResource("5_3v2ag")
+bus = &"SFX"
+
+[node name="Step3" type="AudioStreamPlayer" parent="Audio/Footsteps" unique_id=974374301]
+stream = ExtResource("6_jej6c")
+bus = &"SFX"
+
+[node name="FovLerp" type="Node" parent="." unique_id=1728721920 node_paths=PackedStringArray("camera_node")]
+script = ExtResource("8_oprun")
+camera_node = NodePath("../Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=568336833]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93811035, 0)
+shape = SubResource("CapsuleShape3D_0auqf")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=808998871]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2607082, 0)

@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://caxkvqo4tig0h"]
+
+[ext_resource type="Shader" uid="uid://itpjedgj8imk" path="res://shaders/ocean.gdshader" id="1_h3ntt"]
+[ext_resource type="Texture2D" uid="uid://ckigyvkhwxslg" path="res://textures/ocean_normal.png" id="2_xfvfd"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_h3ntt")
+shader_parameter/max_depth = 6.0000000894072
+shader_parameter/water_level = -10.0
+shader_parameter/underwater_fog_color = Color(0.26, 0.4679999, 0.52, 1)
+shader_parameter/fade_start_depth = 0.0
+shader_parameter/water_normal_texture = ExtResource("2_xfvfd")
+shader_parameter/scale_normal_1 = 30.0
+shader_parameter/scale_normal_2 = 5.0
+shader_parameter/normal_texture_scroll_direction_1 = Vector2(0.05, 0.02)
+shader_parameter/normal_texture_scroll_direction_2 = Vector2(-0.03, 0.04)

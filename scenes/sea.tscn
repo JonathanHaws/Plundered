@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://safr0287hjda"]
+
+[ext_resource type="Script" uid="uid://pm43grwmg3qo" path="res://scripts/menu/pause_toggle.gd" id="1_1gkki"]
+[ext_resource type="PackedScene" uid="uid://butlqj718j0gj" path="res://scenes/menu/main.tscn" id="2_hfvyu"]
+[ext_resource type="Material" uid="uid://caxkvqo4tig0h" path="res://shaders/ocean.tres" id="3_60wme"]
+[ext_resource type="Script" uid="uid://cua876u5s2w4j" path="res://scripts/ocean.gd" id="4_hfvyu"]
+[ext_resource type="Environment" uid="uid://chlcidt7t3gdg" path="res://shaders/sky.tres" id="4_hlm4b"]
+[ext_resource type="PackedScene" uid="uid://ygu7opd5je0u" path="res://scenes/player.tscn" id="5_erah6"]
+[ext_resource type="PackedScene" uid="uid://cayjt37m1mgxu" path="res://scenes/ship.tscn" id="6_3x8wa"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1svla"]
+lightmap_size_hint = Vector2i(509, 509)
+size = Vector2(500, 500)
+subdivide_width = 1
+subdivide_depth = 1
+
+[node name="Sea" type="Node3D" unique_id=214513969]
+
+[node name="Pause" type="Control" parent="." unique_id=1118921173]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1gkki")
+
+[node name="Main" parent="Pause" unique_id=1127001201 instance=ExtResource("2_hfvyu")]
+layout_mode = 1
+
+[node name="Ocean" type="MeshInstance3D" parent="." unique_id=548282033]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1466732, 0)
+material_override = ExtResource("3_60wme")
+mesh = SubResource("PlaneMesh_1svla")
+script = ExtResource("4_hfvyu")
+
+[node name="Sky" type="WorldEnvironment" parent="." unique_id=1211110995]
+environment = ExtResource("4_hlm4b")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=676342986]
+transform = Transform3D(-0.6868846, 0.44353354, -0.5757322, 0, 0.79218316, 0.61028343, 0.7267665, 0.41919428, -0.5441384, -3.3399532, 19.654726, 0.13701057)
+
+[node name="CharacterBody3D" parent="." unique_id=2089436190 instance=ExtResource("5_erah6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4055591, 13.570429, 6.8220634)
+
+[node name="Ship" parent="." unique_id=768453608 instance=ExtResource("6_3x8wa")]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)

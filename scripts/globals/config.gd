@@ -297,7 +297,6 @@ var idle_timeout_seconds: float = 2.0
 func hidden_cursor_ready() -> void:
 	await get_tree().process_frame
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	idle_time_seconds = idle_timeout_seconds + 1
 func hidden_cursor_process(_delta):
 	#print(Input.get_mouse_mode())

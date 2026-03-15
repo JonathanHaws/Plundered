@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://butlqj718j0gj"]
 
 [ext_resource type="Script" uid="uid://cljkg1218oi1y" path="res://scenes/menu/ui_scale.gd" id="1_r8hr5"]
+[ext_resource type="Script" uid="uid://gf3dfohck7pg" path="res://scripts/menu/restart.gd" id="2_box2j"]
 [ext_resource type="Script" uid="uid://bb314me35cbis" path="res://scripts/menu/redirect.gd" id="2_ynvfx"]
 [ext_resource type="Script" uid="uid://dfc16assxe58f" path="res://scripts/menu/quit.gd" id="3_box2j"]
 
@@ -28,6 +29,12 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(133.5, 68)
 script = ExtResource("1_r8hr5")
+
+[node name="Restart" type="Button" parent="VBoxContainer" unique_id=1957585159]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "RESTART"
+script = ExtResource("2_box2j")
 
 [node name="Audio" type="Button" parent="VBoxContainer" unique_id=926313252 node_paths=PackedStringArray("node_to_replace")]
 layout_mode = 2

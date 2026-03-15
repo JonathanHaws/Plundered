@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cayjt37m1mgxu"]
+
+[ext_resource type="Script" uid="uid://djkqyu78pvsfj" path="res://scripts/ship/ship.gd" id="1_2gnfn"]
+[ext_resource type="PackedScene" uid="uid://dogwvx0ee1oc5" path="res://blender/Ship.blend" id="1_q631a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2gnfn"]
+size = Vector3(14.101, 5.806, 25.337)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q631a"]
+size = Vector3(1.5131836, 1.9111328, 1.3911743)
+
+[node name="Ship" type="RigidBody3D" unique_id=768453608]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_2gnfn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1942152668]
+shape = SubResource("BoxShape3D_2gnfn")
+
+[node name="SteerArea" type="Area3D" parent="." unique_id=1613977548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.396011, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SteerArea" unique_id=1180403861]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3305664, 4.2880692, 0.75180054)
+shape = SubResource("BoxShape3D_q631a")
+
+[node name="Ship" parent="." unique_id=1323256864 instance=ExtResource("1_q631a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.2710137, 0)
