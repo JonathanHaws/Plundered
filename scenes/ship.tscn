@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://djkqyu78pvsfj" path="res://scripts/ship.gd" id="1_2gnfn"]
 [ext_resource type="PackedScene" uid="uid://dogwvx0ee1oc5" path="res://blender/Ship.blend" id="1_q631a"]
+[ext_resource type="PackedScene" uid="uid://5gu0itei5s6b" path="res://scenes/cannon.tscn" id="3_4tobq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2gnfn"]
 size = Vector3(14.101, 3.3469353, 26.225485)
@@ -39,5 +40,8 @@ shape = SubResource("ConcavePolygonShape3D_emiat")
 
 [node name="SteerPosition" type="Node3D" parent="." unique_id=630160363]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.43494105, 8.104315, 0.62535036)
+
+[node name="Cannon" parent="." unique_id=1534587913 instance=ExtResource("3_4tobq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.344675, 6.0724535, -7.934469)
 
 [editable path="Ship"]

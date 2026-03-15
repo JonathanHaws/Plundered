@@ -22,8 +22,8 @@ var submerged: bool = false
 
 func _ready():
 	add_to_group("boats")
-	$SteerArea.body_entered.connect(_on_enter_steer)	# signal
-	$SteerArea.body_exited.connect(_on_exit_steer)	# signal
+	$SteerArea.body_entered.connect(_on_enter_steer)
+	$SteerArea.body_exited.connect(_on_exit_steer)
 	player = get_tree().get_first_node_in_group(player_group)	
 	player_anim = get_tree().get_first_node_in_group(player_animator_group)
 	
@@ -73,6 +73,7 @@ func _physics_process(_delta):
 		if player_anim.current_animation == "Steer": 
 			player_anim.play("Idle")
 			player.speed_multiplier = 1
+			player.mouse_delta = Vector2.ZERO
 		elif in_range_of_steering and Input.is_action_just_pressed("interact"): 
 			player_anim.play("Steer")
 			player.speed_multiplier = 0

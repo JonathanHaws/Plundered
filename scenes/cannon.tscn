@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://5gu0itei5s6b"]
+
+[ext_resource type="Script" uid="uid://cyln4awgcqxhk" path="res://scripts/cannon.gd" id="1_pxhkx"]
+[ext_resource type="PackedScene" uid="uid://cj5v3a31giwri" path="res://blender/cannon.blend" id="1_xuqfy"]
+[ext_resource type="Script" uid="uid://chqlwr5cyriq4" path="res://scripts/components/scene_spawner.gd" id="3_yjxeu"]
+[ext_resource type="PackedScene" uid="uid://2wandfrh36gj" path="res://scenes/cannon_ball.tscn" id="4_jfr8q"]
+
+[sub_resource type="Animation" id="Animation_jfr8q"]
+resource_name = "fire"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0285d"]
+_data = {
+&"fire": SubResource("Animation_jfr8q")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yjxeu"]
+size = Vector3(1.5131836, 1.9111328, 1.3911743)
+
+[node name="Cannon" type="Node3D" unique_id=1534587913 node_paths=PackedStringArray("horizontal_mesh", "vertical_mesh")]
+script = ExtResource("1_pxhkx")
+horizontal_mesh = NodePath("Mesh")
+vertical_mesh = NodePath("Mesh/Cylinder")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1380559551]
+root_node = NodePath("../Mesh/Cylinder/Node3D")
+libraries/ = SubResource("AnimationLibrary_0285d")
+
+[node name="Mesh" parent="." unique_id=654514758 instance=ExtResource("1_xuqfy")]
+
+[node name="Node3D" type="Node3D" parent="Mesh/Cylinder" parent_id_path=PackedInt32Array(654514758, 964844297) index="0" unique_id=1472740933]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.703364, -1.4576646)
+script = ExtResource("3_yjxeu")
+scenes = Array[PackedScene]([ExtResource("4_jfr8q")])
+add_to_scene_root = true
+
+[node name="AimArea" type="Area3D" parent="." unique_id=772253556]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.396011, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AimArea" unique_id=354274694]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036511242, -3.7082922, 0.5335958)
+shape = SubResource("BoxShape3D_yjxeu")
+
+[node name="AimPosition" type="Node3D" parent="." unique_id=1890985665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4256635)
+
+[editable path="Mesh"]

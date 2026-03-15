@@ -16,6 +16,21 @@ subdivide_depth = 1
 
 [node name="Sea" type="Node3D" unique_id=214513969]
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=640228312]
+offset_right = 174.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+color = Color(0.19, 0.19, 0.19, 0.8784314)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect" unique_id=1538725228]
+layout_mode = 0
+offset_right = 67.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="ColorRect/HBoxContainer" unique_id=2035885012]
+layout_mode = 2
+text = "BOUNTY"
+
 [node name="Pause" type="Control" parent="." unique_id=1118921173]
 layout_mode = 3
 anchors_preset = 15
@@ -45,3 +60,7 @@ transform = Transform3D(0.9266599, 0, 0.37590083, 0, 1, 0, -0.37590083, 0, 0.926
 
 [node name="Ship" parent="." unique_id=768453608 instance=ExtResource("6_3x8wa")]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1115183922]
+
+[node name="Node3D" type="Node3D" parent="AnimationPlayer" unique_id=973792650]

@@ -9,6 +9,10 @@
 [ext_resource type="AudioStream" uid="uid://5gyev66yjri4" path="res://audio/Steps_3.ogg" id="6_jej6c"]
 [ext_resource type="Script" uid="uid://duii60pm5jcdv" path="res://scripts/player/fov_lerp.gd" id="8_oprun"]
 
+[sub_resource type="Animation" id="Animation_y4r1p"]
+resource_name = "Aim"
+loop_mode = 1
+
 [sub_resource type="Animation" id="Animation_tn317"]
 resource_name = "Idle"
 loop_mode = 1
@@ -82,6 +86,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tn317"]
 _data = {
+&"Aim": SubResource("Animation_y4r1p"),
 &"Idle": SubResource("Animation_tn317"),
 &"Jump": SubResource("Animation_smehm"),
 &"RESET": SubResource("Animation_ur7pv"),

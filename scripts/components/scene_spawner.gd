@@ -7,7 +7,7 @@ extends Node
 @export var scene_to_spawn: int = 0 ## Specifies which scene to spawn 
 @export var random_scene: bool = false ## Overrides 'scene_to_spawn'
 @export var add_to_scene_root: bool = false ## Makes spawned scene a child of the scene root instead of this node. Useful when particles want to spawn other particles) Still starts with this nodes initial transform though
-@export var add_to_root: bool = false ## Makes it so scene spawned will still exist even if scene changes
+@export var add_to_global_root: bool = false ## Makes it so scene spawned will still exist even if scene changes
 func get_scene_to_spawn(scene_variant: Variant = scene_to_spawn) -> PackedScene:
 	if scenes.size() == 0: return null 
 	if scene_variant != -1: # call method track requesting a specific scene to be spawned
@@ -124,7 +124,7 @@ func spawn(scene_variant: Variant = -1) -> Node:
 	
 	for group in add_to_groups: scene.add_to_group(group)
 	
-	if add_to_root:
+	if add_to_global_root:
 		get_tree().root.add_child(scene)
 	elif add_to_scene_root:
 		var root = get_tree().get_current_scene()
