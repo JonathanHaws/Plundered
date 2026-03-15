@@ -40,8 +40,8 @@ environment = ExtResource("4_hlm4b")
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=676342986]
 transform = Transform3D(-0.6868846, 0.44353354, -0.5757322, 0, 0.79218316, 0.61028343, 0.7267665, 0.41919428, -0.5441384, -3.3399532, 19.654726, 0.13701057)
 
-[node name="CharacterBody3D" parent="." unique_id=2089436190 instance=ExtResource("5_erah6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4055591, 13.570429, 6.8220634)
+[node name="Player" parent="." unique_id=2089436190 instance=ExtResource("5_erah6")]
+transform = Transform3D(0.9266599, 0, 0.37590083, 0, 1, 0, -0.37590083, 0, 0.9266599, 4.9013553, 8.173874, 6.8220634)
 
 [node name="Ship" parent="." unique_id=768453608 instance=ExtResource("6_3x8wa")]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
