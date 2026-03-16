@@ -1,5 +1,6 @@
 extends Node3D
 @export_group("Trajectory")
+@export var root: Node3D = self # specify root for movement/collision
 @export var speed = 15.0
 @export var gravity: float = 0.0  
 @export var random_velocity_x: float = 0.0
@@ -83,7 +84,7 @@ func _physics_process(delta: float) -> void:
 
 				play_collision_animation()
 	
-	global_position += velocity * delta
+	root.global_position += velocity * delta
 
 	
 	

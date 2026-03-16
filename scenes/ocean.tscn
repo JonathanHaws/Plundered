@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bhluruq521f8w"]
+
+[ext_resource type="Material" uid="uid://caxkvqo4tig0h" path="res://shaders/ocean.tres" id="1_fiuhb"]
+[ext_resource type="Script" uid="uid://cua876u5s2w4j" path="res://scripts/ocean.gd" id="2_mn261"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1svla"]
+lightmap_size_hint = Vector2i(509, 509)
+size = Vector2(2000, 2000)
+subdivide_width = 1
+subdivide_depth = 1
+
+[node name="Ocean" type="MeshInstance3D" unique_id=1092928726]
+material_override = ExtResource("1_fiuhb")
+mesh = SubResource("PlaneMesh_1svla")
+script = ExtResource("2_mn261")

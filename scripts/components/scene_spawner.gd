@@ -19,6 +19,9 @@ func get_scene_to_spawn(scene_variant: Variant = scene_to_spawn) -> PackedScene:
 	if scenes.size() == 1: # fallback if only one scene exists
 		return scenes[0]
 	return null 
+func add_dynamic_group(group_name: String) -> void:
+	if not group_name in add_to_groups:
+		add_to_groups.append(group_name)
 
 @export_group("Transform 3D") 
 @export var target: Node3D = null ## Specifies a target to orient towards with spawned scenes initial transform

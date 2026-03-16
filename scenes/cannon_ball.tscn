@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://2wandfrh36gj"]
 
 [ext_resource type="Script" uid="uid://c3ouv873w5vdt" path="res://scripts/components/projectile.gd" id="1_4105j"]
+[ext_resource type="Script" uid="uid://b061ha4j5c6lt" path="res://scripts/components/hurt_shape.gd" id="2_tqdv6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4105j"]
+size = Vector3(0.57958984, 0.6086426, 0.6157837)
 
 [sub_resource type="Animation" id="Animation_choov"]
 resource_name = "lifetime"
@@ -31,16 +35,25 @@ roughness = 0.15
 
 [sub_resource type="SphereMesh" id="SphereMesh_4105j"]
 
-[node name="CannonBall" type="Node3D" unique_id=1806330499]
+[node name="HurtArea" type="Area3D" unique_id=1770059089]
+script = ExtResource("2_tqdv6")
+damage = 150.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1210423163]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0007324219, -0.0076904297, 0.0027770996)
+shape = SubResource("BoxShape3D_4105j")
+
+[node name="CannonBall" type="Node3D" parent="." unique_id=1806330499 node_paths=PackedStringArray("root")]
 script = ExtResource("1_4105j")
+root = NodePath("..")
 speed = 30.0
 gravity = 9.8
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1027988438]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CannonBall" unique_id=1027988438]
 root_node = NodePath("../MeshInstance3D")
 libraries/ = SubResource("AnimationLibrary_4105j")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1897261910]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CannonBall" unique_id=1897261910]
 transform = Transform3D(0.53425354, 0, 0, 0, 0.53425354, 0, 0, 0, 0.53425354, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_choov")
 mesh = SubResource("SphereMesh_4105j")

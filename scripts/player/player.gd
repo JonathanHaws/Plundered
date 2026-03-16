@@ -62,10 +62,6 @@ func _free_movement(_d):
 	velocity.z = dir.z * current_speed
 	move_and_slide()
 	
-	if is_on_floor():
-		if velocity.length() > 0.2:
-			if audio_spawner: audio_spawner.play("Run")
-	
 	if movement_vector.length() == 0:
 		fov_lerp.target_fov = 80 # Idle
 	else:
@@ -79,7 +75,8 @@ func _free_movement(_d):
 		ignore_first_was_on_floor = false
 		
 	if not was_on_floor and on_floor_now:
-		if audio_spawner: audio_spawner.play("Land")	
+		if audio_spawner: 
+			audio_spawner.play("Land")	
 	was_on_floor = on_floor_now
 	
 	if is_on_floor():
@@ -98,3 +95,5 @@ func _physics_process(_delta):
 	if anim.current_animation in ["Idle", "Run", "Walk", "Jump"]:
 		_free_movement(_delta)
 	
+	if global_position.y < 0.0:
+		anim.play("Death")

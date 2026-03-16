@@ -1,27 +1,38 @@
 extends RigidBody3D
+#@export var is_docked: bool = true add if wanting sails to be own control
+@export var is_players_boat: bool = false
 @export var player_group: String = "player"
 @export var player_animator_group: String = "player_anim"
-func _on_enter_steer(body):
-	if body.is_in_group(player_group):
-		in_range_of_steering = true
-func _on_exit_steer(body):
-	if body.is_in_group(player_group):
-		in_range_of_steering = false
-var player: CharacterBody3D
-var player_anim: AnimationPlayer
-var in_range_of_steering: bool = false
-
-@export var is_docked: bool = true
+@export var sink_free_y: float = -50.0
 @export var speed: float = 23
 @export var steer: float = 3
 @export var gravity: float = 9.8
 @export var buoyancy := 1.0
 @export var water_drag := 0.01
 @export var water_angular_drag := 0.05
+var player: CharacterBody3D
+var player_anim: AnimationPlayer
+var in_range_of_steering: bool = false
 var submerged: bool = false
+var sunk: bool = false
+func _on_enter_steer(body):
+	if body.is_in_group(player_group):
+		in_range_of_steering = true
+func _on_exit_steer(body):
+	if body.is_in_group(player_group):
+		in_range_of_steering = false
 
 func _ready():
-	add_to_group("boats")
+	
+	if is_players_boat:
+		Save.data["bounty"] = 0
+		Save.save_game()
+	
+	add_to_group('boats')
+	
+	$HitArea.add_immune_group(name)
+	#print(name)
+	
 	$SteerArea.body_entered.connect(_on_enter_steer)
 	$SteerArea.body_exited.connect(_on_exit_steer)
 	player = get_tree().get_first_node_in_group(player_group)	
@@ -48,8 +59,6 @@ func _ready():
 			#probe.add_child(mesh_instance)
 			$CollisionShape3D.add_child(probe)
 	
-	
-
 func _integrate_forces(state: PhysicsDirectBodyState3D):
 	if submerged:
 		state.linear_velocity *=  1 - water_drag
@@ -57,7 +66,11 @@ func _integrate_forces(state: PhysicsDirectBodyState3D):
 
 func _physics_process(_delta):
 
-	#print(player_in)
+	if sunk and global_position.y < sink_free_y:
+		#print('ship queued free')
+		queue_free()
+
+	#print($HitArea.HEALTH)
 
 	submerged = false
 	for probe in $CollisionShape3D.get_children():
@@ -67,19 +80,23 @@ func _physics_process(_delta):
 		#print('testing probe')
 		if depth > 0:
 			submerged = true
-			apply_force(Vector3.UP * buoyancy * depth, probe.global_position - global_transform.origin)
+			if not sunk:
+				apply_force(Vector3.UP * buoyancy * depth, probe.global_position - global_transform.origin)
 	
-	if Input.is_action_just_pressed("interact"):
-		if player_anim.current_animation == "Steer": 
-			player_anim.play("Idle")
-			player.speed_multiplier = 1
-			player.mouse_delta = Vector2.ZERO
-		elif in_range_of_steering and Input.is_action_just_pressed("interact"): 
-			player_anim.play("Steer")
-			player.speed_multiplier = 0
-			#print('test')
+	
+	if in_range_of_steering:
+		if Input.is_action_just_pressed("interact"):
+			if player_anim.current_animation == "Steer": 
+				player_anim.play("Idle")
+				player.speed_multiplier = 1
+				player.mouse_delta = Vector2.ZERO
+			elif in_range_of_steering: 
+				player_anim.play("Steer")
+				player.speed_multiplier = 0
+				#print('test')
 
 	if player_anim.current_animation != "Steer": return
+	if not in_range_of_steering: return
 	var movement_vector = Vector3(
 		int(Input.is_action_pressed("keyboard_right")) - int(Input.is_action_pressed("keyboard_left")),0,
 		int(Input.is_action_pressed("keyboard_back")) - int(Input.is_action_pressed("keyboard_forward"))
@@ -92,17 +109,14 @@ func _physics_process(_delta):
 
 	player.global_transform = $SteerPosition.global_transform
 
+func on_ship_sunk() -> void:
+	#print("sunk")
+	Save.data["bounty"] = Save.data.get("bounty", 0) + 100
+	Save.save_game()
+	sunk = true
 
-
-	#var forward = -global_transform.basis.z.normalized()
-	#var t = transform
-	#t.origin += t.basis.z * movement_vector.z * 10 * _delta  # forward/back speed
-	#transform = t
-#
-	#print(movement_vector)
-#
-	## left/right rotation
-	#rotate_y(-movement_vector.x * 0.5 * _delta)  # rotate at fixed rate
-	
-	
+func impact(strength: float) -> void:
+	var impulse = Vector3(randf_range(-1,1), randf_range(-1,1), randf_range(-1,1)).normalized() * strength
+	var offset = Vector3(randf_range(-1,1), randf_range(-1,1), randf_range(-1,1))
+	apply_impulse(impulse, offset)
 	

@@ -1,20 +1,21 @@
 [gd_scene format=3 uid="uid://safr0287hjda"]
 
 [ext_resource type="Script" uid="uid://pm43grwmg3qo" path="res://scripts/menu/pause_toggle.gd" id="1_1gkki"]
+[ext_resource type="Script" uid="uid://dv2d1smqmvpgg" path="res://scripts/ui_label.gd" id="1_60wme"]
+[ext_resource type="Script" uid="uid://bqehmyoma1axh" path="res://scripts/components/audio_spawner.gd" id="1_hlm4b"]
 [ext_resource type="PackedScene" uid="uid://butlqj718j0gj" path="res://scenes/menu/main.tscn" id="2_hfvyu"]
-[ext_resource type="Material" uid="uid://caxkvqo4tig0h" path="res://shaders/ocean.tres" id="3_60wme"]
-[ext_resource type="Script" uid="uid://cua876u5s2w4j" path="res://scripts/ocean.gd" id="4_hfvyu"]
 [ext_resource type="Environment" uid="uid://chlcidt7t3gdg" path="res://shaders/sky.tres" id="4_hlm4b"]
+[ext_resource type="PackedScene" uid="uid://bhluruq521f8w" path="res://scenes/ocean.tscn" id="5_60wme"]
 [ext_resource type="PackedScene" uid="uid://ygu7opd5je0u" path="res://scenes/player.tscn" id="5_erah6"]
 [ext_resource type="PackedScene" uid="uid://cayjt37m1mgxu" path="res://scenes/ship.tscn" id="6_3x8wa"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_1svla"]
-lightmap_size_hint = Vector2i(509, 509)
-size = Vector2(500, 500)
-subdivide_width = 1
-subdivide_depth = 1
-
 [node name="Sea" type="Node3D" unique_id=214513969]
+
+[node name="FadeInAudioBuses" type="Node" parent="." unique_id=946940834]
+script = ExtResource("1_hlm4b")
+BUS_NAMES = Array[String](["Music", "SFX"])
+TWEEN_TO_MULTIPLIERS = Array[float]([1.0, 1.0])
+TWEEN_DURATION = Array[float]([0.75, 0.75])
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=640228312]
 offset_right = 174.0
@@ -22,14 +23,18 @@ offset_bottom = 40.0
 size_flags_horizontal = 3
 color = Color(0.19, 0.19, 0.19, 0.8784314)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect" unique_id=1538725228]
+[node name="Bounty" type="HBoxContainer" parent="ColorRect" unique_id=1538725228]
 layout_mode = 0
 offset_right = 67.0
 offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="ColorRect/HBoxContainer" unique_id=2035885012]
+[node name="Label" type="Label" parent="ColorRect/Bounty" unique_id=2035885012]
 layout_mode = 2
-text = "BOUNTY"
+text = "BOUNTY - 0$"
+script = ExtResource("1_60wme")
+key = "bounty"
+prefix = "BOUNTY - "
+suffix = "$"
 
 [node name="Pause" type="Control" parent="." unique_id=1118921173]
 layout_mode = 3
@@ -43,11 +48,8 @@ script = ExtResource("1_1gkki")
 [node name="Main" parent="Pause" unique_id=1127001201 instance=ExtResource("2_hfvyu")]
 layout_mode = 1
 
-[node name="Ocean" type="MeshInstance3D" parent="." unique_id=548282033]
+[node name="Ocean" parent="." unique_id=1092928726 instance=ExtResource("5_60wme")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1466732, 0)
-material_override = ExtResource("3_60wme")
-mesh = SubResource("PlaneMesh_1svla")
-script = ExtResource("4_hfvyu")
 
 [node name="Sky" type="WorldEnvironment" parent="." unique_id=1211110995]
 environment = ExtResource("4_hlm4b")
@@ -55,12 +57,16 @@ environment = ExtResource("4_hlm4b")
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=676342986]
 transform = Transform3D(-0.6868846, 0.44353354, -0.5757322, 0, 0.79218316, 0.61028343, 0.7267665, 0.41919428, -0.5441384, -3.3399532, 19.654726, 0.13701057)
 
+[node name="WaveSpawner" type="AnimationPlayer" parent="." unique_id=1115183922]
+
+[node name="Node3D" type="Node3D" parent="WaveSpawner" unique_id=973792650]
+
 [node name="Player" parent="." unique_id=2089436190 instance=ExtResource("5_erah6")]
 transform = Transform3D(0.9266599, 0, 0.37590083, 0, 1, 0, -0.37590083, 0, 0.9266599, 4.9013553, 8.173874, 6.8220634)
 
-[node name="Ship" parent="." unique_id=768453608 instance=ExtResource("6_3x8wa")]
+[node name="PlayersShip" parent="." unique_id=768453608 instance=ExtResource("6_3x8wa")]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
+is_players_boat = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1115183922]
-
-[node name="Node3D" type="Node3D" parent="AnimationPlayer" unique_id=973792650]
+[node name="Ship2" parent="." unique_id=1318434440 instance=ExtResource("6_3x8wa")]
+transform = Transform3D(0.9811951, 0, 0.19301862, 0, 1, 0, -0.19301862, 0, 0.9811951, 44.99369, -1.6377945, -31.719734)
