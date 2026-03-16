@@ -70,9 +70,6 @@ func _physics_process(delta: float) -> void:
 			up = Vector3.RIGHT  # pick a perpendicular up
 		look_at(global_position + velocity, up)
 	
-
-
-
 	if ray:
 		ray.target_position = ray.to_local(global_position + velocity * delta)
 		ray.force_raycast_update()

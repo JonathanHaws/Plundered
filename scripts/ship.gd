@@ -22,15 +22,53 @@ func _on_exit_steer(body):
 	if body.is_in_group(player_group):
 		in_range_of_steering = false
 
+func ai_steer():
+	if is_players_boat: return
+
+	var targets = get_tree().get_nodes_in_group("PlayerShipTargets")
+	if targets.size() == 0: return
+
+	var forward = -global_transform.basis.z.normalized()
+	var best_score = -INF
+	var best_target = null
+
+	# add scoring to keep ship in optimal distance away
+
+	for t in targets:
+		var to_target = (t.global_position - global_position).normalized()
+		var dist = global_position.distance_to(t.global_position)
+		var alignment = forward.dot(to_target)  # 1 = straight ahead, -1 = behind
+		var score = alignment / dist  # high alignment + close distance
+		if score > best_score:
+			best_score = score
+			best_target = t
+
+	if not best_target: return
+
+	# turn shortest way to target
+	var dir = (best_target.global_position - global_position).normalized()
+	var angle = atan2(dir.x, dir.z) - atan2(forward.x, forward.z)
+	angle = wrapf(angle, -PI, PI)
+
+	# steer left/right only
+	apply_torque_impulse(Vector3.UP * steer * sign(angle))
+
+	# always move forward
+	apply_central_force(forward * speed * 0.5)
+
 func _ready():
 	
 	if is_players_boat:
 		Save.data["bounty"] = 0
 		Save.save_game()
 	
+	if name == "PlayerShip":
+		for target in $Targets.get_children():
+			target.add_to_group("PlayerShipTargets")
+	
 	add_to_group('boats')
 	add_to_group(name)
-	$HitArea.add_immune_group(name + "_ball")
+	$HitArea.add_immune_group(name + "CannonBall")
 	#print(name)
 	
 	$SteerArea.body_entered.connect(_on_enter_steer)
@@ -94,6 +132,10 @@ func _physics_process(_delta):
 				player_anim.play("Steer")
 				player.speed_multiplier = 0
 				#print('test')
+
+	ai_steer()
+
+
 
 	if player_anim.current_animation != "Steer": return
 	if not in_range_of_steering: return

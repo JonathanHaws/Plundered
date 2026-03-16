@@ -138,7 +138,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4tobq"]
-size = Vector3(13.012856, 9.116499, 25.109837)
+size = Vector3(11.601114, 5.126537, 24.819567)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q631a"]
 size = Vector3(1.5131836, 1.9111328, 1.3911743)
@@ -169,7 +169,7 @@ DEATH_ANIMATION_PLAYER = NodePath("AnimationPlayer")
 libraries/ = SubResource("AnimationLibrary_3m36u")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" unique_id=1252185358]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.76088333, 4.0570555, -3.686716)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4379053, 4.476281, -3.831851)
 shape = SubResource("BoxShape3D_4tobq")
 
 [node name="SceneSpawner" type="Node3D" parent="HitArea" unique_id=270314046]
@@ -217,5 +217,22 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.34
 
 [node name="Cannon2" parent="." unique_id=1452688541 instance=ExtResource("3_4tobq")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.556938, 6.0724535, -7.934469)
+
+[node name="Targets" type="Node3D" parent="." unique_id=502345858]
+
+[node name="Node3D" type="Node3D" parent="Targets" unique_id=1749732107]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.652138, 0, -4.7224693)
+
+[node name="Node3D2" type="Node3D" parent="Targets" unique_id=989383912]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.2026, 0, 35.370956)
+
+[node name="Node3D3" type="Node3D" parent="Targets" unique_id=569602797]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.652, 0, -4.722)
+
+[node name="Node3D4" type="Node3D" parent="Targets" unique_id=2035512052]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.203, 0, 35.371)
+
+[node name="Node3D5" type="Node3D" parent="Targets" unique_id=1724840030]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -68.52309)
 
 [editable path="Ship"]

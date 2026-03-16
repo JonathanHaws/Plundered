@@ -84,7 +84,7 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group(player_group)	
 	player_anim = get_tree().get_first_node_in_group(player_animator_group)
 	
-	scene_spawner.add_dynamic_group(get_parent().name + '_ball')
+	scene_spawner.add_dynamic_group(get_parent().name + 'CannonBall')
 	#print(get_parent().name)
 	
 func _physics_process(_delta: float) -> void:
