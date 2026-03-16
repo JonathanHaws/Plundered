@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://hqtfeb3i78kr" path="res://scripts/player/player.gd" id="1_smehm"]
 [ext_resource type="Script" uid="uid://b7ftts4cntmsu" path="res://scripts/player/god_mode.gd" id="2_smehm"]
 [ext_resource type="Script" uid="uid://bqehmyoma1axh" path="res://scripts/components/audio_spawner.gd" id="2_ur7pv"]
+[ext_resource type="AudioStream" uid="uid://bguegrv7hola8" path="res://audio/movement/Drown.ogg" id="4_3v2ag"]
 [ext_resource type="AudioStream" uid="uid://6nprinh82ki0" path="res://audio/movement/Steps_1.ogg" id="4_d2wvv"]
 [ext_resource type="AudioStream" uid="uid://bdxrr02lap7qd" path="res://audio/movement/Steps_2.ogg" id="5_3v2ag"]
 [ext_resource type="AudioStream" uid="uid://5gyev66yjri4" path="res://audio/movement/Steps_3.ogg" id="6_jej6c"]
@@ -11,6 +12,9 @@
 [ext_resource type="AudioStream" uid="uid://cfb4njj2cusba" path="res://audio/movement/Land_2.ogg" id="9_jej6c"]
 [ext_resource type="Script" uid="uid://bb314me35cbis" path="res://scripts/menu/redirect.gd" id="9_ur7pv"]
 [ext_resource type="AudioStream" uid="uid://cuv7kutlxtfkc" path="res://audio/movement/Land_3.ogg" id="10_f1ej7"]
+[ext_resource type="AudioStream" uid="uid://no6tjkew54qm" path="res://audio/movement/Jump2.ogg" id="11_f1ej7"]
+[ext_resource type="AudioStream" uid="uid://cvv6qlcs8ns5m" path="res://audio/movement/Jump1.ogg" id="11_oprun"]
+[ext_resource type="AudioStream" uid="uid://d1u52e04a2bbq" path="res://audio/movement/Jump3.ogg" id="12_oprun"]
 
 [sub_resource type="Animation" id="Animation_y4r1p"]
 resource_name = "Aim"
@@ -19,59 +23,73 @@ loop_mode = 1
 [sub_resource type="Animation" id="Animation_d2wvv"]
 resource_name = "Death"
 length = 10.0
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D:position")
-tracks/0/interp = 2
+tracks/0/path = NodePath("Audio/Death")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.8333334, 2.5333333, 4.3, 8.76491),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 1.2607082, 0), Vector3(0.7369013, 7.204465, 1.1579399), Vector3(0.7369013, 7.204465, 1.1579399), Vector3(-15.86265, 24.718716, 13.407692), Vector3(-101.200874, 155.6232, 89.30046)]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/path = NodePath("Camera3D:position")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1.8333334, 2.5333333, 4.3, 8.76491),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-1.2854006, 0.434539, 0), Vector3(-1.2854006, 0.434539, 0), Vector3(-0.8534325, -0.8439147, 0), Vector3(-0.8534325, -0.8439147, 0)]
+"values": [Vector3(0, 1.2607082, 0), Vector3(0.7369013, 7.204465, 1.1579399), Vector3(0.7369013, 7.204465, 1.1579399), Vector3(-15.86265, 24.718716, 13.407692), Vector3(-101.200874, 155.6232, 89.30046)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:speed_multiplier")
-tracks/2/interp = 1
+tracks/2/path = NodePath("Camera3D:rotation")
+tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.8333334, 2.5333333, 4.3, 8.76491),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.2854006, 0.434539, 0), Vector3(-1.2854006, 0.434539, 0), Vector3(-0.8534325, -0.8439147, 0), Vector3(-0.8534325, -0.8439147, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:speed_multiplier")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
 }
-tracks/3/type = "animation"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Fade/AnimationPlayer")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"clips": PackedStringArray("fade_out"),
-"times": PackedFloat32Array(8.166667)
-}
-tracks/4/type = "method"
+tracks/4/type = "animation"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Redirect")
+tracks/4/path = NodePath("Fade/AnimationPlayer")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
+"clips": PackedStringArray("fade_out"),
+"times": PackedFloat32Array(8.166667)
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Redirect")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(9.466666),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -346,6 +364,10 @@ CAMERA = NodePath("../Camera3D")
 libraries/ = SubResource("AnimationLibrary_a8ls1")
 script = ExtResource("2_ur7pv")
 
+[node name="Death" type="AudioStreamPlayer" parent="Audio" unique_id=1030660089]
+stream = ExtResource("4_3v2ag")
+bus = &"SFX"
+
 [node name="Footsteps" type="Node" parent="Audio" unique_id=1955976006]
 script = ExtResource("2_ur7pv")
 
@@ -380,7 +402,21 @@ bus = &"SFX"
 script = ExtResource("2_ur7pv")
 
 [node name="Jump1" type="AudioStreamPlayer" parent="Audio/Jump" unique_id=1047525715]
-pitch_scale = 3.0
+stream = ExtResource("11_oprun")
+volume_db = -5.0
+pitch_scale = 2.0
+bus = &"SFX"
+
+[node name="Jump2" type="AudioStreamPlayer" parent="Audio/Jump" unique_id=1567802228]
+stream = ExtResource("11_f1ej7")
+volume_db = -5.0
+pitch_scale = 2.0
+bus = &"SFX"
+
+[node name="Jump3" type="AudioStreamPlayer" parent="Audio/Jump" unique_id=1463186706]
+stream = ExtResource("12_oprun")
+volume_db = -5.0
+pitch_scale = 2.0
 bus = &"SFX"
 
 [node name="FovLerp" type="Node" parent="." unique_id=1728721920 node_paths=PackedStringArray("camera_node")]

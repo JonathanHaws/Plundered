@@ -33,7 +33,6 @@ func _ready() -> void:
 	
 func _physics_process(_delta: float) -> void:
 	
-	
 	if in_range_of_aiming:
 		if Input.is_action_just_pressed("interact"):
 			if player_anim.current_animation == "Aim": 

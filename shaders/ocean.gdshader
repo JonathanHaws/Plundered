@@ -21,8 +21,8 @@ float get_linear_depth(sampler2D d_tex, vec2 uv, mat4 inv_proj) {
 
 group_uniforms Normals;
 uniform sampler2D water_normal_texture;
-uniform float scale_normal_1 = 30.0;
-uniform float scale_normal_2 = 5.0; // second scale
+uniform float scale_normal_1 = 20.0;
+uniform float scale_normal_2 = 200.0; // second scale
 uniform vec2 normal_texture_scroll_direction_1 = vec2(0.05, 0.02);
 uniform vec2 normal_texture_scroll_direction_2 = vec2(-0.03, 0.04);
 

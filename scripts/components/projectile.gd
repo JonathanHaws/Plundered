@@ -10,6 +10,10 @@ func set_velocity_from_orientation() -> void:
 	velocity = -(global_transform.basis.z.normalized()) * speed		
 	velocity +=  Vector3(randf_range(-random_velocity_x, random_velocity_x), randf_range(-random_velocity_y, random_velocity_y), 0)
 
+@export_subgroup("Kill Plane")
+@export var use_kill_y: bool = false
+@export var kill_y: float = 0.0
+
 @export_subgroup("Homing")
 @export var home_in_ready: bool = false
 @export var homing: bool = false
@@ -50,6 +54,11 @@ func _ready():
 		hurt_box.connect("hurt_something", Callable(self, "play_collision_animation"))
 
 func _physics_process(delta: float) -> void:
+	
+	if use_kill_y and global_position.y < kill_y:	# kill height
+		play_collision_animation()
+		return
+	
 	if homing:pass #add the velocity being changed
 	
 	if gravity != 0.0:
@@ -61,7 +70,9 @@ func _physics_process(delta: float) -> void:
 			up = Vector3.RIGHT  # pick a perpendicular up
 		look_at(global_position + velocity, up)
 	
-	
+
+
+
 	if ray:
 		ray.target_position = ray.to_local(global_position + velocity * delta)
 		ray.force_raycast_update()

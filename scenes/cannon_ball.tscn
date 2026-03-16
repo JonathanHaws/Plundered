@@ -2,9 +2,28 @@
 
 [ext_resource type="Script" uid="uid://c3ouv873w5vdt" path="res://scripts/components/projectile.gd" id="1_4105j"]
 [ext_resource type="Script" uid="uid://b061ha4j5c6lt" path="res://scripts/components/hurt_shape.gd" id="2_tqdv6"]
+[ext_resource type="Script" uid="uid://chqlwr5cyriq4" path="res://scripts/components/scene_spawner.gd" id="3_csbd0"]
+[ext_resource type="PackedScene" uid="uid://78rv1e4g1amj" path="res://scenes/particles/splash.tscn" id="4_mywdy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4105j"]
 size = Vector3(0.57958984, 0.6086426, 0.6157837)
+
+[sub_resource type="Animation" id="Animation_csbd0"]
+resource_name = "explode"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_choov"]
 resource_name = "lifetime"
@@ -24,9 +43,56 @@ tracks/0/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_tqdv6"]
+resource_name = "splash"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../SceneSpawner")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.76666665),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4105j"]
 _data = {
-&"lifetime": SubResource("Animation_choov")
+&"explode": SubResource("Animation_csbd0"),
+&"lifetime": SubResource("Animation_choov"),
+&"splash": SubResource("Animation_tqdv6")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_choov"]
@@ -35,19 +101,25 @@ roughness = 0.15
 
 [sub_resource type="SphereMesh" id="SphereMesh_4105j"]
 
-[node name="HurtArea" type="Area3D" unique_id=1770059089]
+[node name="HurtArea" type="Area3D" unique_id=1770059089 node_paths=PackedStringArray("hit_animation_player")]
 script = ExtResource("2_tqdv6")
 damage = 150.0
+hit_anim = "explode"
+kill_anim = "explode"
+hit_animation_player = NodePath("CannonBall/AnimationPlayer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1210423163]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0007324219, -0.0076904297, 0.0027770996)
 shape = SubResource("BoxShape3D_4105j")
 
-[node name="CannonBall" type="Node3D" parent="." unique_id=1806330499 node_paths=PackedStringArray("root")]
+[node name="CannonBall" type="Node3D" parent="." unique_id=1806330499 node_paths=PackedStringArray("root", "collision_animation_player")]
 script = ExtResource("1_4105j")
 root = NodePath("..")
 speed = 30.0
 gravity = 9.8
+use_kill_y = true
+collision_animation_player = NodePath("AnimationPlayer")
+collision_animation_name = "splash"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CannonBall" unique_id=1027988438]
 root_node = NodePath("../MeshInstance3D")
@@ -57,3 +129,8 @@ libraries/ = SubResource("AnimationLibrary_4105j")
 transform = Transform3D(0.53425354, 0, 0, 0, 0.53425354, 0, 0, 0, 0.53425354, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_choov")
 mesh = SubResource("SphereMesh_4105j")
+
+[node name="SceneSpawner" type="Node3D" parent="." unique_id=844150610]
+script = ExtResource("3_csbd0")
+scenes = Array[PackedScene]([ExtResource("4_mywdy")])
+add_to_global_root = true

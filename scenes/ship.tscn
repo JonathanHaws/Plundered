@@ -157,8 +157,9 @@ shape = SubResource("BoxShape3D_2gnfn")
 
 [node name="HitArea" type="Area3D" parent="." unique_id=885592007 node_paths=PackedStringArray("TELEPORT_NODES_TO_HIT", "HURT_ANIMATION_PLAYER", "DEATH_ANIMATION_PLAYER")]
 script = ExtResource("5_gudjc")
-HEALTH = 2000.0
-MAX_HEALTH = 2000.0
+HEALTH = 3500.0
+MAX_HEALTH = 3500.0
+INVINCIBILITY_COOLDOWN = 0.001
 PERSISTENT_HEALTH = false
 TELEPORT_NODES_TO_HIT = [NodePath("SceneSpawner")]
 HURT_ANIMATION_PLAYER = NodePath("AnimationPlayer")
