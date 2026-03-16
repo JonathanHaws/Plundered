@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cljkg1218oi1y" path="res://scenes/menu/ui_scale.gd" id="1_jxvd6"]
 [ext_resource type="Script" uid="uid://dv2d1smqmvpgg" path="res://scripts/ui_label.gd" id="1_mifw5"]
+[ext_resource type="AudioStream" uid="uid://0eteiw5oeit" path="res://audio/Ambience.ogg" id="1_migvp"]
 [ext_resource type="Script" uid="uid://pm43grwmg3qo" path="res://scripts/menu/pause_toggle.gd" id="2_jxvd6"]
 [ext_resource type="PackedScene" uid="uid://butlqj718j0gj" path="res://scenes/menu/main.tscn" id="3_migvp"]
 [ext_resource type="PackedScene" uid="uid://bhluruq521f8w" path="res://scenes/ocean.tscn" id="6_mifw5"]
@@ -171,6 +172,11 @@ _data = {
 }
 
 [node name="Sea" type="Node3D" unique_id=214513969]
+
+[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=1103781317]
+stream = ExtResource("1_migvp")
+autoplay = true
+bus = &"SFX"
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=640228312]
 modulate = Color(1, 1, 1, 0)

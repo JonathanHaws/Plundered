@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pm43grwmg3qo" path="res://scripts/menu/pause_toggle.gd" id="1_1gkki"]
 [ext_resource type="Script" uid="uid://dv2d1smqmvpgg" path="res://scripts/ui_label.gd" id="1_60wme"]
-[ext_resource type="Script" uid="uid://bqehmyoma1axh" path="res://scripts/components/audio_spawner.gd" id="1_hlm4b"]
+[ext_resource type="AudioStream" uid="uid://0eteiw5oeit" path="res://audio/Ambience.ogg" id="1_erah6"]
 [ext_resource type="PackedScene" uid="uid://butlqj718j0gj" path="res://scenes/menu/main.tscn" id="2_hfvyu"]
 [ext_resource type="Environment" uid="uid://chlcidt7t3gdg" path="res://shaders/sky.tres" id="4_hlm4b"]
 [ext_resource type="PackedScene" uid="uid://bhluruq521f8w" path="res://scenes/ocean.tscn" id="5_60wme"]
@@ -11,11 +11,10 @@
 
 [node name="Sea" type="Node3D" unique_id=214513969]
 
-[node name="FadeInAudioBuses" type="Node" parent="." unique_id=946940834]
-script = ExtResource("1_hlm4b")
-BUS_NAMES = Array[String](["Music", "SFX"])
-TWEEN_TO_MULTIPLIERS = Array[float]([1.0, 1.0])
-TWEEN_DURATION = Array[float]([0.75, 0.75])
+[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=261621461]
+stream = ExtResource("1_erah6")
+autoplay = true
+bus = &"SFX"
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=640228312]
 offset_right = 174.0
