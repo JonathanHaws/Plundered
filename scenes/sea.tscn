@@ -63,7 +63,7 @@ transform = Transform3D(-0.6868846, 0.44353354, -0.5757322, 0, 0.79218316, 0.610
 [node name="Player" parent="." unique_id=2089436190 instance=ExtResource("5_erah6")]
 transform = Transform3D(0.9266599, 0, 0.37590083, 0, 1, 0, -0.37590083, 0, 0.9266599, 4.9013553, 8.173874, 6.8220634)
 
-[node name="PlayersShip" parent="." unique_id=768453608 instance=ExtResource("6_3x8wa")]
+[node name="PlayerShip" parent="." unique_id=768453608 instance=ExtResource("6_3x8wa")]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
 is_players_boat = true
 

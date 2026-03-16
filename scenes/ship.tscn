@@ -159,7 +159,7 @@ shape = SubResource("BoxShape3D_2gnfn")
 script = ExtResource("5_gudjc")
 HEALTH = 3500.0
 MAX_HEALTH = 3500.0
-INVINCIBILITY_COOLDOWN = 0.001
+INVINCIBILITY_COOLDOWN = 0.0
 PERSISTENT_HEALTH = false
 TELEPORT_NODES_TO_HIT = [NodePath("SceneSpawner")]
 HURT_ANIMATION_PLAYER = NodePath("AnimationPlayer")
@@ -196,21 +196,26 @@ shape = SubResource("ConcavePolygonShape3D_emiat")
 [node name="SteerPosition" type="Node3D" parent="." unique_id=630160363]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.43494105, 8.104315, 0.62535036)
 
-[node name="Audio" type="Node" parent="." unique_id=1255782583]
+[node name="Audio" type="Node3D" parent="." unique_id=1358291165]
 script = ExtResource("4_tfsc7")
 
 [node name="BountyIncreased" type="AudioStreamPlayer" parent="Audio" unique_id=519598064]
 stream = ExtResource("5_itrim")
 bus = &"SFX"
 
-[node name="Hits" type="Node" parent="Audio" unique_id=1175624869]
+[node name="Hits" type="Node3D" parent="Audio" unique_id=918205372]
 script = ExtResource("4_tfsc7")
 
-[node name="Hit" type="AudioStreamPlayer" parent="Audio/Hits" unique_id=1286727187]
+[node name="Hit" type="AudioStreamPlayer3D" parent="Audio/Hits" unique_id=1113730855]
 stream = ExtResource("5_8qiel")
+unit_size = 50.0
+max_distance = 4000.0
 bus = &"SFX"
 
-[node name="Cannon" parent="." unique_id=1534587913 instance=ExtResource("3_4tobq")]
+[node name="Cannon1" parent="." unique_id=1534587913 instance=ExtResource("3_4tobq")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.344675, 6.0724535, -7.934469)
+
+[node name="Cannon2" parent="." unique_id=1452688541 instance=ExtResource("3_4tobq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.556938, 6.0724535, -7.934469)
 
 [editable path="Ship"]

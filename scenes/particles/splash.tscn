@@ -124,23 +124,17 @@ light_color = Color(0.53602046, 0.7539103, 0.88883805, 1)
 light_energy = 5.0
 omni_range = 10.691391
 
-[node name="Splash" type="Node" parent="." unique_id=1555350945]
+[node name="Splash" type="Node3D" parent="." unique_id=428888334]
 script = ExtResource("2_ovdco")
 
-[node name="Splash1" type="AudioStreamPlayer" parent="Splash" unique_id=294640687]
+[node name="Splash1" type="AudioStreamPlayer3D" parent="Splash" unique_id=1311061690]
 stream = ExtResource("3_f7q7i")
-volume_db = -5.0
-pitch_scale = 0.5
-script = ExtResource("2_ovdco")
+bus = &"SFX"
 
-[node name="Splash2" type="AudioStreamPlayer" parent="Splash" unique_id=567986419]
+[node name="Splash2" type="AudioStreamPlayer3D" parent="Splash" unique_id=661595781]
 stream = ExtResource("4_4sx1t")
-volume_db = -5.0
-pitch_scale = 0.5
-script = ExtResource("2_ovdco")
+bus = &"SFX"
 
-[node name="Splash3" type="AudioStreamPlayer" parent="Splash" unique_id=2141155947]
+[node name="Splash3" type="AudioStreamPlayer3D" parent="Splash" unique_id=1689021018]
 stream = ExtResource("5_hbgbp")
-volume_db = -5.0
-pitch_scale = 0.5
-script = ExtResource("2_ovdco")
+bus = &"SFX"

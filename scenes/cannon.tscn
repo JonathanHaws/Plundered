@@ -71,22 +71,22 @@ scene_spawner = NodePath("Mesh/Cylinder/SceneSpawner")
 horizontal_mesh = NodePath("Mesh")
 vertical_mesh = NodePath("Mesh/Cylinder")
 
-[node name="Audio" type="Node" parent="." unique_id=938941435]
+[node name="Audio" type="Node3D" parent="." unique_id=703274324]
 script = ExtResource("2_0285d")
 
-[node name="Shoot1" type="AudioStreamPlayer" parent="Audio" unique_id=931919163]
+[node name="Shoot1" type="AudioStreamPlayer3D" parent="Audio" unique_id=1685231180]
 stream = ExtResource("3_uvlre")
 bus = &"SFX"
 
-[node name="Shoot2" type="AudioStreamPlayer" parent="Audio" unique_id=1831289432]
+[node name="Shoot2" type="AudioStreamPlayer3D" parent="Audio" unique_id=1199407024]
 stream = ExtResource("4_ogt75")
 bus = &"SFX"
 
-[node name="Shoot3" type="AudioStreamPlayer" parent="Audio" unique_id=2083355602]
+[node name="Shoot3" type="AudioStreamPlayer3D" parent="Audio" unique_id=1580190067]
 stream = ExtResource("5_4a4je")
 bus = &"SFX"
 
-[node name="Shoot4" type="AudioStreamPlayer" parent="Audio" unique_id=1857211603]
+[node name="Shoot4" type="AudioStreamPlayer3D" parent="Audio" unique_id=615868463]
 stream = ExtResource("6_ediu4")
 bus = &"SFX"
 

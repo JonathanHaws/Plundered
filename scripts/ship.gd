@@ -29,8 +29,8 @@ func _ready():
 		Save.save_game()
 	
 	add_to_group('boats')
-	
-	$HitArea.add_immune_group(name)
+	add_to_group(name)
+	$HitArea.add_immune_group(name + "_ball")
 	#print(name)
 	
 	$SteerArea.body_entered.connect(_on_enter_steer)

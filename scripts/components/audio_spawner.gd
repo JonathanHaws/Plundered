@@ -4,7 +4,7 @@ func play_random_child() -> void:
 	if nodes.size() == 0: return
 	var idx = randi() % nodes.size()
 	var node = nodes[idx]
-	if node is AudioStreamPlayer:
+	if node is AudioStreamPlayer or node is AudioStreamPlayer2D or node is AudioStreamPlayer3D:
 		node.pitch_scale = randf_range(PITCH_MULTIPLIER - PITCH_VARIANCE, PITCH_MULTIPLIER + PITCH_VARIANCE)
 		node.volume_db = linear_to_db((db_to_linear(node.volume_db) * VOLUME_MULTIPLIER) + randf_range(-VOLUME_VARIANCE, VOLUME_VARIANCE))
 		node.play()
