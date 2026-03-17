@@ -18,6 +18,11 @@ var ignore_first_was_on_floor : bool = true
 var pitch := 0.0
 var mouse_delta := Vector2.ZERO
 
+func reset_camera():
+	if cam:
+		cam.rotation = Vector3.ZERO
+		mouse_delta = Vector2.ZERO
+
 func die():
 	if not Save.data.has("Deaths"):
 		Save.data["Deaths"] = 0
@@ -29,15 +34,15 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_delta += event.relative
 
-func _free_movement(_d):
-	if Input.is_action_just_pressed("jump"): jump_buffer = jump_buffer_time;
-	elif jump_buffer > 0: jump_buffer -= _d	
-		
-	# Move Camera
+func _move_camera():
 	rotate_y(-mouse_delta.x * sens)
 	pitch = clamp(pitch - mouse_delta.y * sens, -1.5, 1.5)
 	cam.rotation.x = pitch
 	mouse_delta = Vector2.ZERO
+
+func _free_movement(_d):
+	if Input.is_action_just_pressed("jump"): jump_buffer = jump_buffer_time;
+	elif jump_buffer > 0: jump_buffer -= _d	
 		
 	var movement_vector = Vector3(
 		int(Input.is_action_pressed("keyboard_right")) - int(Input.is_action_pressed("keyboard_left")),0,
@@ -92,8 +97,14 @@ func _free_movement(_d):
 		
 func _physics_process(_delta):
 	
+	#print(anim.current_animation)
+	
+	if anim.current_animation in ["Steer", "God"]:
+		_move_camera()
+	
 	if anim.current_animation in ["Idle", "Run", "Walk", "Jump"]:
 		_free_movement(_delta)
+		_move_camera()
 	
 	if global_position.y < 0.0:
 		anim.play("Death")

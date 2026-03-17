@@ -12,6 +12,7 @@
 [node name="Sea" type="Node3D" unique_id=214513969]
 
 [node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=261621461]
+process_mode = 3
 stream = ExtResource("1_erah6")
 autoplay = true
 bus = &"SFX"
@@ -35,18 +36,6 @@ key = "bounty"
 prefix = "BOUNTY - "
 suffix = "$"
 
-[node name="Pause" type="Control" parent="." unique_id=1118921173]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_1gkki")
-
-[node name="Main" parent="Pause" unique_id=1127001201 instance=ExtResource("2_hfvyu")]
-layout_mode = 1
-
 [node name="Ocean" parent="." unique_id=1092928726 instance=ExtResource("5_60wme")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1466732, 0)
 
@@ -67,5 +56,17 @@ transform = Transform3D(0.9266599, 0, 0.37590083, 0, 1, 0, -0.37590083, 0, 0.926
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
 is_players_boat = true
 
-[node name="Ship2" parent="." unique_id=1318434440 instance=ExtResource("6_3x8wa")]
-transform = Transform3D(0.9811951, 0, 0.19301862, 0, 1, 0, -0.19301862, 0, 0.9811951, 44.99369, -1.6377945, -31.719734)
+[node name="Ship2" parent="." unique_id=2110487790 instance=ExtResource("6_3x8wa")]
+transform = Transform3D(0.9811951, 0, 0.19301862, 0, 1, 0, -0.19301862, 0, 0.9811951, 44.99369, -3.2260785, -31.719734)
+
+[node name="Pause" type="Control" parent="." unique_id=1118921173]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1gkki")
+
+[node name="Main" parent="Pause" unique_id=1127001201 instance=ExtResource("2_hfvyu")]
+layout_mode = 1

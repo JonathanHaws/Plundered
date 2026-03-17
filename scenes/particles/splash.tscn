@@ -128,13 +128,16 @@ omni_range = 10.691391
 script = ExtResource("2_ovdco")
 
 [node name="Splash1" type="AudioStreamPlayer3D" parent="Splash" unique_id=1311061690]
+process_mode = 3
 stream = ExtResource("3_f7q7i")
 bus = &"SFX"
 
 [node name="Splash2" type="AudioStreamPlayer3D" parent="Splash" unique_id=661595781]
+process_mode = 3
 stream = ExtResource("4_4sx1t")
 bus = &"SFX"
 
 [node name="Splash3" type="AudioStreamPlayer3D" parent="Splash" unique_id=1689021018]
+process_mode = 3
 stream = ExtResource("5_hbgbp")
 bus = &"SFX"

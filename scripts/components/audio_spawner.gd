@@ -109,6 +109,8 @@ func _connect_group_signal(group_name: String, signal_name: String, sound_name: 
 
 func _ready() -> void:
 	
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	
 	if SPAWN_ON_LOAD: spawn_sound.call_deferred()
 	
 	for group_name in DESTORY_GROUPS: 

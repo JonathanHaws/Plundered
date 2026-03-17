@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://butlqj718j0gj"]
 
 [ext_resource type="Script" uid="uid://cljkg1218oi1y" path="res://scenes/menu/ui_scale.gd" id="1_r8hr5"]
+[ext_resource type="Script" uid="uid://bqehmyoma1axh" path="res://scripts/components/audio_spawner.gd" id="1_ynvfx"]
+[ext_resource type="AudioStream" uid="uid://77nx04f7a36k" path="res://audio/menu/menu_hover.ogg" id="2_box2j"]
 [ext_resource type="Script" uid="uid://bb314me35cbis" path="res://scripts/menu/redirect.gd" id="2_ynvfx"]
 [ext_resource type="Script" uid="uid://dfc16assxe58f" path="res://scripts/menu/quit.gd" id="3_box2j"]
+[ext_resource type="AudioStream" uid="uid://cp5vq7mnjnmei" path="res://audio/menu/menu_press.ogg" id="3_gmxck"]
 
 [node name="Main" type="ColorRect" unique_id=1127001201]
 process_mode = 3
@@ -12,6 +15,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.121519126, 0.121519126, 0.12151911, 1)
+
+[node name="MenuAudio" type="Control" parent="." unique_id=1412327493]
+anchors_preset = 0
+script = ExtResource("1_ynvfx")
+SOUNDS = Array[AudioStream]([ExtResource("2_box2j"), ExtResource("3_gmxck")])
+ADD_TO_ROOT = true
+VOLUME_MULTIPLIER = 0.5
+HOVER_SOUND = "menu_hover"
+PRESSED_SOUND = "menu_press"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1941289252]
 layout_mode = 1
@@ -29,14 +41,14 @@ grow_vertical = 2
 pivot_offset = Vector2(133.5, 68)
 script = ExtResource("1_r8hr5")
 
-[node name="Restart" type="Button" parent="VBoxContainer" unique_id=1957585159]
+[node name="Restart" type="Button" parent="VBoxContainer" unique_id=1957585159 groups=["menu_hovered_sound", "menu_pressed_sound"]]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "RESTART"
 script = ExtResource("2_ynvfx")
 scene_file = "uid://safr0287hjda"
 
-[node name="Audio" type="Button" parent="VBoxContainer" unique_id=926313252 node_paths=PackedStringArray("node_to_replace")]
+[node name="Audio" type="Button" parent="VBoxContainer" unique_id=926313252 node_paths=PackedStringArray("node_to_replace") groups=["menu_hovered_sound", "menu_pressed_sound"]]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "AUDIO"
@@ -44,7 +56,7 @@ script = ExtResource("2_ynvfx")
 scene_file = "uid://c120cg3r8x66m"
 node_to_replace = NodePath("../..")
 
-[node name="Graphics" type="Button" parent="VBoxContainer" unique_id=2018019839 node_paths=PackedStringArray("node_to_replace")]
+[node name="Graphics" type="Button" parent="VBoxContainer" unique_id=2018019839 node_paths=PackedStringArray("node_to_replace") groups=["menu_hovered_sound", "menu_pressed_sound"]]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "GRAPHICS"
@@ -52,7 +64,7 @@ script = ExtResource("2_ynvfx")
 scene_file = "uid://nquefxh3rvg3"
 node_to_replace = NodePath("../..")
 
-[node name="Credits" type="Button" parent="VBoxContainer" unique_id=1318870532 node_paths=PackedStringArray("node_to_replace")]
+[node name="Credits" type="Button" parent="VBoxContainer" unique_id=1318870532 node_paths=PackedStringArray("node_to_replace") groups=["menu_hovered_sound", "menu_pressed_sound"]]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "CREDiTS"
@@ -60,7 +72,7 @@ script = ExtResource("2_ynvfx")
 scene_file = "uid://m4xlepqe003j"
 node_to_replace = NodePath("../..")
 
-[node name="Quit" type="Button" parent="VBoxContainer" unique_id=91361422]
+[node name="Quit" type="Button" parent="VBoxContainer" unique_id=91361422 groups=["menu_hovered_sound", "menu_pressed_sound"]]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "QUIT"

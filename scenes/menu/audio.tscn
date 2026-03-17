@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://c120cg3r8x66m"]
 
 [ext_resource type="Script" uid="uid://cljkg1218oi1y" path="res://scenes/menu/ui_scale.gd" id="1_7fm37"]
+[ext_resource type="Script" uid="uid://bqehmyoma1axh" path="res://scripts/components/audio_spawner.gd" id="1_fsgnj"]
 [ext_resource type="Script" uid="uid://dm4l2tosk6266" path="res://scripts/menu/volume_adjustment.gd" id="1_oe50q"]
 [ext_resource type="Script" uid="uid://bb314me35cbis" path="res://scripts/menu/redirect.gd" id="2_7fm37"]
+[ext_resource type="AudioStream" uid="uid://77nx04f7a36k" path="res://audio/menu/menu_hover.ogg" id="2_sacrq"]
+[ext_resource type="AudioStream" uid="uid://cp5vq7mnjnmei" path="res://audio/menu/menu_press.ogg" id="3_dk2ni"]
 
 [node name="Main" type="ColorRect" unique_id=1127001201]
 process_mode = 3
@@ -12,6 +15,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.121519126, 0.121519126, 0.12151911, 1)
+
+[node name="MenuAudio" type="Control" parent="." unique_id=1593092041]
+anchors_preset = 0
+script = ExtResource("1_fsgnj")
+SOUNDS = Array[AudioStream]([ExtResource("2_sacrq"), ExtResource("3_dk2ni")])
+ADD_TO_ROOT = true
+VOLUME_MULTIPLIER = 0.5
+HOVER_SOUND = "menu_hover"
+PRESSED_SOUND = "menu_press"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1941289252]
 layout_mode = 1
@@ -37,7 +49,7 @@ size_flags_horizontal = 4
 layout_mode = 2
 text = "MASTER"
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/Master" unique_id=1634809820]
+[node name="HSlider" type="HSlider" parent="VBoxContainer/Master" unique_id=1634809820 groups=["menu_hovered_sound", "menu_pressed_sound"]]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -52,7 +64,7 @@ size_flags_horizontal = 4
 layout_mode = 2
 text = "MUSIC"
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/Music" unique_id=1131346493]
+[node name="HSlider" type="HSlider" parent="VBoxContainer/Music" unique_id=1131346493 groups=["menu_hovered_sound", "menu_pressed_sound"]]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -67,17 +79,17 @@ size_flags_horizontal = 4
 layout_mode = 2
 text = "SFX"
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/SFX" unique_id=223848864]
+[node name="HSlider" type="HSlider" parent="VBoxContainer/SFX" unique_id=223848864 groups=["menu_hovered_sound", "menu_pressed_sound"]]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 4
 script = ExtResource("1_oe50q")
 bus_name = "SFX"
 
-[node name="Back" type="Button" parent="VBoxContainer" unique_id=1318870532 node_paths=PackedStringArray("node_to_replace")]
+[node name="Back" type="Button" parent="VBoxContainer" unique_id=1318870532 node_paths=PackedStringArray("node_to_replace") groups=["menu_hovered_sound", "menu_pressed_sound"]]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Back"
+text = "BACK"
 script = ExtResource("2_7fm37")
 scene_file = "uid://butlqj718j0gj"
 node_to_replace = NodePath("../..")

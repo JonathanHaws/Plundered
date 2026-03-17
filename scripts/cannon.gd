@@ -1,24 +1,17 @@
 extends Node3D
-@export var player_group: String = "player"
-@export var player_animator_group: String = "player_anim"
-@export var scene_spawner: Node
-@export var horizontal_mesh: Node3D
-@export var vertical_mesh: Node3D
+@export_group("Controls")
 @export var yaw_sensitivity: float = 0.1
 @export var pitch_sensitivity: float = 0.1
-
-@export var min_pitch: float = -40
+@export var min_pitch: float = -10
 @export var max_pitch: float = 40
-@export var min_yaw: float = -90
-@export var max_yaw: float = 90
+@export var min_yaw: float = -70
+@export var max_yaw: float = 70
+var in_range_of_aiming: bool = false
+var aiming: bool = false
 func clamp_aim() -> void:
 	#print(horizontal_mesh.rotation_degrees.y, vertical_mesh.rotation_degrees.x)
-	horizontal_mesh.rotation_degrees = Vector3(0, clamp(horizontal_mesh.rotation_degrees.y, min_yaw, max_yaw), 0)
-	vertical_mesh.rotation_degrees = Vector3(clamp(vertical_mesh.rotation_degrees.x, min_pitch, max_pitch), 0, 0)
-
-var in_range_of_aiming: bool = false
-var player: CharacterBody3D
-var player_anim: AnimationPlayer
+	stand.rotation_degrees = Vector3(0, clamp(stand.rotation_degrees.y, min_yaw, max_yaw), 0)
+	barrel.rotation_degrees = Vector3(clamp(barrel.rotation_degrees.x, min_pitch, max_pitch), 0, 0)
 func _on_enter_aim(body):
 	if body.is_in_group(player_group):
 		in_range_of_aiming = true
@@ -26,12 +19,22 @@ func _on_exit_aim(body):
 	if body.is_in_group(player_group):
 		in_range_of_aiming= false
 
-@export var ai_cooldown: float = 2.0
-@export var ai_random_cooldown: float = 2.0
+@export_group("References")
+@export var player_group: String = "player"
+@export var player_animator_group: String = "player_anim"
+@onready var stand: Node3D = $cannon
+@onready var barrel: Node3D = $cannon/Barrel
+@onready var scene_spawner: Node3D = $cannon/Barrel/Node3D
+var player: CharacterBody3D
+var player_anim: AnimationPlayer
+
+@export_group("Ai")
+@export var ai_cooldown: float = 5.0
+@export var ai_random_cooldown: float = 3.0
 @export var ai_random_offset = Vector3(11, 11, 11)
 @export var ai_random_aim: Vector2 = Vector2(5, 5)
-var ai_cooldown_remaining: float = 0.0
 var ai_aim_offset = Vector3(0, 2.0, 0)
+var ai_cooldown_remaining: float = randf_range(0, ai_cooldown + ai_random_cooldown)
 func ai_aim(delta: float) -> void:
 	var parent = get_parent()
 	if parent.name == "PlayerShip": return
@@ -42,11 +45,11 @@ func ai_aim(delta: float) -> void:
 		ai_cooldown_remaining -= delta
 	if ai_cooldown_remaining > 0: return
 	
-	var h_y_orig = horizontal_mesh.rotation_degrees.y
-	var v_x_orig = vertical_mesh.rotation_degrees.x
+	var original_stand_rotation = stand.rotation_degrees.y
+	var original_barrel_rotation = barrel.rotation_degrees.x
 	
 	var target = player_ship.global_position + ai_aim_offset
-	var to_target = target - horizontal_mesh.global_position
+	var to_target = target - stand.global_position
 	var dist = Vector2(to_target.x, to_target.z).length()
 	var y = to_target.y
 	var v = 30.0
@@ -56,68 +59,65 @@ func ai_aim(delta: float) -> void:
 	var t = dist / (v * cos(atan((v*v - sqrt(disc)) / (g*dist))))
 	var aim_pos = target + player_ship.linear_velocity * t + Vector3(0, 0.5*g*t*t, 0)
 
-	horizontal_mesh.look_at(aim_pos, Vector3.UP)
-	horizontal_mesh.rotation_degrees.y += randf_range(-ai_random_aim.y, ai_random_aim.y)
-	var h_y_before = horizontal_mesh.rotation_degrees.y
+	stand.look_at(aim_pos, Vector3.UP)
+	stand.rotation_degrees.y += randf_range(-ai_random_aim.y, ai_random_aim.y)
+	var optimal_stand_rotation = stand.rotation_degrees.y
 	clamp_aim()
 
-	vertical_mesh.look_at(aim_pos, Vector3.UP)
-	vertical_mesh.rotation_degrees.x += randf_range(-ai_random_aim.x, ai_random_aim.x)
-	var v_x_before = vertical_mesh.rotation_degrees.x
+	barrel.look_at(aim_pos, Vector3.UP)
+	barrel.rotation_degrees.x += randf_range(-ai_random_aim.x, ai_random_aim.x)
+	var optimal_barrel_rotation = barrel.rotation_degrees.x
 	clamp_aim()
 
-	if horizontal_mesh.rotation_degrees.y != h_y_before or vertical_mesh.rotation_degrees.x != v_x_before:
-		horizontal_mesh.rotation_degrees.y = h_y_orig
-		vertical_mesh.rotation_degrees.x = v_x_orig
+	if stand.rotation_degrees.y != optimal_stand_rotation or barrel.rotation_degrees.x != optimal_barrel_rotation:
+		stand.rotation_degrees.y = original_stand_rotation
+		barrel.rotation_degrees.x = original_barrel_rotation
 		return  # aim was clamped, skip firing
 
 
 	$AnimationPlayer.play("fire")
 	ai_cooldown_remaining = ai_cooldown + randf_range(0, ai_random_cooldown)
 
-
 func _ready() -> void:
-
 	$AimArea.body_entered.connect(_on_enter_aim)	
 	$AimArea.body_exited.connect(_on_exit_aim)	
-	
 	player = get_tree().get_first_node_in_group(player_group)	
 	player_anim = get_tree().get_first_node_in_group(player_animator_group)
-	
 	scene_spawner.add_dynamic_group(get_parent().name + 'CannonBall')
 	#print(get_parent().name)
 	
-func _physics_process(_delta: float) -> void:
-	
-	ai_aim(_delta)
-			
-
-	if in_range_of_aiming:
-		if Input.is_action_just_pressed("interact"):
-			if player_anim.current_animation == "Aim": 
-				player_anim.play("Idle")
-				player.speed_multiplier = 1
-				player.mouse_delta = Vector2.ZERO
-			elif in_range_of_aiming: 
-				player_anim.play("Aim")
-				player.speed_multiplier = 0
-				#print('test')
-			
-	if player_anim.current_animation != "Aim": return
-	if not in_range_of_aiming: return
-	
-	player.global_transform = $AimPosition.global_transform
-	
-	if Input.is_action_just_pressed("jump"):
-		#print('fire')
-		$AnimationPlayer.play("fire")
+func _process(_delta: float) -> void:
+		
+	if Input.is_action_just_pressed("interact"):
+		if aiming:
+			aiming = false
+			player_anim.play("Idle")
+			player.speed_multiplier = 1
+			player.mouse_delta = Vector2.ZERO
+			player.global_position = $AimSpot.global_position
+			$cannon/Barrel/Camera3D.current = false
+				
+		elif in_range_of_aiming: 
+			aiming = true
+			$cannon/Barrel/Camera3D.current = true
+			player_anim.play("Aim")
+			player.speed_multiplier = 0
+			player.global_position = $AimSpot.global_position
+			player.reset_camera()
+			#print('test')
+		
+	ai_aim(_delta)	
+	aim()
 		
 func _input(event):
-	if player_anim.current_animation != "Aim": return
-	if not in_range_of_aiming: return
-	
+	if not aiming: return
 	if event is InputEventMouseMotion:
-		horizontal_mesh.rotation_degrees.y += -event.relative.x * yaw_sensitivity
-		vertical_mesh.rotation_degrees.x += -event.relative.y * pitch_sensitivity
+		stand.rotation_degrees.y += -event.relative.x * yaw_sensitivity
+		barrel.rotation_degrees.x += -event.relative.y * pitch_sensitivity
 		clamp_aim()
-			
+	
+func aim() -> void:
+	if not aiming: return
+	if Input.is_action_just_pressed("jump"):
+		player.global_position = $AimSpot.global_position
+		$AnimationPlayer.play("fire")	

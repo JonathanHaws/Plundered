@@ -98,6 +98,10 @@ tracks/5/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_qfm1y"]
+resource_name = "God"
+loop_mode = 1
+
 [sub_resource type="Animation" id="Animation_tn317"]
 resource_name = "Idle"
 loop_mode = 1
@@ -197,6 +201,7 @@ tracks/0/keys = {
 _data = {
 &"Aim": SubResource("Animation_y4r1p"),
 &"Death": SubResource("Animation_d2wvv"),
+&"God": SubResource("Animation_qfm1y"),
 &"Idle": SubResource("Animation_tn317"),
 &"Jump": SubResource("Animation_smehm"),
 &"RESET": SubResource("Animation_ur7pv"),
@@ -249,7 +254,7 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0auqf"]
 radius = 0.37548828
-height = 1.8762207
+height = 1.5
 
 [sub_resource type="Animation" id="Animation_3v2ag"]
 length = 0.001
@@ -355,10 +360,13 @@ autoplay = &"Idle"
 next/Run = &"Idle"
 next/Walk = &"Idle"
 
-[node name="GodMode" type="Node" parent="." unique_id=24241003 node_paths=PackedStringArray("PLAYER", "CAMERA")]
+[node name="GodMode" type="Node" parent="." unique_id=24241003 node_paths=PackedStringArray("PLAYER", "CAMERA", "ANIMATION_PLAYER")]
 script = ExtResource("2_smehm")
 PLAYER = NodePath("..")
 CAMERA = NodePath("../Camera3D")
+ANIMATION_PLAYER = NodePath("../State")
+ENTER_ANIMATION = "God"
+EXIT_ANIMATION = "Idle"
 
 [node name="Audio" type="AnimationPlayer" parent="." unique_id=1988651747]
 libraries/ = SubResource("AnimationLibrary_a8ls1")
@@ -388,14 +396,17 @@ script = ExtResource("2_ur7pv")
 
 [node name="Land1" type="AudioStreamPlayer" parent="Audio/Land" unique_id=1816631918]
 stream = ExtResource("8_3v2ag")
+volume_db = -5.0
 bus = &"SFX"
 
 [node name="Land2" type="AudioStreamPlayer" parent="Audio/Land" unique_id=1587045604]
 stream = ExtResource("9_jej6c")
+volume_db = -5.0
 bus = &"SFX"
 
 [node name="Land3" type="AudioStreamPlayer" parent="Audio/Land" unique_id=1206511826]
 stream = ExtResource("10_f1ej7")
+volume_db = -5.0
 bus = &"SFX"
 
 [node name="Jump" type="Node" parent="Audio" unique_id=1124288255]
@@ -424,7 +435,7 @@ script = ExtResource("8_oprun")
 camera_node = NodePath("../Camera3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=568336833]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93811035, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CapsuleShape3D_0auqf")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=808998871]
