@@ -13,9 +13,6 @@
 [ext_resource type="AudioStream" uid="uid://put8jhjiqpkm" path="res://audio/steer.ogg" id="7_03y04"]
 [ext_resource type="PackedScene" uid="uid://cjll2da7x15rp" path="res://blender/wheel.blend" id="7_48mkp"]
 [ext_resource type="PackedScene" uid="uid://caq61atyyxveg" path="res://scenes/particles/boat_destruction.tscn" id="8_8qiel"]
-[ext_resource type="Shader" uid="uid://da5t5c1udqss2" path="res://shaders/crayon.gdshader" id="9_vbj2c"]
-[ext_resource type="Texture2D" uid="uid://2rhsqc0irh3v" path="res://textures/crayon_2.jpg" id="10_dschd"]
-[ext_resource type="Texture2D" uid="uid://b07uenqitqt1e" path="res://textures/crayon_1.jpg" id="11_83dbu"]
 [ext_resource type="PackedScene" uid="uid://dhiwjfe1tbiqe" path="res://scenes/leak.tscn" id="11_tlr80"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2gnfn"]
@@ -149,27 +146,6 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_4tobq"]
 size = Vector3(13.507647, 5.4276485, 25.361385)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xifwb"]
-render_priority = 0
-shader = ExtResource("9_vbj2c")
-shader_parameter/albedo = Color(0.2762096, 0.15670261, 0.1423384, 1)
-shader_parameter/albedo_texture_size = Vector2i(1024, 1024)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
-shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/uv1_blend_sharpness = 1.0
-shader_parameter/uv1_scale = Vector3(0.732, 0.732, 0.732)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/uv2_scale = Vector3(1, 1, 1)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/crayon_texture_a = ExtResource("10_dschd")
-shader_parameter/crayon_texture_b = ExtResource("11_83dbu")
-shader_parameter/crayon_amount = 0.50000002375
-shader_parameter/speed_crayon = 6.0
-shader_parameter/jiggle_strength = 0.008
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_q631a"]
 size = Vector3(1.5131836, 1.9111328, 1.3911743)
 
@@ -212,10 +188,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.396011, 0)
 script = ExtResource("5_tbq4g")
 boat = NodePath("..")
 
-[node name="SteerSound" type="AudioStreamPlayer" parent="SteerArea" unique_id=694225325]
-stream = ExtResource("7_03y04")
-pitch_scale = 0.5
-
 [node name="SteerSpot" type="Node3D" parent="SteerArea" unique_id=366787988]
 transform = Transform3D(1, 0, 0, 0, 0.99933475, 0.036469296, 0, -0.036469296, 0.99933475, 0.43006238, 3.777863, 0.6003962)
 
@@ -226,7 +198,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4449973, 3.7060657, 0.38498
 surface_material_override/0 = ExtResource("6_bseor")
 
 [node name="Wheel" parent="SteerArea/wheel" index="1" unique_id=722802549]
-surface_material_override/0 = SubResource("ShaderMaterial_xifwb")
+surface_material_override/0 = ExtResource("6_bseor")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SteerArea" unique_id=1180403861]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3305664, 4.2880692, 0.75180054)
@@ -243,6 +215,10 @@ sync_to_physics = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ship/AnimatableBody3D" unique_id=116461858]
 shape = SubResource("ConcavePolygonShape3D_emiat")
+
+[node name="SteerSound" type="AudioStreamPlayer" parent="." unique_id=694225325]
+stream = ExtResource("7_03y04")
+pitch_scale = 0.5
 
 [node name="Audio" type="Node3D" parent="." unique_id=1358291165]
 script = ExtResource("4_tfsc7")

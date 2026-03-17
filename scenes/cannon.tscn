@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cj5v3a31giwri" path="res://blender/cannon.blend" id="1_xuqfy"]
 [ext_resource type="Script" uid="uid://bqehmyoma1axh" path="res://scripts/components/audio_spawner.gd" id="2_0285d"]
 [ext_resource type="Script" uid="uid://c5lbw334hful" path="res://scripts/components/camera_effects.gd" id="2_m2udb"]
+[ext_resource type="AudioStream" uid="uid://bp38fekxgimlp" path="res://audio/cannon/aim.ogg" id="3_01vp4"]
 [ext_resource type="AudioStream" uid="uid://d4j2fjlsefkra" path="res://audio/cannon/Cannons1.ogg" id="3_uvlre"]
 [ext_resource type="Script" uid="uid://chqlwr5cyriq4" path="res://scripts/components/scene_spawner.gd" id="3_yjxeu"]
 [ext_resource type="PackedScene" uid="uid://2wandfrh36gj" path="res://scenes/cannon_ball.tscn" id="4_jfr8q"]
@@ -17,7 +18,7 @@
 
 [sub_resource type="Animation" id="Animation_jfr8q"]
 resource_name = "fire"
-length = 0.1
+length = 0.2
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -243,6 +244,10 @@ script = ExtResource("1_pxhkx")
 
 [node name="CameraEffects" type="Node" parent="." unique_id=425530989]
 script = ExtResource("2_m2udb")
+
+[node name="AimSound" type="AudioStreamPlayer" parent="." unique_id=871879369]
+stream = ExtResource("3_01vp4")
+pitch_scale = 0.5
 
 [node name="Audio" type="Node3D" parent="." unique_id=703274324]
 script = ExtResource("2_0285d")

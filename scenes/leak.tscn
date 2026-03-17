@@ -3,15 +3,14 @@
 [ext_resource type="Script" uid="uid://bqehmyoma1axh" path="res://scripts/components/audio_spawner.gd" id="1_687o7"]
 [ext_resource type="AudioStream" uid="uid://cnngfeil2jqq0" path="res://audio/splash/Splash1.ogg" id="2_cvfb6"]
 [ext_resource type="Script" uid="uid://bun1bw82vfgwf" path="res://scripts/leak.gd" id="2_plahu"]
+[ext_resource type="Material" uid="uid://cf8qrehjkux0f" path="res://shaders/water.tres" id="2_y0vmt"]
 [ext_resource type="AudioStream" uid="uid://bgjccxogk0ttv" path="res://audio/splash/Splash2.ogg" id="3_eh6gj"]
+[ext_resource type="AudioStream" uid="uid://c2rig841hd6rt" path="res://audio/destruction/leak.ogg" id="3_h1tcw"]
 [ext_resource type="AudioStream" uid="uid://3r3ne4rgl2yf" path="res://audio/splash/Splash3.ogg" id="4_7n0mx"]
-[ext_resource type="AudioStream" uid="uid://77nx04f7a36k" path="res://audio/menu/menu_hover.ogg" id="6_m5x2a"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0vs71"]
-billboard_mode = 2
+[ext_resource type="AudioStream" uid="uid://7lj57e22daqi" path="res://audio/destruction/repair.ogg" id="7_y0vmt"]
 
 [sub_resource type="Curve" id="Curve_3sqip"]
-_data = [Vector2(0, 1), 0.0, -5.7703304, 0, 0, Vector2(0.28913552, 0.31208056), -0.42922163, -0.42922163, 0, 0, Vector2(0.9807243, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, -0.5234462, 0, 0, Vector2(0.6016726, 0.5929672), -0.42922163, -0.42922163, 0, 0, Vector2(0.9807243, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_3ajkw"]
@@ -20,41 +19,54 @@ curve = SubResource("Curve_3sqip")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3ajkw"]
 particle_flag_align_y = true
 direction = Vector3(0, 1, 0)
-spread = 10.0
+spread = 0.0
 initial_velocity_min = 1.0
 initial_velocity_max = 3.0
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_3ajkw")
 
 [sub_resource type="SphereMesh" id="SphereMesh_ou55p"]
-radius = 0.05
-height = 0.5
+radius = 0.03
+height = 0.3
 radial_segments = 4
 rings = 4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hg431"]
 size = Vector3(2.5701904, 1, 2.4077263)
 
-[sub_resource type="Animation" id="Animation_plahu"]
-resource_name = "repair"
-tracks/0/type = "method"
+[sub_resource type="Animation" id="Animation_h1tcw"]
+length = 0.001
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Audio/Repair")
+tracks/0/path = NodePath("Audio/Leak:volume_db")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"play_random_child"
-}]
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_plahu"]
+resource_name = "repair"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Audio/Leak:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -80.0]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Water")
+tracks/1/path = NodePath("Audio/Repair")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -62,16 +74,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"queue_free"
+"method": &"play_random_child"
 }]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".")
+tracks/2/path = NodePath("Water")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.8333333),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
@@ -85,6 +111,7 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rae0q"]
 _data = {
+&"RESET": SubResource("Animation_h1tcw"),
 &"repair": SubResource("Animation_plahu")
 }
 
@@ -94,20 +121,22 @@ anim_player = NodePath("AnimationPlayer")
 
 [node name="Water" type="GPUParticles3D" parent="." unique_id=1336449144]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36865735, 0)
-material_override = SubResource("StandardMaterial3D_0vs71")
+material_override = ExtResource("2_y0vmt")
 amount = 32
 lifetime = 0.5
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_3ajkw")
 draw_pass_1 = SubResource("SphereMesh_ou55p")
 
-[node name="Leak" type="AudioStreamPlayer3D" parent="." unique_id=1311061690]
-process_mode = 3
-stream = ExtResource("2_cvfb6")
-autoplay = true
-bus = &"SFX"
-
 [node name="Audio" type="Node3D" parent="." unique_id=1228684050]
+
+[node name="Leak" type="AudioStreamPlayer3D" parent="Audio" unique_id=2069093971]
+process_mode = 3
+stream = ExtResource("3_h1tcw")
+unit_size = 1.0
+autoplay = true
+max_distance = 80.0
+bus = &"SFX"
 
 [node name="Splash" type="Node3D" parent="Audio" unique_id=391107258]
 script = ExtResource("1_687o7")
@@ -115,16 +144,19 @@ script = ExtResource("1_687o7")
 [node name="Splash1" type="AudioStreamPlayer3D" parent="Audio/Splash" unique_id=373213777]
 process_mode = 3
 stream = ExtResource("2_cvfb6")
+volume_db = -5.0
 bus = &"SFX"
 
 [node name="Splash2" type="AudioStreamPlayer3D" parent="Audio/Splash" unique_id=407033693]
 process_mode = 3
 stream = ExtResource("3_eh6gj")
+volume_db = -5.0
 bus = &"SFX"
 
 [node name="Splash3" type="AudioStreamPlayer3D" parent="Audio/Splash" unique_id=424207835]
 process_mode = 3
 stream = ExtResource("4_7n0mx")
+volume_db = -5.0
 bus = &"SFX"
 
 [node name="Repair" type="Node3D" parent="Audio" unique_id=651137010]
@@ -132,7 +164,7 @@ script = ExtResource("1_687o7")
 
 [node name="Splash1" type="AudioStreamPlayer3D" parent="Audio/Repair" unique_id=805157375]
 process_mode = 3
-stream = ExtResource("6_m5x2a")
+stream = ExtResource("7_y0vmt")
 bus = &"SFX"
 
 [node name="Area3D" type="Area3D" parent="." unique_id=956915124]

@@ -18,18 +18,6 @@ var ignore_first_was_on_floor : bool = true
 var pitch := 0.0
 var mouse_delta := Vector2.ZERO
 
-func reset_camera():
-	if cam:
-		cam.rotation = Vector3.ZERO
-		mouse_delta = Vector2.ZERO
-
-func die():
-	if not Save.data.has("Deaths"):
-		Save.data["Deaths"] = 0
-	if Save: Save.data["Deaths"] += 1
-	if not is_inside_tree(): return
-	get_tree().reload_current_scene()
-	
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_delta += event.relative

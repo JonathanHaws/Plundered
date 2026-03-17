@@ -20,6 +20,7 @@ func _on_exit_aim(body):
 		in_range_of_aiming= false
 
 @export_group("References")
+@export var boat: RigidBody3D
 @export var player_group: String = "player"
 @export var player_animator_group: String = "player_anim"
 @onready var stand: Node3D = $cannon
@@ -35,9 +36,52 @@ var player_anim: AnimationPlayer
 @export var ai_random_aim: Vector2 = Vector2(5, 5)
 var ai_aim_offset = Vector3(0, 2.0, 0)
 var ai_cooldown_remaining: float = randf_range(0, ai_cooldown + ai_random_cooldown)
+
+func _ready() -> void:
+	if not boat: boat = get_parent()
+	$AimArea.body_entered.connect(_on_enter_aim)	
+	$AimArea.body_exited.connect(_on_exit_aim)	
+	player = get_tree().get_first_node_in_group(player_group)	
+	player_anim = get_tree().get_first_node_in_group(player_animator_group)
+	scene_spawner.add_dynamic_group(get_parent().name + 'CannonBall')
+	#print(get_parent().name)
+	
+func _process(_delta: float) -> void:
+		
+	if boat.name == "PlayerShip": # Can Only Aim Your Ship
+		if Input.is_action_just_pressed("interact"):
+			if aiming:
+				aiming = false
+				player_anim.play("Idle")
+				player.speed_multiplier = 1
+				player.mouse_delta = Vector2.ZERO
+				player.global_position = $AimSpot.global_position
+				$cannon/Barrel/Camera3D.current = false
+					
+			elif in_range_of_aiming: 
+				aiming = true
+				$AimSound.play()
+				$cannon/Barrel/Camera3D.current = true
+				player_anim.play("Aim")
+				player.speed_multiplier = 0
+				player.global_position = $AimSpot.global_position
+				#print('test')
+		
+	ai_aim(_delta)	
+	aim()
+		
+func _input(event):
+	if not aiming: return
+	if event is InputEventMouseMotion:
+		stand.rotation_degrees.y += -event.relative.x * yaw_sensitivity
+		barrel.rotation_degrees.x += -event.relative.y * pitch_sensitivity
+		clamp_aim()
+	
 func ai_aim(delta: float) -> void:
 	var parent = get_parent()
 	if parent.name == "PlayerShip": return
+	if get_parent().sunk: return
+	
 	var player_ship = get_tree().get_first_node_in_group("PlayerShip")
 	if player_ship == null: return
 
@@ -76,45 +120,7 @@ func ai_aim(delta: float) -> void:
 
 
 	$AnimationPlayer.play("fire")
-	ai_cooldown_remaining = ai_cooldown + randf_range(0, ai_random_cooldown)
-
-func _ready() -> void:
-	$AimArea.body_entered.connect(_on_enter_aim)	
-	$AimArea.body_exited.connect(_on_exit_aim)	
-	player = get_tree().get_first_node_in_group(player_group)	
-	player_anim = get_tree().get_first_node_in_group(player_animator_group)
-	scene_spawner.add_dynamic_group(get_parent().name + 'CannonBall')
-	#print(get_parent().name)
-	
-func _process(_delta: float) -> void:
-		
-	if Input.is_action_just_pressed("interact"):
-		if aiming:
-			aiming = false
-			player_anim.play("Idle")
-			player.speed_multiplier = 1
-			player.mouse_delta = Vector2.ZERO
-			player.global_position = $AimSpot.global_position
-			$cannon/Barrel/Camera3D.current = false
-				
-		elif in_range_of_aiming: 
-			aiming = true
-			$cannon/Barrel/Camera3D.current = true
-			player_anim.play("Aim")
-			player.speed_multiplier = 0
-			player.global_position = $AimSpot.global_position
-			player.reset_camera()
-			#print('test')
-		
-	ai_aim(_delta)	
-	aim()
-		
-func _input(event):
-	if not aiming: return
-	if event is InputEventMouseMotion:
-		stand.rotation_degrees.y += -event.relative.x * yaw_sensitivity
-		barrel.rotation_degrees.x += -event.relative.y * pitch_sensitivity
-		clamp_aim()
+	ai_cooldown_remaining = ai_cooldown + randf_range(0, ai_random_cooldown)	
 	
 func aim() -> void:
 	if not aiming: return

@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://78rv1e4g1amj"]
 
+[ext_resource type="Material" uid="uid://cf8qrehjkux0f" path="res://shaders/water.tres" id="1_f7q7i"]
 [ext_resource type="Script" uid="uid://bqehmyoma1axh" path="res://scripts/components/audio_spawner.gd" id="2_ovdco"]
 [ext_resource type="AudioStream" uid="uid://cnngfeil2jqq0" path="res://audio/splash/Splash1.ogg" id="3_f7q7i"]
 [ext_resource type="AudioStream" uid="uid://bgjccxogk0ttv" path="res://audio/splash/Splash2.ogg" id="4_4sx1t"]
@@ -81,24 +82,22 @@ _data = {
 &"emit": SubResource("Animation_pakj8")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0vs71"]
-
 [sub_resource type="Curve" id="Curve_3sqip"]
-_data = [Vector2(0, 1), 0.0, -5.7703304, 0, 0, Vector2(0.28913552, 0.31208056), -0.42922163, -0.42922163, 0, 0, Vector2(0.9807243, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, -0.91613287, 0, 0, Vector2(0.53125006, 0.5500275), -0.42922163, -0.42922163, 0, 0, Vector2(0.9807243, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_3ajkw"]
 curve = SubResource("Curve_3sqip")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3ajkw"]
-direction = Vector3(0, 0, -1)
+direction = Vector3(0, 1, 0)
 initial_velocity_max = 6.2
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_3ajkw")
 
 [sub_resource type="SphereMesh" id="SphereMesh_pakj8"]
-radius = 0.2
-height = 0.4
+radius = 0.3
+height = 0.8
 radial_segments = 4
 rings = 4
 
@@ -110,7 +109,7 @@ libraries/ = SubResource("AnimationLibrary_3sqip")
 autoplay = &"emit"
 
 [node name="Water" type="GPUParticles3D" parent="." unique_id=1336449144]
-material_override = SubResource("StandardMaterial3D_0vs71")
+material_override = ExtResource("1_f7q7i")
 amount = 32
 lifetime = 0.5
 one_shot = true
