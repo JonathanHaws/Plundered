@@ -346,7 +346,7 @@ _data = {
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ur7pv"]
 
-[node name="Player" type="CharacterBody3D" unique_id=2089436190 node_paths=PackedStringArray("anim", "cam", "fov_lerp", "audio_spawner") groups=["player"]]
+[node name="Player" type="CharacterBody3D" unique_id=2089436190 node_paths=PackedStringArray("anim", "cam", "fov_lerp", "audio_spawner") groups=["player", "player_ship"]]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 script = ExtResource("1_smehm")
 anim = NodePath("State")

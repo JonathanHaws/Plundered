@@ -9,12 +9,13 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_q631a"]
 size = Vector3(1.6854248, 1.8083496, 1.3911743)
 
-[node name="SteerArea" type="Area3D" unique_id=1453918494]
+[node name="SteeringWheel" type="Area3D" unique_id=1453918494]
 script = ExtResource("1_u0205")
 
 [node name="SteerSound" type="AudioStreamPlayer" parent="." unique_id=710704672]
 stream = ExtResource("2_m2w2j")
 pitch_scale = 0.5
+bus = &"SFX"
 
 [node name="SteerSpot" type="Node3D" parent="." unique_id=358594902]
 transform = Transform3D(1, 0, 0, 0, 0.99933475, 0.036469296, 0, -0.036469296, 0.99933475, 0, 0, 0.6)

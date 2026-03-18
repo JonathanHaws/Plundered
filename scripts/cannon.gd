@@ -76,11 +76,18 @@ func _input(event):
 		stand.rotation_degrees.y += -event.relative.x * yaw_sensitivity
 		barrel.rotation_degrees.x += -event.relative.y * pitch_sensitivity
 		clamp_aim()
+
+func is_player_ship_sunk() -> bool:
+	for b in get_tree().get_nodes_in_group("boats"):
+		if b.name == "PlayerShip" and not b.sunk:
+			return false
+	return true
 	
 func ai_aim(delta: float) -> void:
 	var parent = get_parent()
 	if parent.name == "PlayerShip": return
 	if get_parent().sunk: return
+	if is_player_ship_sunk(): return
 	
 	var player_ship = get_tree().get_first_node_in_group("PlayerShip")
 	if player_ship == null: return

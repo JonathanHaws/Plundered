@@ -35,6 +35,7 @@ window/stretch/aspect="expand"
 
 menu_hovered_sound=""
 menu_pressed_sound=""
+player_ship_targets="Relative position enemy ships try to maneuver to"
 
 [input]
 

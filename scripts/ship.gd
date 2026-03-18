@@ -1,24 +1,28 @@
 extends RigidBody3D
+
+@export_group('Stats')
+@export var speed: float = 1200
+@export var steer: float = 160
+
+@export_group('Physics')
 #@export var is_docked: bool = true add if wanting sails to be own control
-@export var is_players_boat: bool = false
-@export var player_group: String = "player"
-@export var player_animator_group: String = "player_anim"
 @export var sink_free_y: float = -50.0
-
-@export var leak_per_second: float = 10.0  ## HP lost per second when not at max health
-
 @export var gravity: float = 9.8
 @export var buoyancy: float = 3.1
 @export var water_drag: float = 0.02
 @export var air_drag: float = 0.01
 @export var water_angular_drag: float = 0.05
 @export var air_angular_drag: float = 0.01
-
-var player: CharacterBody3D
-var player_anim: AnimationPlayer
-var in_range_of_steering: bool = false
 var submerged: bool = false
 var sunk: bool = false
+
+@export_group('Player')
+@export var player_ship_name: String = "PlayerShip"
+@export var player_group: String = "player"
+@export var player_animator_group: String = "player_anim"
+@export var leak_per_second: float = 10.0  ## HP lost per second when not at max health
+var player: CharacterBody3D
+var player_anim: AnimationPlayer
 
 func _integrate_forces(state: PhysicsDirectBodyState3D):
 	if submerged:
@@ -30,19 +34,22 @@ func _integrate_forces(state: PhysicsDirectBodyState3D):
 
 func on_ship_sunk() -> void:
 	#print("sunk")
-	remove_from_group("boats")
-	Save.data["bounty"] = Save.data.get("bounty", 0) + 100
-	Save.save_game()
 	sunk = true
+	remove_from_group("boats")
+	if name != player_ship_name:
+		Save.data["bounty"] = Save.data.get("bounty", 0) + 100
+		Save.save_game()
+		$Audio/Bounty.play()
 	
 func impact(strength: float) -> void:
 	var impulse = Vector3(randf_range(-1,1), randf_range(-1,1), randf_range(-1,1)).normalized() * strength
 	var offset = Vector3(randf_range(-1,1), randf_range(-1,1), randf_range(-1,1))
 	apply_impulse(impulse, offset)
 	
-func apply_boat_controls(control_speed: float, control_steer: float, _delta: float) -> void:
-	apply_central_force(-global_transform.basis.z.normalized() * control_speed * _delta)
-	apply_torque_impulse(Vector3.UP * control_steer * _delta)
+func apply_boat_controls(forward: float, right: float, _delta: float) -> void:
+	#print("moving boat ", name, " at a speed of ", speed * forward, " and steering ", right * steer)
+	apply_central_force(-global_transform.basis.z.normalized() * forward * speed * _delta)
+	apply_torque_impulse(Vector3.UP * right * steer * _delta)
 	
 func _ready():
 	
@@ -52,13 +59,12 @@ func _ready():
 	player_anim = get_tree().get_first_node_in_group(player_animator_group)
 	$HitArea.add_immune_group(name + "CannonBall")
 	
-	if is_players_boat:
+	if name == player_ship_name:
 		Save.data["bounty"] = 0
 		Save.save_game()
 	
-	if name == "PlayerShip":
-		for target in $Targets.get_children():
-			target.add_to_group("PlayerShipTargets")
+	if name != player_ship_name:
+		$Targets.queue_free()
 	
 	#print(name)
 	
@@ -101,7 +107,7 @@ func _ready():
 				child.queue_free()
 	
 func _process(_delta):
-
+	
 	if sunk and global_position.y < sink_free_y:
 		#print('ship queued free')
 		queue_free()
@@ -118,7 +124,7 @@ func _process(_delta):
 				apply_force(Vector3.UP * buoyancy * depth, probe.global_position - global_transform.origin)
 	
 	#print($HitArea.HEALTH)
-	if name == "PlayerShip": # Only produce leaks for player ship
+	if name == player_ship_name: # Only produce leaks for player ship
 	
 		if  get_tree().get_nodes_in_group("leaks").size() > 0:
 			$HitArea.HEALTH -= leak_per_second * _delta

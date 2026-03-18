@@ -7,11 +7,6 @@ var player_anim: AnimationPlayer
 var in_range_of_steering: bool = false
 var steering: bool = false
 
-@export var speed: float = 1200
-@export var steer: float = 160
-@export var ai_speed: float = 400
-@export var ai_steer: float = 120
-
 func _on_enter_steer(body):
 	if body.is_in_group(player_group):
 		in_range_of_steering = true
@@ -51,8 +46,10 @@ func _process(_delta):
 func ai_steering(_delta):
 	if boat.name == "PlayerShip": return
 	
-	var targets = get_tree().get_nodes_in_group("PlayerShipTargets")
+	var targets = get_tree().get_nodes_in_group("player_ship_targets")
 	if targets.size() == 0: return
+
+	#print('piloting ai boat')
 
 	var forward = -global_transform.basis.z.normalized()
 	var best_score = -INF
@@ -76,7 +73,7 @@ func ai_steering(_delta):
 	var angle = atan2(dir.x, dir.z) - atan2(forward.x, forward.z)
 	angle = wrapf(angle, -PI, PI)
 
-	boat.apply_boat_controls(ai_speed * 0.2, ai_steer * sign(angle), _delta)
+	boat.apply_boat_controls(1, sign(angle), _delta)
 
 func player_steering(_delta) -> void:
 	if not boat.name == "PlayerShip": return
@@ -90,5 +87,5 @@ func player_steering(_delta) -> void:
 	$wheel/Wheel.rotate_z(-movement_vector.x * 0.02)
 
 	player.global_position = $SteerSpot.global_position
-	boat.apply_central_force(-boat.global_transform.basis.z.normalized() * speed * movement_vector.z * _delta)
-	boat.apply_torque_impulse(Vector3.UP * -steer * movement_vector.x * _delta)
+	
+	boat.apply_boat_controls(movement_vector.z, -movement_vector.x, _delta)

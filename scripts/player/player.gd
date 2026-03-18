@@ -29,6 +29,12 @@ func _move_camera():
 	cam.rotation.x = pitch
 	mouse_delta = Vector2.ZERO
 
+func is_player_ship_sunk() -> bool:
+	for b in get_tree().get_nodes_in_group("boats"):
+		if b.name == "PlayerShip" and not b.sunk:
+			return false
+	return true
+
 func _free_movement(_d):
 	if Input.is_action_just_pressed("jump"): jump_buffer = jump_buffer_time;
 	elif jump_buffer > 0: jump_buffer -= _d	
@@ -95,5 +101,6 @@ func _physics_process(_delta):
 		_free_movement(_delta)
 		_move_camera()
 	
-	if global_position.y < kill_y:
+	if global_position.y < kill_y or is_player_ship_sunk():
 		anim.play("Death")
+		

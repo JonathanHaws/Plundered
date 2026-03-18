@@ -3,16 +3,19 @@ extends AnimationPlayer
 var spawner
 
 @export_group("Difficulty")	
+@export_subgroup("Spawning")
 @export var min_ships: float = 2.0
 @export var breathing_time: float = 7
 @export var random_breathing_time: float = 2
 @export var spawn_distance: float = 50.0
 @export var random_spawn_distance: float = 20.0
+@export_subgroup("Mobility")
+@export var speed: float = 400.0
+@export var steer: float = 80.0
 
 @export_group("Auto Progress Difficulty")
 @export var auto_progress: bool = true
 @export var curve_base_time: float = 20
-
 @export_subgroup("Spawning")
 @export var curve_min_ships: Curve
 @export var curve_breathing_time: Curve
@@ -20,6 +23,10 @@ var spawner
 @export var curve_spawn_distance: Curve
 @export var curve_random_spawn_distance: Curve
 var min_separation: float = 25.0 # Spawns boats fruther if overlapping
+@export_subgroup("Mobility")
+@export var curve_speed: Curve
+@export var curve_steer: Curve
+
 
 var progress_time : float = 0.0
 func get_curve_value_at_time(curve: Curve) -> float:
@@ -59,6 +66,12 @@ func _process(_delta):
 			spawn_distance = get_curve_value_at_time(curve_spawn_distance)
 		if curve_random_spawn_distance:
 			random_spawn_distance = get_curve_value_at_time(curve_random_spawn_distance)
+		
+		if curve_speed:
+			speed = get_curve_value_at_time(curve_speed)
+		if curve_steer:
+			steer = get_curve_value_at_time(curve_steer)
+			
 
 	#print(boat_count)
 	var boat_count = get_tree().get_nodes_in_group("boats").size()
@@ -68,7 +81,6 @@ func _process(_delta):
 	if cooldown > 0: return 
 	cooldown = breathing_time + (randf() * random_breathing_time)
 	var cam = get_viewport().get_camera_3d()
-	print('spawning new boat out of view')
 
 	var distance: float = spawn_distance + (randf() * random_spawn_distance)
 	var spawn_position = cam.global_position + (get_random_backward_direction(cam) * distance)
@@ -80,12 +92,15 @@ func _process(_delta):
 				distance += min_separation
 				spawn_position = cam.global_position + (get_random_backward_direction(cam) * distance)
 				clear = false
-				break
+				break			
+	#print('spawning new boat out of view at:', round(spawn_position))
 	
 	spawner.global_position = spawn_position
 	spawner.rotation.y = randf_range(0.0, TAU)
 	spawner.global_position.y = 0.0
-	#var boat = spawner.spawn()
+	var boat = spawner.spawn()
+	boat.speed = speed
+	boat.steer = steer
 	#print(boat.name) ## Add stat buffs as tiem goes on
 
 	cooldown = breathing_time + (randf() * random_breathing_time)
