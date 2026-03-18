@@ -155,15 +155,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_2gnfn")
 debug_color = Color(0.96, 0.19839998, 0.14399998, 0.87058824)
 
-[node name="HitArea" type="Area3D" parent="." unique_id=885592007 node_paths=PackedStringArray("TELEPORT_NODES_TO_HIT", "HURT_ANIMATION_PLAYER", "DEATH_ANIMATION_PLAYER")]
+[node name="HitArea" type="Area3D" parent="." unique_id=885592007 node_paths=PackedStringArray("TELEPORT_NODES_TO_HIT", "REACTION_ANIM_PLAYER")]
 script = ExtResource("5_gudjc")
-HEALTH = 2500.0
-MAX_HEALTH = 2500.0
+HEALTH = 1500.0
+MAX_HEALTH = 1500.0
 INVINCIBILITY_COOLDOWN = 0.0
 PERSISTENT_HEALTH = false
 TELEPORT_NODES_TO_HIT = [NodePath("SceneSpawner")]
-HURT_ANIMATION_PLAYER = NodePath("AnimationPlayer")
-DEATH_ANIMATION_PLAYER = NodePath("AnimationPlayer")
+REACTION_ANIM_PLAYER = NodePath("AnimationPlayer")
+POLL_HURT = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HitArea" unique_id=1847229458]
 libraries/ = SubResource("AnimationLibrary_3m36u")

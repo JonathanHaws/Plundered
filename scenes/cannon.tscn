@@ -155,7 +155,8 @@ scenes = Array[PackedScene]([ExtResource("4_jfr8q"), ExtResource("10_ogt75")])
 add_to_scene_root = true
 
 [node name="Camera3D" type="Camera3D" parent="cannon/Barrel" index="1" unique_id=1421257956]
-transform = Transform3D(1, 0, 0, 0, 0.99874574, -0.050069984, 0, 0.050069984, 0.99874574, 0, 1.5529484, 1.0179856)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.665724, 0.5637355)
+fov = 90.9
 
 [node name="Stand" parent="cannon" index="1" unique_id=530149653]
 surface_material_override/0 = ExtResource("16_lr4va")

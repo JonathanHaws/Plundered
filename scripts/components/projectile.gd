@@ -34,9 +34,8 @@ func play_collision_animation():
 			collision_animation_player.play(collision_animation_name, 0)
 			collision_animation_player.advance(0)
 func _on_hurt() -> void:
-	print("hurt")
+	#print("hurt")
 	play_collision_animation()
-
 
 func _ready():
 	

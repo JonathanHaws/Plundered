@@ -5,6 +5,8 @@ extends RigidBody3D
 @export var player_animator_group: String = "player_anim"
 @export var sink_free_y: float = -50.0
 
+@export var leak_per_second: float = 10.0  ## HP lost per second when not at max health
+
 @export var gravity: float = 9.8
 @export var buoyancy: float = 3.1
 @export var water_drag: float = 0.02
@@ -28,6 +30,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D):
 
 func on_ship_sunk() -> void:
 	#print("sunk")
+	remove_from_group("boats")
 	Save.data["bounty"] = Save.data.get("bounty", 0) + 100
 	Save.save_game()
 	sunk = true
@@ -116,7 +119,13 @@ func _process(_delta):
 	
 	#print($HitArea.HEALTH)
 	if name == "PlayerShip": # Only produce leaks for player ship
+	
+		if  get_tree().get_nodes_in_group("leaks").size() > 0:
+			$HitArea.HEALTH -= leak_per_second * _delta
+			#print("leaking", $HitArea.HEALTH)
+	
 		if $HitArea.HEALTH < $HitArea.MAX_HEALTH:
+			
 			var max_leaks = int(($HitArea.MAX_HEALTH - $HitArea.HEALTH) / 150)
 			var current_leaks = get_tree().get_nodes_in_group("leaks").size()
 			if current_leaks < max_leaks:

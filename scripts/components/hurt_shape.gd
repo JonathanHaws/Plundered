@@ -116,9 +116,6 @@ func _ready() -> void:
 	if hit_shape and hit_shape.has_signal("DIED"):
 		hit_shape.DIED.connect(queue_free)
 	
-func on_ship_hit() -> void:
-	print('hit')
-	
 
 #func _process(_delta: float) -> void:
 	#print("Timers alive:", get_tree().get_nodes_in_group("memory_leak_check").size())

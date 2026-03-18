@@ -10,6 +10,7 @@ signal HEAL
 @export var DISABLED: bool = false 
 var last_hurt_shape: Area3D = null ## most recent hurt_shape to damage this shape
 var invincibility_timer: Timer
+var previous_health: float = HEALTH
 func add_immune_group(group_name: String) -> void:
 	if not group_name in IMMUNE_GROUPS:
 		IMMUNE_GROUPS.append(group_name)
@@ -21,18 +22,38 @@ func add_immune_group(group_name: String) -> void:
 
 @export_group("Damage Reaction") ## For Body / Child Nodes which have to reposition themselves. Such as Needed positional synchronization between attacker / attacked on animations, Hurt Particles, etc.
 @export var TELEPORT_NODES_TO_HIT: Array[Node3D] = [] 
-@export var HURT_ANIMATION_PLAYER: AnimationPlayer
-@export var DEATH_ANIMATION_PLAYER: AnimationPlayer
-@export var HEAL_ANIMATION_PLAYER: AnimationPlayer
+@export var REACTION_ANIM_PLAYER: AnimationPlayer
 @export var HURT_ANIM: String = "HURT"
 @export var DEATH_ANIM: String = "DEATH"
 @export var HEAL_ANIM: String = "HEAL"
+@export var POLL_HURT: bool = true
+@export var POLL_DEATH: bool = true
+@export var POLL_HEAL: bool = true
 @export var DAMAGE_NUMBERS: PackedScene
 func show_damage(damage_amount: int) -> void:
 	var number = DAMAGE_NUMBERS.instantiate()
 	number.get_node("Node2D/Label").text = str(int(damage_amount))
 	get_tree().current_scene.add_child(number)
 	number.position = get_viewport().get_camera_3d().unproject_position(self.global_position) - Vector2(0, 140.0)
+
+func _play_anim(anim: String, signal_to_emit: Signal) -> void:
+	if REACTION_ANIM_PLAYER.has_animation(anim):
+		REACTION_ANIM_PLAYER.play(anim)
+		signal_to_emit.emit()
+
+func play_reaction_animations(poll: bool = false) -> void:
+	if DISABLED or not REACTION_ANIM_PLAYER: return
+
+	if HEALTH <= 0 and not DISABLED and (not poll or POLL_DEATH): # Death
+		DISABLED = true
+		_play_anim(DEATH_ANIM, DIED)
+	elif HEALTH < previous_health and (not poll or POLL_HURT): # Hurt
+		if HEALTH > 0:
+			_play_anim(HURT_ANIM, HURT)
+	elif HEALTH > previous_health and (not poll or POLL_HEAL): # Heal
+		_play_anim(HEAL_ANIM, HEAL)
+
+	previous_health = HEALTH
 
 @export_group("Respawn") ## For configuring exactly how persistent save data is handled
 @export var RESPAWN_WHEN_DEATHS_INCREMENT: bool = true ## Makes it so entitiy resets save data when player dies
@@ -72,7 +93,7 @@ func _load_max_health() -> void:
 @export var WAVE_HITSHAPE_GROUP: String = "enemy_hitshape" ## optional group for wave health
 @export var WAVE_DAMAGE :float = 300.0 ## The amount to decrease health when enemies die
 
-func hit(area: Area3D = null, damage: int = 0, play_animations: bool = true) -> bool:
+func hit(area: Area3D = null, damage: int = 0) -> bool:
 	if DISABLED: return false
 	if invincibility_timer: if invincibility_timer.is_stopped() == false: return false 
 	if area: for immune_group in IMMUNE_GROUPS: 
@@ -92,21 +113,11 @@ func hit(area: Area3D = null, damage: int = 0, play_animations: bool = true) -> 
 		for node in TELEPORT_NODES_TO_HIT:
 			if node is Node3D: node.global_transform.origin = area.global_transform.origin
 	
-	if play_animations:
-		if HEALTH > 0 and damage > 0: # HURT
-			if HURT_ANIMATION_PLAYER and HURT_ANIMATION_PLAYER.has_animation(HURT_ANIM):
-				HURT.emit()
-				HURT_ANIMATION_PLAYER.play(HURT_ANIM)
-		if HEALTH <= 0: # DEATH
-			if DEATH_ANIMATION_PLAYER and DEATH_ANIMATION_PLAYER.has_animation(DEATH_ANIM):
-				DIED.emit()
-				DISABLED = true
-				DEATH_ANIMATION_PLAYER.play(DEATH_ANIM)	
-		if damage < 0: # HEAL
-			if HEAL_ANIMATION_PLAYER and HEAL_ANIMATION_PLAYER.has_animation(HEAL_ANIM):
-				HEAL.emit()
-				HEAL_ANIMATION_PLAYER.play(HEAL_ANIM)
+	play_reaction_animations()
 	return true
+	
+
+	
 			
 func _ready():
 	
@@ -130,9 +141,11 @@ func _ready():
 	if Save.data.has(HEALTH_KEY): HEALTH = Save.data[HEALTH_KEY]	
 	else: HEALTH = MAX_HEALTH
 	if HEALTH <= 0 and ROOT: ROOT.queue_free()
+	previous_health = HEALTH
 		
 func _process(_delta):
 	
+	play_reaction_animations(true)
 	
 	if USE_WAVE_HEALTH_BAR:
 		var callback := Callable(self, "hit").bind(null, WAVE_DAMAGE)
