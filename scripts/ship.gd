@@ -5,22 +5,26 @@ extends RigidBody3D
 @export var player_animator_group: String = "player_anim"
 @export var sink_free_y: float = -50.0
 
-
 @export var gravity: float = 9.8
-@export var buoyancy := 1.0
-@export var water_drag := 0.01
-@export var water_angular_drag := 0.05
+@export var buoyancy: float = 3.1
+@export var water_drag: float = 0.02
+@export var air_drag: float = 0.01
+@export var water_angular_drag: float = 0.05
+@export var air_angular_drag: float = 0.01
+
 var player: CharacterBody3D
 var player_anim: AnimationPlayer
 var in_range_of_steering: bool = false
 var submerged: bool = false
 var sunk: bool = false
 
-
 func _integrate_forces(state: PhysicsDirectBodyState3D):
 	if submerged:
-		state.linear_velocity *=  1 - water_drag
-		state.angular_velocity *= 1 - water_angular_drag 
+		state.linear_velocity *= 1 - water_drag
+		state.angular_velocity *= 1 - water_angular_drag
+	else:
+		state.linear_velocity *= 1 - air_drag
+		state.angular_velocity *= 1 - air_angular_drag
 
 func on_ship_sunk() -> void:
 	#print("sunk")
@@ -69,12 +73,29 @@ func _ready():
 		for pos in positions:
 			var probe = Node3D.new()
 			probe.position = pos
-			#simply for seeing the probe location and degbugging
-			#var mesh_instance = MeshInstance3D.new()  # create mesh
-			#mesh_instance.mesh = SphereMesh.new()    # simple sphere
-			#mesh_instance.scale = Vector3.ONE * 0.1  # small size
-			#probe.add_child(mesh_instance)
 			$CollisionShape3D.add_child(probe)
+			
+			#simply for seeing the probe location and degbugging
+			#var mesh_instance = MeshInstance3D.new()
+			#mesh_instance.mesh = SphereMesh.new() 
+			#mesh_instance.scale = Vector3.ONE
+			#probe.add_child(mesh_instance)
+	
+	# replaces static meshses with animatable bodies as they carry momentu
+	for mesh in $Ship.get_children():
+		for child in mesh.get_children():
+			if child is StaticBody3D:
+				#print('test')
+				var new_body = AnimatableBody3D.new()
+				new_body.sync_to_physics = false
+				new_body.transform = child.transform
+				
+				for c in child.get_children():
+					child.remove_child(c)
+					new_body.add_child(c)
+				
+				mesh.add_child(new_body)
+				child.queue_free()
 	
 func _process(_delta):
 

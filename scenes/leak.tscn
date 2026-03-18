@@ -19,15 +19,15 @@ curve = SubResource("Curve_3sqip")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3ajkw"]
 particle_flag_align_y = true
 direction = Vector3(0, 1, 0)
-spread = 0.0
+spread = 10.0
 initial_velocity_min = 1.0
 initial_velocity_max = 3.0
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_3ajkw")
 
 [sub_resource type="SphereMesh" id="SphereMesh_ou55p"]
-radius = 0.03
-height = 0.3
+radius = 0.06
+height = 0.2
 radial_segments = 4
 rings = 4
 
@@ -120,7 +120,7 @@ script = ExtResource("2_plahu")
 anim_player = NodePath("AnimationPlayer")
 
 [node name="Water" type="GPUParticles3D" parent="." unique_id=1336449144]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36865735, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0061482787, 0)
 material_override = ExtResource("2_y0vmt")
 amount = 32
 lifetime = 0.5

@@ -1,4 +1,5 @@
 extends CharacterBody3D
+@export var kill_y: float = -5
 @export var anim: AnimationPlayer 
 @export var speed := 3.0
 @export var speed_multiplier := 1.0
@@ -94,5 +95,5 @@ func _physics_process(_delta):
 		_free_movement(_delta)
 		_move_camera()
 	
-	if global_position.y < 0.0:
+	if global_position.y < kill_y:
 		anim.play("Death")

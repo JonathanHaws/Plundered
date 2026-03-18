@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://crf7v51qwlgff"]
+
+[ext_resource type="Script" uid="uid://i5orvfyiofxx" path="res://scripts/steering_wheel.gd" id="1_u0205"]
+[ext_resource type="AudioStream" uid="uid://put8jhjiqpkm" path="res://audio/steer.ogg" id="2_m2w2j"]
+[ext_resource type="PackedScene" uid="uid://cjll2da7x15rp" path="res://blender/wheel.blend" id="3_0ihdb"]
+[ext_resource type="Material" uid="uid://4wmac4esdrtt" path="res://shaders/wood.tres" id="4_u0205"]
+[ext_resource type="Material" uid="uid://bdqd05r0122jr" path="res://shaders/dark_wood.tres" id="5_4taih"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q631a"]
+size = Vector3(1.6854248, 1.8083496, 1.3911743)
+
+[node name="SteerArea" type="Area3D" unique_id=1453918494]
+script = ExtResource("1_u0205")
+
+[node name="SteerSound" type="AudioStreamPlayer" parent="." unique_id=710704672]
+stream = ExtResource("2_m2w2j")
+pitch_scale = 0.5
+
+[node name="SteerSpot" type="Node3D" parent="." unique_id=358594902]
+transform = Transform3D(1, 0, 0, 0, 0.99933475, 0.036469296, 0, -0.036469296, 0.99933475, 0, 0, 0.6)
+
+[node name="wheel" parent="." unique_id=641583058 instance=ExtResource("3_0ihdb")]
+
+[node name="Stand" parent="wheel" index="0" unique_id=1892421944]
+surface_material_override/0 = ExtResource("4_u0205")
+
+[node name="Wheel" parent="wheel" index="1" unique_id=583412277]
+surface_material_override/0 = ExtResource("5_4taih")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1550117771]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0049438477, 0.7335205, 0)
+shape = SubResource("BoxShape3D_q631a")
+
+[editable path="wheel"]

@@ -7,19 +7,15 @@
 [ext_resource type="AudioStream" uid="uid://cjm1uedwordvb" path="res://audio/destruction/destruction.ogg" id="5_8qiel"]
 [ext_resource type="Script" uid="uid://cthq3d3fa2too" path="res://scripts/components/hit_shape.gd" id="5_gudjc"]
 [ext_resource type="AudioStream" uid="uid://0wye6421c487" path="res://audio/bounty_increased.ogg" id="5_itrim"]
-[ext_resource type="Script" uid="uid://i5orvfyiofxx" path="res://scripts/steering_wheel.gd" id="5_tbq4g"]
-[ext_resource type="Material" uid="uid://4y2tudmoewqr" path="res://shaders/crayon.tres" id="6_bseor"]
+[ext_resource type="PackedScene" uid="uid://crf7v51qwlgff" path="res://scenes/steering_wheel.tscn" id="5_tlr80"]
 [ext_resource type="Script" uid="uid://chqlwr5cyriq4" path="res://scripts/components/scene_spawner.gd" id="7_3m36u"]
-[ext_resource type="AudioStream" uid="uid://put8jhjiqpkm" path="res://audio/steer.ogg" id="7_03y04"]
-[ext_resource type="PackedScene" uid="uid://cjll2da7x15rp" path="res://blender/wheel.blend" id="7_48mkp"]
+[ext_resource type="Material" uid="uid://4wmac4esdrtt" path="res://shaders/wood.tres" id="7_03y04"]
 [ext_resource type="PackedScene" uid="uid://caq61atyyxveg" path="res://scenes/particles/boat_destruction.tscn" id="8_8qiel"]
-[ext_resource type="Shader" uid="uid://da5t5c1udqss2" path="res://shaders/crayon.gdshader" id="9_vbj2c"]
-[ext_resource type="Texture2D" uid="uid://2rhsqc0irh3v" path="res://textures/crayon_2.jpg" id="10_dschd"]
-[ext_resource type="Texture2D" uid="uid://b07uenqitqt1e" path="res://textures/crayon_1.jpg" id="11_83dbu"]
+[ext_resource type="Material" uid="uid://cmb4wdnkr65if" path="res://shaders/sail.tres" id="8_48mkp"]
 [ext_resource type="PackedScene" uid="uid://dhiwjfe1tbiqe" path="res://scenes/leak.tscn" id="11_tlr80"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2gnfn"]
-size = Vector3(14.101, 3.3469353, 26.225485)
+size = Vector3(12, 1, 20)
 
 [sub_resource type="Animation" id="Animation_8qiel"]
 resource_name = "DEATH"
@@ -147,34 +143,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4tobq"]
-size = Vector3(13.507647, 5.4276485, 25.361385)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xifwb"]
-render_priority = 0
-shader = ExtResource("9_vbj2c")
-shader_parameter/albedo = Color(0.2762096, 0.15670261, 0.1423384, 1)
-shader_parameter/albedo_texture_size = Vector2i(1024, 1024)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
-shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/uv1_blend_sharpness = 1.0
-shader_parameter/uv1_scale = Vector3(0.732, 0.732, 0.732)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/uv2_scale = Vector3(1, 1, 1)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/crayon_texture_a = ExtResource("10_dschd")
-shader_parameter/crayon_texture_b = ExtResource("11_83dbu")
-shader_parameter/crayon_amount = 0.50000002375
-shader_parameter/speed_crayon = 6.0
-shader_parameter/jiggle_strength = 0.008
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_q631a"]
-size = Vector3(1.5131836, 1.9111328, 1.3911743)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_emiat"]
-data = PackedVector3Array(6.203332, -2.3107939, -1.6848469, 6.203331, 1.8008695, 8.479864, 6.203332, 1.8008695, -1.6848469, 6.203332, -2.3107939, -1.6848469, 6.203331, -2.3107939, 8.479865, 6.203331, 1.8008695, 8.479864, 3.3248055, -2.3107939, -1.6848471, 6.203333, -2.3107934, -11.849558, 3.3248062, -2.3107934, -13.971859, 3.3248055, -2.3107939, -1.6848471, 6.203332, -2.3107939, -1.6848469, 6.203333, -2.3107934, -11.849558, 3.3248062, -2.3107934, -13.971859, 6.203333, 1.8008695, -11.84956, 3.3248062, 1.8008695, -13.971861, 3.3248062, -2.3107934, -13.971859, 6.203333, -2.3107934, -11.849558, 6.203333, 1.8008695, -11.84956, 3.3248043, -2.3107939, 8.479865, 6.203332, -2.3107939, -1.6848469, 3.3248055, -2.3107939, -1.6848471, 3.3248043, -2.3107939, 8.479865, 6.203331, -2.3107939, 8.479865, 6.203332, -2.3107939, -1.6848469, 6.203333, -2.3107934, -11.849558, 6.203332, 1.8008695, -1.6848469, 6.203333, 1.8008695, -11.84956, 6.203333, -2.3107934, -11.849558, 6.203332, -2.3107939, -1.6848469, 6.203332, 1.8008695, -1.6848469, 3.3248062, 1.8008695, -13.971861, 6.203332, 1.8008695, -1.6848469, 3.3248055, 1.8008695, -1.6848471, 3.3248062, 1.8008695, -13.971861, 6.203333, 1.8008695, -11.84956, 6.203332, 1.8008695, -1.6848469, 3.3248053, 3.9028606, 1.4233803, 6.203331, 3.9028604, 8.479864, 3.3248043, 3.9028604, 8.479864, 3.3248053, 3.9028606, 1.4233803, 6.203332, 3.9028606, 1.4233804, 6.203331, 3.9028604, 8.479864, 6.203331, 1.8008695, 8.479864, 6.203332, 3.9028606, 1.4233804, 6.203332, 1.8008695, -1.6848469, 6.203331, 1.8008695, 8.479864, 6.203331, 3.9028604, 8.479864, 6.203332, 3.9028606, 1.4233804, 3.3248043, 1.8008695, 8.479864, 6.203331, 3.9028604, 8.479864, 6.203331, 1.8008695, 8.479864, 3.3248043, 1.8008695, 8.479864, 3.3248043, 3.9028604, 8.479864, 6.203331, 3.9028604, 8.479864, 3.3248043, -2.3107939, 8.479865, 0.44627857, 1.8008695, 8.479864, 3.3248043, 1.8008695, 8.479864, 3.3248043, -2.3107939, 8.479865, 0.44627857, -2.3107939, 8.479865, 0.44627857, 1.8008695, 8.479864, 3.3248055, 1.8008695, -1.6848471, 3.3248053, 3.9028606, 1.4233803, 0.44627905, 3.9028606, -1.6848477, 6.203332, 1.8008695, -1.6848469, 3.3248053, 3.9028606, 1.4233803, 3.3248055, 1.8008695, -1.6848471, 6.203332, 1.8008695, -1.6848469, 6.203332, 3.9028606, 1.4233804, 3.3248053, 3.9028606, 1.4233803, 6.203331, -2.3107939, 8.479865, 3.3248043, 1.8008695, 8.479864, 6.203331, 1.8008695, 8.479864, 6.203331, -2.3107939, 8.479865, 3.3248043, -2.3107939, 8.479865, 3.3248043, 1.8008695, 8.479864, 0.44627857, 1.8008695, 8.479864, 3.3248043, 3.9028604, 8.479864, 3.3248043, 1.8008695, 8.479864, 0.44627857, 1.8008695, 8.479864, 0.44627857, 3.9028604, 8.479864, 3.3248043, 3.9028604, 8.479864, 0.44627905, 3.9028606, -1.6848477, 3.3248043, 3.9028604, 8.479864, 0.44627857, 3.9028604, 8.479864, 0.44627905, 3.9028606, -1.6848477, 3.3248053, 3.9028606, 1.4233803, 3.3248043, 3.9028604, 8.479864, 0.44627953, 1.8008695, -16.094158, 3.3248055, 1.8008695, -1.6848471, 0.44627905, 1.8008695, -1.6848475, 0.44627953, 1.8008695, -16.094158, 3.3248062, 1.8008695, -13.971861, 3.3248055, 1.8008695, -1.6848471, 0.44627857, -2.3107939, 8.479865, 3.3248055, -2.3107939, -1.6848471, 0.44627905, -2.3107939, -1.6848477, 0.44627857, -2.3107939, 8.479865, 3.3248043, -2.3107939, 8.479865, 3.3248055, -2.3107939, -1.6848471, 0.44627953, -2.3107939, -16.094158, 3.3248062, 1.8008695, -13.971861, 0.44627953, 1.8008695, -16.094158, 0.44627953, -2.3107939, -16.094158, 3.3248062, -2.3107934, -13.971859, 3.3248062, 1.8008695, -13.971861, 0.44627905, -2.3107939, -1.6848477, 3.3248062, -2.3107934, -13.971859, 0.44627953, -2.3107939, -16.094158, 0.44627905, -2.3107939, -1.6848477, 3.3248055, -2.3107939, -1.6848471, 3.3248062, -2.3107934, -13.971859, -5.310774, -2.3107939, -1.6848478, -5.310775, 1.8008695, 8.479864, -5.310775, -2.3107939, 8.479864, -5.310774, -2.3107939, -1.6848478, -5.310774, 1.8008695, -1.6848478, -5.310775, 1.8008695, 8.479864, -2.4322474, -2.3107939, -1.6848477, -5.310772, -2.3107934, -11.849559, -5.310774, -2.3107939, -1.6848478, -2.4322474, -2.3107939, -1.6848477, -2.4322472, -2.3107934, -13.97186, -5.310772, -2.3107934, -11.849559, -2.4322472, -2.3107934, -13.97186, -5.310773, 1.8008695, -11.84956, -5.310772, -2.3107934, -11.849559, -2.4322472, -2.3107934, -13.97186, -2.4322462, 1.8008695, -13.971861, -5.310773, 1.8008695, -11.84956, -2.432248, -2.3107939, 8.479865, -5.310774, -2.3107939, -1.6848478, -5.310775, -2.3107939, 8.479864, -2.432248, -2.3107939, 8.479865, -2.4322474, -2.3107939, -1.6848477, -5.310774, -2.3107939, -1.6848478, -5.310772, -2.3107934, -11.849559, -5.310774, 1.8008695, -1.6848478, -5.310774, -2.3107939, -1.6848478, -5.310772, -2.3107934, -11.849559, -5.310773, 1.8008695, -11.84956, -5.310774, 1.8008695, -1.6848478, -2.4322462, 1.8008695, -13.971861, -5.310774, 1.8008695, -1.6848478, -5.310773, 1.8008695, -11.84956, -2.4322462, 1.8008695, -13.971861, -2.4322474, 1.8008695, -1.6848477, -5.310774, 1.8008695, -1.6848478, -2.4322476, 3.9028606, 1.4233797, -5.310775, 3.9028604, 8.479864, -5.310774, 3.9028606, 1.4233794, -2.4322476, 3.9028606, 1.4233797, -2.432248, 3.9028604, 8.479864, -5.310775, 3.9028604, 8.479864, -5.310775, 1.8008695, 8.479864, -5.310774, 3.9028606, 1.4233794, -5.310775, 3.9028604, 8.479864, -5.310775, 1.8008695, 8.479864, -5.310774, 1.8008695, -1.6848478, -5.310774, 3.9028606, 1.4233794, -2.432248, 1.8008695, 8.479864, -5.310775, 3.9028604, 8.479864, -2.432248, 3.9028604, 8.479864, -2.432248, 1.8008695, 8.479864, -5.310775, 1.8008695, 8.479864, -5.310775, 3.9028604, 8.479864, -2.432248, -2.3107939, 8.479865, 0.44627857, 1.8008695, 8.479864, 0.44627857, -2.3107939, 8.479865, -2.432248, -2.3107939, 8.479865, -2.432248, 1.8008695, 8.479864, 0.44627857, 1.8008695, 8.479864, -2.4322474, 1.8008695, -1.6848477, 0.44627905, 3.9028606, -1.6848477, -2.4322476, 3.9028606, 1.4233797, -5.310774, 1.8008695, -1.6848478, -2.4322476, 3.9028606, 1.4233797, -5.310774, 3.9028606, 1.4233794, -5.310774, 1.8008695, -1.6848478, -2.4322474, 1.8008695, -1.6848477, -2.4322476, 3.9028606, 1.4233797, -5.310775, -2.3107939, 8.479864, -2.432248, 1.8008695, 8.479864, -2.432248, -2.3107939, 8.479865, -5.310775, -2.3107939, 8.479864, -5.310775, 1.8008695, 8.479864, -2.432248, 1.8008695, 8.479864, 0.44627857, 1.8008695, 8.479864, -2.432248, 3.9028604, 8.479864, 0.44627857, 3.9028604, 8.479864, 0.44627857, 1.8008695, 8.479864, -2.432248, 1.8008695, 8.479864, -2.432248, 3.9028604, 8.479864, 0.44627905, 3.9028606, -1.6848477, -2.432248, 3.9028604, 8.479864, -2.4322476, 3.9028606, 1.4233797, 0.44627905, 3.9028606, -1.6848477, 0.44627857, 3.9028604, 8.479864, -2.432248, 3.9028604, 8.479864, 0.44627953, 1.8008695, -16.094158, -2.4322474, 1.8008695, -1.6848477, -2.4322462, 1.8008695, -13.971861, 0.44627953, 1.8008695, -16.094158, 0.44627905, 1.8008695, -1.6848475, -2.4322474, 1.8008695, -1.6848477, 0.44627857, -2.3107939, 8.479865, -2.4322474, -2.3107939, -1.6848477, -2.432248, -2.3107939, 8.479865, 0.44627857, -2.3107939, 8.479865, 0.44627905, -2.3107939, -1.6848477, -2.4322474, -2.3107939, -1.6848477, 0.44627953, -2.3107939, -16.094158, -2.4322462, 1.8008695, -13.971861, -2.4322472, -2.3107934, -13.97186, 0.44627953, -2.3107939, -16.094158, 0.44627953, 1.8008695, -16.094158, -2.4322462, 1.8008695, -13.971861, 0.44627905, -2.3107939, -1.6848477, -2.4322472, -2.3107934, -13.97186, -2.4322474, -2.3107939, -1.6848477, 0.44627905, -2.3107939, -1.6848477, 0.44627953, -2.3107939, -16.094158, -2.4322472, -2.3107934, -13.97186, 0.44627905, 3.9028606, -1.6848477, 0.44627905, 1.8008695, -1.6848475, 3.3248055, 1.8008695, -1.6848471, 0.44627905, 3.9028606, -1.6848477, -2.4322474, 1.8008695, -1.6848477, 0.44627905, 1.8008695, -1.6848475)
+size = Vector3(8.332031, 7.7306366, 22)
 
 [node name="Ship" type="RigidBody3D" unique_id=768453608]
 collision_layer = 2
@@ -182,8 +151,9 @@ collision_mask = 2
 script = ExtResource("1_2gnfn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1942152668]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8029613, -3.7456555)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_2gnfn")
+debug_color = Color(0.96, 0.19839998, 0.14399998, 0.87058824)
 
 [node name="HitArea" type="Area3D" parent="." unique_id=885592007 node_paths=PackedStringArray("TELEPORT_NODES_TO_HIT", "HURT_ANIMATION_PLAYER", "DEATH_ANIMATION_PLAYER")]
 script = ExtResource("5_gudjc")
@@ -199,7 +169,7 @@ DEATH_ANIMATION_PLAYER = NodePath("AnimationPlayer")
 libraries/ = SubResource("AnimationLibrary_3m36u")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" unique_id=1252185358]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5402546, 4.626837, -3.4329548)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.041015625, 1.3996658, -1)
 shape = SubResource("BoxShape3D_4tobq")
 
 [node name="SceneSpawner" type="Node3D" parent="HitArea" unique_id=270314046]
@@ -207,42 +177,28 @@ script = ExtResource("7_3m36u")
 scenes = Array[PackedScene]([ExtResource("8_8qiel")])
 add_to_global_root = true
 
-[node name="SteerArea" type="Area3D" parent="." unique_id=1613977548 node_paths=PackedStringArray("boat")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.396011, 0)
-script = ExtResource("5_tbq4g")
-boat = NodePath("..")
+[node name="SteerArea" parent="." unique_id=1453918494 instance=ExtResource("5_tlr80")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.863283, 5.297)
 
-[node name="SteerSound" type="AudioStreamPlayer" parent="SteerArea" unique_id=694225325]
-stream = ExtResource("7_03y04")
-pitch_scale = 0.5
+[node name="Ship" parent="." unique_id=1854678182 instance=ExtResource("1_q631a")]
 
-[node name="SteerSpot" type="Node3D" parent="SteerArea" unique_id=366787988]
-transform = Transform3D(1, 0, 0, 0, 0.99933475, 0.036469296, 0, -0.036469296, 0.99933475, 0.43006238, 3.777863, 0.6003962)
+[node name="Hull" parent="Ship" index="0" unique_id=1895705423]
+surface_material_override/0 = ExtResource("7_03y04")
 
-[node name="wheel" parent="SteerArea" unique_id=335278869 instance=ExtResource("7_48mkp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4449973, 3.7060657, 0.38498437)
+[node name="Sprit" parent="Ship" index="4" unique_id=435317233]
+surface_material_override/0 = ExtResource("7_03y04")
 
-[node name="Stand" parent="SteerArea/wheel" index="0" unique_id=377705361]
-surface_material_override/0 = ExtResource("6_bseor")
+[node name="Stairs" parent="Ship" index="5" unique_id=617464687]
+surface_material_override/0 = ExtResource("7_03y04")
 
-[node name="Wheel" parent="SteerArea/wheel" index="1" unique_id=722802549]
-surface_material_override/0 = SubResource("ShaderMaterial_xifwb")
+[node name="SailFront" parent="Ship" index="6" unique_id=1728175131]
+surface_material_override/0 = ExtResource("8_48mkp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SteerArea" unique_id=1180403861]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3305664, 4.2880692, 0.75180054)
-shape = SubResource("BoxShape3D_q631a")
+[node name="SailMiddle" parent="Ship" index="7" unique_id=1841411530]
+surface_material_override/0 = ExtResource("8_48mkp")
 
-[node name="Ship" parent="." unique_id=177427943 instance=ExtResource("1_q631a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.2710137, 0)
-
-[node name="Boat" parent="Ship" index="0" unique_id=158051955]
-surface_material_override/0 = ExtResource("6_bseor")
-
-[node name="AnimatableBody3D" type="AnimatableBody3D" parent="Ship" unique_id=790461555]
-sync_to_physics = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ship/AnimatableBody3D" unique_id=116461858]
-shape = SubResource("ConcavePolygonShape3D_emiat")
+[node name="SailBack" parent="Ship" index="8" unique_id=742802090]
+surface_material_override/0 = ExtResource("8_48mkp")
 
 [node name="Audio" type="Node3D" parent="." unique_id=1358291165]
 script = ExtResource("4_tfsc7")
@@ -263,10 +219,10 @@ max_distance = 4000.0
 bus = &"SFX"
 
 [node name="Cannon1" parent="." unique_id=1534587913 instance=ExtResource("3_4tobq")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4.209132, 6.0724535, -7.934469)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.2644787, 1.7783105, -0.155)
 
 [node name="Cannon2" parent="." unique_id=2052450845 instance=ExtResource("3_4tobq")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3.3356292, 6.0724535, -7.934469)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.1505399, 1.9383104, -2.514)
 
 [node name="Targets" type="Node3D" parent="." unique_id=502345858]
 
@@ -288,28 +244,33 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -68.52309)
 [node name="Leaks" type="Node3D" parent="." unique_id=148199585]
 
 [node name="Leak1" type="Node3D" parent="Leaks" unique_id=1779408668]
-transform = Transform3D(-0.30070686, 0.84208137, -0.44774368, 0, 0.46947244, 0.88294715, 0.95371664, 0.26550826, -0.1411736, -2.3892562, 6.0718846, -2.7744646)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9136989, 2.194634, -2.7744646)
 script = ExtResource("7_3m36u")
 scenes = Array[PackedScene]([ExtResource("11_tlr80")])
 add_to_groups = Array[String](["leaks"])
 
 [node name="Leak2" type="Node3D" parent="Leaks" unique_id=349974102]
-transform = Transform3D(-0.30070686, 0.84208137, -0.44774368, 0, 0.46947244, 0.88294715, 0.95371664, 0.26550826, -0.1411736, 2.6107438, 6.0718846, -4.7744646)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09321165, 5.4925795, -9.552713)
 script = ExtResource("7_3m36u")
 scenes = Array[PackedScene]([ExtResource("11_tlr80")])
 add_to_groups = Array[String](["leaks"])
 
 [node name="Leak3" type="Node3D" parent="Leaks" unique_id=1839813025]
-transform = Transform3D(-0.30070686, 0.84208137, -0.44774368, 0, 0.46947244, 0.88294715, 0.95371664, 0.26550826, -0.1411736, -1.0279186, 6.0718846, -9.809395)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.033826828, 2.0387216, 2.5815473)
 script = ExtResource("7_3m36u")
 scenes = Array[PackedScene]([ExtResource("11_tlr80")])
 add_to_groups = Array[String](["leaks"])
 
 [node name="Leak4" type="Node3D" parent="Leaks" unique_id=693387408]
-transform = Transform3D(-0.30070686, 0.84208137, -0.44774368, 0, 0.46947244, 0.88294715, 0.95371664, 0.26550826, -0.1411736, 2.59744, 6.0718846, -12.602167)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2794561, 5.650791, 7.0581055)
 script = ExtResource("7_3m36u")
 scenes = Array[PackedScene]([ExtResource("11_tlr80")])
 add_to_groups = Array[String](["leaks"])
 
-[editable path="SteerArea/wheel"]
+[node name="Leak5" type="Node3D" parent="Leaks" unique_id=844647176]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1277866, 5.651408, 7.0581055)
+script = ExtResource("7_3m36u")
+scenes = Array[PackedScene]([ExtResource("11_tlr80")])
+add_to_groups = Array[String](["leaks"])
+
 [editable path="Ship"]

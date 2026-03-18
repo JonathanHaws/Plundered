@@ -11,14 +11,13 @@
 [ext_resource type="AudioStream" uid="uid://hkpe26egskwl" path="res://audio/cannon/Cannons2.ogg" id="4_ogt75"]
 [ext_resource type="AudioStream" uid="uid://kouarqlo1uv6" path="res://audio/cannon/Cannons3.ogg" id="5_4a4je"]
 [ext_resource type="AudioStream" uid="uid://crhb8xiicofll" path="res://audio/cannon/Cannons4.ogg" id="6_ediu4"]
-[ext_resource type="Shader" uid="uid://da5t5c1udqss2" path="res://shaders/crayon.gdshader" id="8_m2udb"]
-[ext_resource type="Texture2D" uid="uid://2rhsqc0irh3v" path="res://textures/crayon_2.jpg" id="9_01vp4"]
-[ext_resource type="Texture2D" uid="uid://b07uenqitqt1e" path="res://textures/crayon_1.jpg" id="10_lr4va"]
+[ext_resource type="Material" uid="uid://bkmcqutp6wix4" path="res://shaders/cannon.tres" id="10_m2udb"]
 [ext_resource type="PackedScene" uid="uid://cr4xa15qrhqk7" path="res://scenes/particles/cannon_fire.tscn" id="10_ogt75"]
+[ext_resource type="Material" uid="uid://bdqd05r0122jr" path="res://shaders/dark_wood.tres" id="16_lr4va"]
 
 [sub_resource type="Animation" id="Animation_jfr8q"]
 resource_name = "fire"
-length = 0.2
+length = 0.27
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -96,148 +95,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yjxeu"]
-size = Vector3(1.5131836, 1.9111328, 1.1443176)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q3p7l"]
-render_priority = 0
-shader = ExtResource("8_m2udb")
-shader_parameter/albedo = Color(0.29807454, 0.29807457, 0.29807454, 1)
-shader_parameter/albedo_texture_size = Vector2i(1024, 1024)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 0.34000001615
-shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
-shader_parameter/specular = 0.5
-shader_parameter/metallic = 1.0
-shader_parameter/uv1_blend_sharpness = 1.0
-shader_parameter/uv1_scale = Vector3(0.732, 0.732, 0.732)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/uv2_scale = Vector3(1, 1, 1)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/crayon_texture_a = ExtResource("9_01vp4")
-shader_parameter/crayon_texture_b = ExtResource("10_lr4va")
-shader_parameter/crayon_amount = 0.50000002375
-shader_parameter/speed_crayon = 5.0
-shader_parameter/jiggle_strength = 0.008
-
-[sub_resource type="Shader" id="Shader_obma0"]
-code = "// NOTE: Shader automatically converted from Godot Engine 4.6.stable's StandardMaterial3D.
-
-shader_type spatial;
-render_mode blend_mix, depth_draw_always, cull_back, diffuse_burley, specular_schlick_ggx;
-
-group_uniforms regular_shader_material; // Converted from regular shader to make use of triplanar mapping
-uniform vec4 albedo : source_color;
-uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
-uniform ivec2 albedo_texture_size;
-uniform float point_size : hint_range(0.1, 128.0, 0.1);
-
-uniform float roughness : hint_range(0.0, 1.0);
-uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
-uniform vec4 metallic_texture_channel;
-uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
-
-uniform float specular : hint_range(0.0, 1.0, 0.01);
-uniform float metallic : hint_range(0.0, 1.0, 0.01);
-varying vec3 uv1_triplanar_pos;
-
-uniform float uv1_blend_sharpness : hint_range(0.0, 150.0, 0.001);
-varying vec3 uv1_power_normal;
-
-uniform vec3 uv1_scale;
-uniform vec3 uv1_offset;
-uniform vec3 uv2_scale;
-uniform vec3 uv2_offset;
-
-
-
-
-group_uniforms custom_crayon_effects;
-uniform sampler2D crayon_texture_a: source_color, filter_linear_mipmap, repeat_enable;
-uniform sampler2D crayon_texture_b: source_color, filter_linear_mipmap, repeat_enable;
-uniform float crayon_amount : hint_range(0.0, 1.0) = 0.5; // 0 = no crayon, 1 = full effect
-uniform float speed_crayon = 6.0;
-uniform float jiggle_strength = 0.005;
-
-
-float hash(vec3 p) { return fract(sin(dot(p, vec3(12.9898,78.233,45.164))) * 43758.5453); }
-
-void vertex() {
-	
-	// Jiggle Effect
-	float t = floor(TIME * speed_crayon);
-	vec3 rnd = vec3(hash(VERTEX + t), hash(VERTEX + t + 1.3), hash(VERTEX + t + 2.7)) * 2.0 - 1.0;
-	VERTEX += rnd * jiggle_strength;
-	
-	
-	vec3 normal = NORMAL;
-
-	TANGENT = vec3(0.0, 0.0, -1.0) * abs(normal.x);
-	TANGENT += vec3(1.0, 0.0, 0.0) * abs(normal.y);
-	TANGENT += vec3(1.0, 0.0, 0.0) * abs(normal.z);
-	TANGENT = normalize(TANGENT);
-
-	BINORMAL = vec3(0.0, 1.0, 0.0) * abs(normal.x);
-	BINORMAL += vec3(0.0, 0.0, -1.0) * abs(normal.y);
-	BINORMAL += vec3(0.0, 1.0, 0.0) * abs(normal.z);
-	BINORMAL = normalize(BINORMAL);
-
-	// UV1 Triplanar: Enabled
-	uv1_power_normal = pow(abs(NORMAL), vec3(uv1_blend_sharpness));
-	uv1_triplanar_pos = VERTEX * uv1_scale + uv1_offset;
-	uv1_power_normal /= dot(uv1_power_normal, vec3(1.0));
-	uv1_triplanar_pos *= vec3(1.0, -1.0, 1.0);
-}
-
-vec4 triplanar_texture(sampler2D p_sampler, vec3 p_weights, vec3 p_triplanar_pos) {
-	vec4 samp = vec4(0.0);
-	samp += texture(p_sampler, p_triplanar_pos.xy) * p_weights.z;
-	samp += texture(p_sampler, p_triplanar_pos.xz) * p_weights.y;
-	samp += texture(p_sampler, p_triplanar_pos.zy * vec2(-1.0, 1.0)) * p_weights.x;
-	return samp;
-}
-
-void fragment() {
-	vec4 albedo_tex = triplanar_texture(texture_albedo, uv1_power_normal, uv1_triplanar_pos);
-	ALBEDO = albedo.rgb * albedo_tex.rgb;
-
-	float metallic_tex = dot(triplanar_texture(texture_metallic, uv1_power_normal, uv1_triplanar_pos), metallic_texture_channel);
-	METALLIC = metallic_tex * metallic;
-	SPECULAR = specular;
-
-	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
-	float roughness_tex = dot(triplanar_texture(texture_roughness, uv1_power_normal, uv1_triplanar_pos), roughness_texture_channel);
-	ROUGHNESS = roughness_tex * roughness;
-	
-	// Crayon effect
-	float step_t = floor(TIME * speed_crayon); // use the same integer step
-	vec4 crayon_tex_a = triplanar_texture(crayon_texture_a, uv1_power_normal, uv1_triplanar_pos);
-	vec4 crayon_tex_b = triplanar_texture(crayon_texture_b, uv1_power_normal, uv1_triplanar_pos);
-	vec4 crayon_mix = mix(crayon_tex_a, crayon_tex_b, step_t - floor(step_t / 2.0) * 2.0); 
-	ALBEDO *= mix(vec3(1.0), crayon_mix.rgb, crayon_amount);
-	
-}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vda2x"]
-render_priority = 0
-shader = SubResource("Shader_obma0")
-shader_parameter/albedo = Color(0.38814613, 0.22759905, 0.21205863, 1)
-shader_parameter/albedo_texture_size = Vector2i(1024, 1024)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
-shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/uv1_blend_sharpness = 1.0
-shader_parameter/uv1_scale = Vector3(0.732, 0.732, 0.732)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/uv2_scale = Vector3(1, 1, 1)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/crayon_texture_a = ExtResource("9_01vp4")
-shader_parameter/crayon_texture_b = ExtResource("10_lr4va")
-shader_parameter/crayon_amount = 0.50000002375
-shader_parameter/speed_crayon = 6.0
-shader_parameter/jiggle_strength = 0.005
+size = Vector3(1.5131836, 1.9111328, 2.1820412)
 
 [node name="Cannon" type="Node3D" unique_id=1534587913]
 script = ExtResource("1_pxhkx")
@@ -279,7 +137,7 @@ libraries/ = SubResource("AnimationLibrary_0285d")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.396011, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AimArea" unique_id=354274694]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036511242, -3.7082922, 0.65702415)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036511242, -3.7082922, -0.17920136)
 shape = SubResource("BoxShape3D_yjxeu")
 
 [node name="AimSpot" type="Node3D" parent="." unique_id=1890985665]
@@ -288,7 +146,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8176036)
 [node name="cannon" parent="." unique_id=618810764 instance=ExtResource("1_xuqfy")]
 
 [node name="Barrel" parent="cannon" index="0" unique_id=1365576747]
-material_override = SubResource("ShaderMaterial_q3p7l")
+material_override = ExtResource("10_m2udb")
 
 [node name="Node3D" type="Node3D" parent="cannon/Barrel" index="0" unique_id=53893665]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61977124, -1.5555694)
@@ -297,9 +155,9 @@ scenes = Array[PackedScene]([ExtResource("4_jfr8q"), ExtResource("10_ogt75")])
 add_to_scene_root = true
 
 [node name="Camera3D" type="Camera3D" parent="cannon/Barrel" index="1" unique_id=1421257956]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5426894, 0.49509454)
+transform = Transform3D(1, 0, 0, 0, 0.99874574, -0.050069984, 0, 0.050069984, 0.99874574, 0, 1.5529484, 1.0179856)
 
 [node name="Stand" parent="cannon" index="1" unique_id=530149653]
-material_override = SubResource("ShaderMaterial_vda2x")
+surface_material_override/0 = ExtResource("16_lr4va")
 
 [editable path="cannon"]

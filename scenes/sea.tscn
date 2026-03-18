@@ -50,14 +50,14 @@ transform = Transform3D(-0.6868846, 0.44353354, -0.5757322, 0, 0.79218316, 0.610
 [node name="Node3D" type="Node3D" parent="WaveSpawner" unique_id=973792650]
 
 [node name="Player" parent="." unique_id=2089436190 instance=ExtResource("5_erah6")]
-transform = Transform3D(0.9266599, 0, 0.37590083, 0, 1, 0, -0.37590083, 0, 0.9266599, 4.9013553, 8.173874, 6.8220634)
+transform = Transform3D(0.9266599, 0, 0.37590083, 0, 1, 0, -0.37590083, 0, 0.9266599, 2.0667706, 10.344908, 7.0968914)
 
 [node name="PlayerShip" parent="." unique_id=768453608 instance=ExtResource("6_3x8wa")]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
 is_players_boat = true
 
-[node name="Ship2" parent="." unique_id=2110487790 instance=ExtResource("6_3x8wa")]
-transform = Transform3D(0.9811951, 0, 0.19301862, 0, 1, 0, -0.19301862, 0, 0.9811951, 44.99369, -3.2260785, -31.719734)
+[node name="Ship2" parent="." unique_id=1875089958 instance=ExtResource("6_3x8wa")]
+transform = Transform3D(0.9811951, 0, 0.19301862, 0, 1, 0, -0.19301862, 0, 0.9811951, 44.994, 0, -5.5903645)
 
 [node name="Pause" type="Control" parent="." unique_id=1118921173]
 layout_mode = 3
