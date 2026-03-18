@@ -30,14 +30,14 @@ var player: CharacterBody3D
 var player_anim: AnimationPlayer
 
 @export_group("Ai")
-@export var ai_cooldown: float = 5.0
-@export var ai_random_cooldown: float = 3.0
-@export var ai_random_offset = Vector3(11, 11, 11)
-@export var ai_random_aim: Vector2 = Vector2(5, 5)
+func get_random_cooldown() -> float:
+	return get_parent().cannon_cooldown + (randf() * get_parent().cannon_random_cooldown)
 var ai_aim_offset = Vector3(0, 2.0, 0)
-var ai_cooldown_remaining: float = randf_range(0, ai_cooldown + ai_random_cooldown)
+var ai_cooldown_remaining: float
 
 func _ready() -> void:
+	ai_cooldown_remaining = get_random_cooldown()
+	
 	if not boat: boat = get_parent()
 	$AimArea.body_entered.connect(_on_enter_aim)	
 	$AimArea.body_exited.connect(_on_exit_aim)	
@@ -111,12 +111,12 @@ func ai_aim(delta: float) -> void:
 	var aim_pos = target + player_ship.linear_velocity * t + Vector3(0, 0.5*g*t*t, 0)
 
 	stand.look_at(aim_pos, Vector3.UP)
-	stand.rotation_degrees.y += randf_range(-ai_random_aim.y, ai_random_aim.y)
+	stand.rotation_degrees.y += randf_range(-get_parent().cannon_random_aim.y, get_parent().cannon_random_aim.y)
 	var optimal_stand_rotation = stand.rotation_degrees.y
 	clamp_aim()
 
 	barrel.look_at(aim_pos, Vector3.UP)
-	barrel.rotation_degrees.x += randf_range(-ai_random_aim.x, ai_random_aim.x)
+	barrel.rotation_degrees.x += randf_range(-get_parent().cannon_random_aim.x, get_parent().cannon_random_aim.x)
 	var optimal_barrel_rotation = barrel.rotation_degrees.x
 	clamp_aim()
 
@@ -125,9 +125,8 @@ func ai_aim(delta: float) -> void:
 		barrel.rotation_degrees.x = original_barrel_rotation
 		return  # aim was clamped, skip firing
 
-
 	$AnimationPlayer.play("fire")
-	ai_cooldown_remaining = ai_cooldown + randf_range(0, ai_random_cooldown)	
+	ai_cooldown_remaining = get_random_cooldown()
 	
 func aim() -> void:
 	if not aiming: return

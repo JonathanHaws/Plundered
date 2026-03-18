@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://dv2d1smqmvpgg" path="res://scripts/ui_label.gd" id="1_60wme"]
 [ext_resource type="AudioStream" uid="uid://0eteiw5oeit" path="res://audio/Ambience.ogg" id="1_erah6"]
 [ext_resource type="PackedScene" uid="uid://butlqj718j0gj" path="res://scenes/menu/main.tscn" id="2_hfvyu"]
-[ext_resource type="AudioStream" uid="uid://u3lynj0t5pab" path="res://audio/true_pirate.ogg" id="2_qlpmv"]
 [ext_resource type="Environment" uid="uid://chlcidt7t3gdg" path="res://shaders/sky.tres" id="4_hlm4b"]
 [ext_resource type="PackedScene" uid="uid://bhluruq521f8w" path="res://scenes/ocean.tscn" id="5_60wme"]
 [ext_resource type="PackedScene" uid="uid://ygu7opd5je0u" path="res://scenes/player.tscn" id="5_erah6"]
@@ -18,6 +17,9 @@
 [ext_resource type="Curve" uid="uid://ctgut02bsumvf" path="res://curves/spawning_difficulty/random_spawn_distance.tres" id="13_pnam1"]
 [ext_resource type="Curve" uid="uid://dn671ccougamf" path="res://curves/mobility/speed.tres" id="14_684mg"]
 [ext_resource type="Curve" uid="uid://cg5rvhitrvfbr" path="res://curves/mobility/steer.tres" id="15_d5l4n"]
+[ext_resource type="Curve" uid="uid://6u00xat3pnke" path="res://curves/damage/cannon_cooldown.tres" id="16_eqr6v"]
+[ext_resource type="Curve" uid="uid://c6of8k4iq5rei" path="res://curves/damage/cannon_random_cooldown.tres" id="17_htb8w"]
+[ext_resource type="Curve" uid="uid://b84rkscu7wkvy" path="res://curves/damage/cannon_random_aim.tres" id="18_1m6pm"]
 
 [node name="Sea" type="Node3D" unique_id=214513969]
 
@@ -26,12 +28,6 @@ process_mode = 3
 stream = ExtResource("1_erah6")
 autoplay = true
 bus = &"SFX"
-
-[node name="Song" type="AudioStreamPlayer" parent="." unique_id=356446700]
-process_mode = 3
-stream = ExtResource("2_qlpmv")
-autoplay = true
-bus = &"Music"
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=640228312]
 offset_right = 174.0
@@ -76,6 +72,9 @@ curve_spawn_distance = ExtResource("12_223n2")
 curve_random_spawn_distance = ExtResource("13_pnam1")
 curve_speed = ExtResource("14_684mg")
 curve_steer = ExtResource("15_d5l4n")
+curve_cannon_cooldown = ExtResource("16_eqr6v")
+curve_cannon_random_cooldown = ExtResource("17_htb8w")
+curve_cannon_random_aim = ExtResource("18_1m6pm")
 
 [node name="Player" parent="." unique_id=2089436190 instance=ExtResource("5_erah6")]
 transform = Transform3D(0.9266599, 0, 0.37590083, 0, 1, 0, -0.37590083, 0, 0.9266599, 2.0667706, 5.141719, 6.043366)

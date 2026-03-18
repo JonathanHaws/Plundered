@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bhluruq521f8w" path="res://scenes/ocean.tscn" id="6_mifw5"]
 [ext_resource type="Environment" uid="uid://chlcidt7t3gdg" path="res://shaders/sky.tres" id="6_p7dfi"]
 [ext_resource type="PackedScene" uid="uid://dwa335y6j7a7" path="res://blender/island.blend" id="7_ftju0"]
+[ext_resource type="Material" uid="uid://d17vei8pbuxpa" path="res://shaders/sand.tres" id="7_qtqbj"]
+[ext_resource type="Material" uid="uid://4wmac4esdrtt" path="res://shaders/wood.tres" id="8_p7dfi"]
+[ext_resource type="Material" uid="uid://b5ia2dbqqipj6" path="res://shaders/grass.tres" id="9_8ke6f"]
 [ext_resource type="Script" uid="uid://bb314me35cbis" path="res://scripts/menu/redirect.gd" id="9_jxvd6"]
 
 [sub_resource type="Animation" id="Animation_ftju0"]
@@ -233,6 +236,21 @@ autoplay = &"fade_in"
 [node name="island" parent="." unique_id=1265616051 instance=ExtResource("7_ftju0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9822388, -0.6415441, -0.669152)
 
+[node name="Island" parent="island" index="0" unique_id=43970752]
+material_override = ExtResource("7_qtqbj")
+
+[node name="Cylinder" parent="island" index="1" unique_id=868292886]
+material_override = ExtResource("8_p7dfi")
+
+[node name="Cone" parent="island" index="2" unique_id=1276725809]
+surface_material_override/0 = ExtResource("9_8ke6f")
+
+[node name="Cone_001" parent="island" index="3" unique_id=1945724176]
+surface_material_override/0 = ExtResource("9_8ke6f")
+
+[node name="Cone_002" parent="island" index="4" unique_id=1570025629]
+surface_material_override/0 = ExtResource("9_8ke6f")
+
 [node name="Redirect" type="Control" parent="." unique_id=1984340890]
 layout_mode = 3
 anchors_preset = 0
@@ -251,3 +269,5 @@ script = ExtResource("2_jxvd6")
 
 [node name="Main" parent="Pause" unique_id=1127001201 instance=ExtResource("3_migvp")]
 layout_mode = 1
+
+[editable path="island"]

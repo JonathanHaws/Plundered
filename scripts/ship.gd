@@ -3,6 +3,9 @@ extends RigidBody3D
 @export_group('Stats')
 @export var speed: float = 1200
 @export var steer: float = 160
+@export var cannon_cooldown: float = 8.0 ## Minimum duration enemy ships will wait between shots
+@export var cannon_random_cooldown: float = 4.0 ## Add this to the mimum duration and its maximum duration
+@export var cannon_random_aim: Vector2 = Vector2(5, 5) ## How inaccurate Enemies shots will be. 
 
 @export_group('Physics')
 #@export var is_docked: bool = true add if wanting sails to be own control

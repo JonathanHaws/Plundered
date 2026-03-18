@@ -1,32 +1,33 @@
 extends AnimationPlayer
-@export var cooldown: float = 5.0 
+var cooldown
 var spawner
 
-@export_group("Difficulty")	
-@export_subgroup("Spawning")
+@export_group("Base Difficulty")	
 @export var min_ships: float = 2.0
 @export var breathing_time: float = 7
 @export var random_breathing_time: float = 2
 @export var spawn_distance: float = 50.0
 @export var random_spawn_distance: float = 20.0
-@export_subgroup("Mobility")
 @export var speed: float = 400.0
 @export var steer: float = 80.0
+@export var cannon_cooldown: float = 8.0
+@export var cannon_random_cooldown: float = 4.0
+@export var cannon_random_aim: Vector2 = Vector2(5, 5)
 
 @export_group("Auto Progress Difficulty")
 @export var auto_progress: bool = true
 @export var curve_base_time: float = 20
-@export_subgroup("Spawning")
 @export var curve_min_ships: Curve
 @export var curve_breathing_time: Curve
 @export var curve_random_breathing_time: Curve
 @export var curve_spawn_distance: Curve
 @export var curve_random_spawn_distance: Curve
-var min_separation: float = 25.0 # Spawns boats fruther if overlapping
-@export_subgroup("Mobility")
 @export var curve_speed: Curve
 @export var curve_steer: Curve
-
+@export var curve_cannon_cooldown: Curve
+@export var curve_cannon_random_cooldown: Curve
+@export var curve_cannon_random_aim: Curve
+var min_separation: float = 25.0 # Spawns boats fruther if overlapping
 
 var progress_time : float = 0.0
 func get_curve_value_at_time(curve: Curve) -> float:
@@ -101,6 +102,9 @@ func _process(_delta):
 	var boat = spawner.spawn()
 	boat.speed = speed
 	boat.steer = steer
+	boat.cannon_cooldown = cannon_cooldown
+	boat.cannon_random_cooldown = cannon_random_cooldown
+	boat.cannon_random_aim = cannon_random_aim
 	#print(boat.name) ## Add stat buffs as tiem goes on
 
 	cooldown = breathing_time + (randf() * random_breathing_time)
