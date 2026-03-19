@@ -17,15 +17,9 @@ func _ready() -> void:
 	_delete_extra_sails(middle_sails)
 	_delete_extra_sails(back_sails)
 	
-	apply_texture(front_sails, 0)
-	apply_texture(back_sails, 0)
-	apply_texture(back_sails, 0)
-	# assign random textures to all remaining sails
-	#for sail_group in [front_sails, middle_sails, back_sails]:
-		#for name in sail_group:
-			#if sail_textures.size() == 0:
-				#continue
-			#apply_texture([name], randi() % sail_textures.size())
+	apply_texture(front_sails, randi() % sail_textures.size())
+	apply_texture(middle_sails, randi() % sail_textures.size())
+	apply_texture(back_sails, randi() % sail_textures.size())
 
 func _delete_extra_sails(sail_names: Array[String]) -> void:
 	while sail_names.size() > 1:
@@ -44,8 +38,12 @@ func apply_texture(sail_names: Array[String], texture_index: int = 0) -> void:
 
 		var mat = sail_node.get_active_material(0)
 		if not mat or not mat is ShaderMaterial: continue
+		
+		# make material unique so each sail can have its own texture
+		var new_mat = mat.duplicate() as ShaderMaterial
+		sail_node.set_surface_override_material(0, new_mat)
 
-		mat.set_shader_parameter(shader_param_name, sail_textures[texture_index])
+		new_mat.set_shader_parameter(shader_param_name, sail_textures[texture_index])
 		#print('getting here')
 
 		
