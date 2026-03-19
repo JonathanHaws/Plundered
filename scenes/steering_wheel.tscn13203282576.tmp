@@ -1,10 +1,8 @@
 [gd_scene format=3 uid="uid://crf7v51qwlgff"]
 
 [ext_resource type="Script" uid="uid://i5orvfyiofxx" path="res://scripts/steering_wheel.gd" id="1_u0205"]
-[ext_resource type="AudioStream" uid="uid://put8jhjiqpkm" path="res://audio/steer.ogg" id="2_m2w2j"]
 [ext_resource type="PackedScene" uid="uid://cjll2da7x15rp" path="res://blender/wheel.blend" id="3_0ihdb"]
-[ext_resource type="AudioStream" uid="uid://dwemksn0uw6go" path="res://audio/movement/wheel.ogg" id="3_qfkqd"]
-[ext_resource type="AudioStream" uid="uid://cx3p5q6m4a82l" path="res://audio/sail.ogg" id="4_m2w2j"]
+[ext_resource type="AudioStream" uid="uid://dwemksn0uw6go" path="res://audio/movement/Wheel.ogg" id="3_qfkqd"]
 [ext_resource type="Material" uid="uid://4wmac4esdrtt" path="res://shaders/wood.tres" id="4_u0205"]
 [ext_resource type="Material" uid="uid://bdqd05r0122jr" path="res://shaders/dark_wood.tres" id="5_4taih"]
 
@@ -15,22 +13,13 @@ size = Vector3(1.6854248, 1.8083496, 1.3911743)
 script = ExtResource("1_u0205")
 
 [node name="SteerSound" type="AudioStreamPlayer" parent="." unique_id=710704672]
-stream = ExtResource("2_m2w2j")
+stream = ExtResource("3_qfkqd")
 pitch_scale = 0.5
 bus = &"SFX"
 
-[node name="SteeringSound" type="AudioStreamPlayer" parent="." unique_id=1600715203]
+[node name="SteeringSound" type="AudioStreamPlayer" parent="." unique_id=1196596081]
 process_mode = 3
 stream = ExtResource("3_qfkqd")
-volume_db = -5.0
-pitch_scale = 0.6
-bus = &"SFX"
-
-[node name="SailSound" type="AudioStreamPlayer" parent="." unique_id=232869917]
-process_mode = 3
-stream = ExtResource("4_m2w2j")
-volume_db = -10.0
-pitch_scale = 0.1
 bus = &"SFX"
 
 [node name="SteerSpot" type="Node3D" parent="." unique_id=358594902]

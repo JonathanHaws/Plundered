@@ -22,7 +22,25 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group(player_group)	
 	player_anim = get_tree().get_first_node_in_group(player_animator_group)
 
+func get_movement_vector() -> Vector3:
+	return Vector3(
+		int(Input.is_action_pressed("keyboard_right")) - int(Input.is_action_pressed("keyboard_left")), 0,
+		int(Input.is_action_pressed("keyboard_forward")) - int(Input.is_action_pressed("keyboard_back"))
+	)
+
 func _process(_delta):
+	
+	if steering: # SAIL SOUND
+		if Input.is_action_just_pressed("keyboard_forward") or Input.is_action_just_pressed("keyboard_back"):
+			if not $SailSound.playing:
+				$SailSound.play()
+	
+	# WHEEL SOUND
+	var movement_vector = get_movement_vector()
+	if steering and movement_vector.x != 0 and not $SteeringSound.playing:
+		$SteeringSound.play()
+	if movement_vector.x == 0 and $SteeringSound.playing:
+		$SteeringSound.stop()
 	
 	if boat.name == "PlayerShip": # Can Only Pilot Your Ship
 		if Input.is_action_just_pressed("interact"):
@@ -79,13 +97,13 @@ func player_steering(_delta) -> void:
 	if not boat.name == "PlayerShip": return
 	if not steering: return
 	
-	var movement_vector = Vector3(
-		int(Input.is_action_pressed("keyboard_right")) - int(Input.is_action_pressed("keyboard_left")),0,
-		int(Input.is_action_pressed("keyboard_forward")) - int(Input.is_action_pressed("keyboard_back"))
-	)
+	var movement_vector = get_movement_vector()
 
 	$wheel/Wheel.rotate_z(-movement_vector.x * 0.02)
 
 	player.global_position = $SteerSpot.global_position
 	
 	boat.apply_boat_controls(movement_vector.z, -movement_vector.x, _delta)
+	
+
+	

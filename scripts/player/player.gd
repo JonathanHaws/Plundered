@@ -101,6 +101,8 @@ func _physics_process(_delta):
 		_free_movement(_delta)
 		_move_camera()
 	
-	if global_position.y < kill_y or is_player_ship_sunk():
+	if anim.current_animation in "God": return
+	
+	if anim.current_animation != "Death" and (global_position.y < kill_y or is_player_ship_sunk()):
 		anim.play("Death")
 		

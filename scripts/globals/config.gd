@@ -316,9 +316,9 @@ func hidden_cursor_input(event):
 #endregion
 
 func _ready() -> void:
+	load_audio_settings()
 	hidden_cursor_ready()
 	load_graphics_settings()
-	load_audio_settings()
 	load_controls_settings()
 	play_animation_by_group("only_on_launch", "game_start_player")
 

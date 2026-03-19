@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bb314me35cbis" path="res://scripts/menu/redirect.gd" id="2_ynvfx"]
 [ext_resource type="Script" uid="uid://dfc16assxe58f" path="res://scripts/menu/quit.gd" id="3_box2j"]
 [ext_resource type="AudioStream" uid="uid://cp5vq7mnjnmei" path="res://audio/menu/menu_press.ogg" id="3_gmxck"]
+[ext_resource type="Theme" uid="uid://ch3ag1y51wmlm" path="res://resources/default_theme.tres" id="5_ec7jh"]
 
 [node name="Main" type="ColorRect" unique_id=1127001201]
 process_mode = 3
@@ -14,7 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.121519126, 0.121519126, 0.12151911, 1)
+color = Color(0.050980393, 0.050980393, 0.050980393, 0.9137255)
 
 [node name="MenuAudio" type="Control" parent="." unique_id=1412327493]
 anchors_preset = 0
@@ -41,9 +42,18 @@ grow_vertical = 2
 pivot_offset = Vector2(133.5, 68)
 script = ExtResource("1_r8hr5")
 
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1026160412]
+layout_mode = 2
+theme = ExtResource("5_ec7jh")
+theme_override_colors/font_color = Color(0.67, 0.49602333, 0.41540003, 1)
+theme_override_font_sizes/font_size = 30
+text = "PLUNDERED!"
+horizontal_alignment = 1
+
 [node name="Restart" type="Button" parent="VBoxContainer" unique_id=1957585159 groups=["menu_hovered_sound", "menu_pressed_sound"]]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("5_ec7jh")
 text = "RESTART"
 script = ExtResource("2_ynvfx")
 scene_file = "uid://safr0287hjda"
@@ -51,6 +61,7 @@ scene_file = "uid://safr0287hjda"
 [node name="Audio" type="Button" parent="VBoxContainer" unique_id=926313252 node_paths=PackedStringArray("node_to_replace") groups=["menu_hovered_sound", "menu_pressed_sound"]]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("5_ec7jh")
 text = "AUDIO"
 script = ExtResource("2_ynvfx")
 scene_file = "uid://c120cg3r8x66m"
@@ -59,6 +70,7 @@ node_to_replace = NodePath("../..")
 [node name="Graphics" type="Button" parent="VBoxContainer" unique_id=2018019839 node_paths=PackedStringArray("node_to_replace") groups=["menu_hovered_sound", "menu_pressed_sound"]]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("5_ec7jh")
 text = "GRAPHICS"
 script = ExtResource("2_ynvfx")
 scene_file = "uid://nquefxh3rvg3"
@@ -67,6 +79,7 @@ node_to_replace = NodePath("../..")
 [node name="Credits" type="Button" parent="VBoxContainer" unique_id=1318870532 node_paths=PackedStringArray("node_to_replace") groups=["menu_hovered_sound", "menu_pressed_sound"]]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("5_ec7jh")
 text = "CREDiTS"
 script = ExtResource("2_ynvfx")
 scene_file = "uid://m4xlepqe003j"
@@ -75,5 +88,6 @@ node_to_replace = NodePath("../..")
 [node name="Quit" type="Button" parent="VBoxContainer" unique_id=91361422 groups=["menu_hovered_sound", "menu_pressed_sound"]]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("5_ec7jh")
 text = "QUIT"
 script = ExtResource("3_box2j")

@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://ch3ag1y51wmlm"]
+
+[ext_resource type="FontFile" uid="uid://e66duxq140gy" path="res://fonts/Pieces of Eight.ttf" id="1_mwhd1"]
+
+[resource]
+default_font = ExtResource("1_mwhd1")
+default_font_size = 20

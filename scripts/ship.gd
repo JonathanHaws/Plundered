@@ -87,11 +87,18 @@ func _ready():
 			probe.position = pos
 			$CollisionShape3D.add_child(probe)
 			
-			#simply for seeing the probe location and degbugging
+			#simply for seeing the probe locations and degbugging
 			#var mesh_instance = MeshInstance3D.new()
 			#mesh_instance.mesh = SphereMesh.new() 
 			#mesh_instance.scale = Vector3.ONE
 			#probe.add_child(mesh_instance)
+	
+	# Simply for seeing target locations and debugging
+	#for target in $Targets.get_children():
+		#var mesh = MeshInstance3D.new()
+		#mesh.mesh = BoxMesh.new()
+		#mesh.scale = Vector3.ONE * 20
+		#target.add_child(mesh)
 	
 	# replaces static meshses with animatable bodies as they carry momentu
 	for mesh in $Ship.get_children():

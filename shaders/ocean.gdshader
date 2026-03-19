@@ -7,7 +7,7 @@ uniform vec2 ocean_position = vec2(0.0, 0.0);
 group_uniforms Color;
 uniform float max_depth : hint_range(0.1, 50.0, 0.1) = 10.0; // Max depth to visualize, controls brightness
 uniform float water_level : hint_range(-10.0, 10.0, 0.1) = 0.0; // Base height of the water surface
-uniform vec3 underwater_fog_color : source_color = vec3(0.0, 0.05, 0.1);
+uniform vec3 color : source_color = vec3(0.0, 0.05, 0.1);
 uniform float fade_start_depth : hint_range(0.0, 50.0, 0.1) = 0.5;
 float get_linear_depth(sampler2D d_tex, vec2 uv, mat4 inv_proj) {
     float depth = texture(d_tex, uv).x;
@@ -131,7 +131,7 @@ void fragment() {
 	float fade_range = max(0.001, max_depth - fade_start_depth);
 	float depth_ratio = clamp((thickness - fade_start_depth) / fade_range, 0.0, 1.0);
 
-	ALBEDO = mix(screen_color, underwater_fog_color, depth_ratio);
+	ALBEDO = mix(screen_color, color, depth_ratio);
 	
 	
 	vec2 uv1 = (UV - (ocean_position / mesh_size)) * scale_normal_1 + normal_texture_scroll_direction_1 * TIME;

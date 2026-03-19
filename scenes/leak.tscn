@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://dhiwjfe1tbiqe"]
 
 [ext_resource type="Script" uid="uid://bqehmyoma1axh" path="res://scripts/components/audio_spawner.gd" id="1_687o7"]
-[ext_resource type="AudioStream" uid="uid://cnngfeil2jqq0" path="res://audio/splash/Splash1.ogg" id="2_cvfb6"]
 [ext_resource type="Script" uid="uid://bun1bw82vfgwf" path="res://scripts/leak.gd" id="2_plahu"]
 [ext_resource type="Material" uid="uid://cf8qrehjkux0f" path="res://shaders/water.tres" id="2_y0vmt"]
-[ext_resource type="AudioStream" uid="uid://bgjccxogk0ttv" path="res://audio/splash/Splash2.ogg" id="3_eh6gj"]
 [ext_resource type="AudioStream" uid="uid://c2rig841hd6rt" path="res://audio/destruction/leak.ogg" id="3_h1tcw"]
-[ext_resource type="AudioStream" uid="uid://3r3ne4rgl2yf" path="res://audio/splash/Splash3.ogg" id="4_7n0mx"]
+[ext_resource type="AudioStream" uid="uid://is13n1kwwant" path="res://audio/destruction/crack_1.ogg" id="5_y0vmt"]
+[ext_resource type="AudioStream" uid="uid://np52utod481g" path="res://audio/destruction/crack_2.ogg" id="6_ksebr"]
+[ext_resource type="AudioStream" uid="uid://drt14nuqcfghe" path="res://audio/destruction/crack_3.ogg" id="7_mg31b"]
 [ext_resource type="AudioStream" uid="uid://7lj57e22daqi" path="res://audio/destruction/repair.ogg" id="7_y0vmt"]
 
 [sub_resource type="Curve" id="Curve_3sqip"]
@@ -47,6 +47,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_y0vmt"]
+resource_name = "crack"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Audio/Crack")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random_child"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_plahu"]
@@ -112,6 +129,7 @@ tracks/3/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rae0q"]
 _data = {
 &"RESET": SubResource("Animation_h1tcw"),
+&"crack": SubResource("Animation_y0vmt"),
 &"repair": SubResource("Animation_plahu")
 }
 
@@ -138,24 +156,24 @@ autoplay = true
 max_distance = 80.0
 bus = &"SFX"
 
-[node name="Splash" type="Node3D" parent="Audio" unique_id=391107258]
+[node name="Crack" type="Node3D" parent="Audio" unique_id=391107258]
 script = ExtResource("1_687o7")
 
-[node name="Splash1" type="AudioStreamPlayer3D" parent="Audio/Splash" unique_id=373213777]
+[node name="Crack1" type="AudioStreamPlayer3D" parent="Audio/Crack" unique_id=373213777]
 process_mode = 3
-stream = ExtResource("2_cvfb6")
+stream = ExtResource("5_y0vmt")
 volume_db = -5.0
 bus = &"SFX"
 
-[node name="Splash2" type="AudioStreamPlayer3D" parent="Audio/Splash" unique_id=407033693]
+[node name="Crack2" type="AudioStreamPlayer3D" parent="Audio/Crack" unique_id=407033693]
 process_mode = 3
-stream = ExtResource("3_eh6gj")
+stream = ExtResource("6_ksebr")
 volume_db = -5.0
 bus = &"SFX"
 
-[node name="Splash3" type="AudioStreamPlayer3D" parent="Audio/Splash" unique_id=424207835]
+[node name="Crack3" type="AudioStreamPlayer3D" parent="Audio/Crack" unique_id=424207835]
 process_mode = 3
-stream = ExtResource("4_7n0mx")
+stream = ExtResource("7_mg31b")
 volume_db = -5.0
 bus = &"SFX"
 
@@ -176,4 +194,4 @@ shape = SubResource("BoxShape3D_hg431")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1963047663]
 libraries/ = SubResource("AnimationLibrary_rae0q")
-autoplay = &"leak_burst"
+autoplay = &"crack"
