@@ -51,7 +51,12 @@ func impact(strength: float) -> void:
 	
 func apply_boat_controls(forward: float, right: float, _delta: float) -> void:
 	#print("moving boat ", name, " at a speed of ", speed * forward, " and steering ", right * steer)
-	apply_central_force(-global_transform.basis.z.normalized() * forward * speed * _delta)
+	
+	var forward_direction = -global_transform.basis.z
+	forward_direction.y = 0 # avoid flying ships going to vahalla... only apply force x / y
+	forward_direction = forward_direction.normalized()
+	
+	apply_central_force(forward_direction * forward * speed * _delta)
 	apply_torque_impulse(Vector3.UP * right * steer * _delta)
 	
 func _ready():

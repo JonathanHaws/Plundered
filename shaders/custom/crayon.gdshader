@@ -63,13 +63,13 @@ vec4 triplanar_texture(sampler2D p_sampler, vec3 p_weights, vec3 p_triplanar_pos
 
 void fragment() {
 	// Standard
-	vec4 albedo_tex = triplanar_texture(texture_albedo, uv1_power_normal, uv1_triplanar_pos);
+	vec4 albedo_tex = texture(texture_albedo, UV);
 	ALBEDO = albedo.rgb * albedo_tex.rgb;
-	float metallic_tex = dot(triplanar_texture(texture_metallic, uv1_power_normal, uv1_triplanar_pos), metallic_texture_channel);
+	float metallic_tex = dot(texture(texture_metallic, UV), metallic_texture_channel);
 	METALLIC = metallic_tex * metallic;
 	SPECULAR = specular;
 	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
-	float roughness_tex = dot(triplanar_texture(texture_roughness, uv1_power_normal, uv1_triplanar_pos), roughness_texture_channel);
+	float roughness_tex = dot(texture(texture_roughness, UV), roughness_texture_channel);
 	ROUGHNESS = roughness_tex * roughness;
 	
 	// Crayon effect
