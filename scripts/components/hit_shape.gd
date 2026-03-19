@@ -115,10 +115,7 @@ func hit(area: Area3D = null, damage: int = 0) -> bool:
 	
 	play_reaction_animations()
 	return true
-	
-
-	
-			
+		
 func _ready():
 	
 	if INVINCIBILITY_COOLDOWN > 0:

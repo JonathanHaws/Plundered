@@ -39,8 +39,9 @@ func _process(_delta):
 	var movement_vector = get_movement_vector()
 	if steering and movement_vector.x != 0 and not $SteeringSound.playing:
 		$SteeringSound.play()
-	if movement_vector.x == 0 and $SteeringSound.playing:
-		$SteeringSound.stop()
+	if $SteeringSound.playing:
+		if movement_vector.x == 0 or not steering:
+			$SteeringSound.stop()
 	
 	if boat.name == "PlayerShip": # Can Only Pilot Your Ship
 		if Input.is_action_just_pressed("interact"):

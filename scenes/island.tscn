@@ -177,8 +177,10 @@ _data = {
 
 [node name="Sea" type="Node3D" unique_id=214513969]
 
-[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=1103781317]
+[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=724377844]
+process_mode = 3
 stream = ExtResource("1_migvp")
+volume_db = -20.0
 autoplay = true
 bus = &"SFX"
 

@@ -412,6 +412,7 @@ EXIT_ANIMATION = "Idle"
 libraries/ = SubResource("AnimationLibrary_a8ls1")
 script = ExtResource("2_ur7pv")
 SOUNDS = Array[AudioStream]([ExtResource("4_qfm1y")])
+VOLUME_MULTIPLIERS = Array[float]([2.0])
 AUDIO_BUS = "Music"
 ADD_TO_ROOT = true
 

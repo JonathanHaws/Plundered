@@ -78,8 +78,10 @@ func spawn_sound(sound: Variant = null) -> AudioStreamPlayer:
 		tree.get_root().call_deferred("add_child", player)
 	else:
 		add_child.call_deferred(player)
+		
+	#print(player.volume_db)
 	return player
-
+	
 @export_group("Ready") 
 @export var SPAWN_ON_LOAD: bool = false ## Makes first sound autoplay on load
 @export var DESTORY_GROUPS: Array[String] ## Groups that are destroyed in ready to avoid choatic audial overlap when switching scenes

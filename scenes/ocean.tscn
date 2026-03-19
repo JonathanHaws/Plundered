@@ -14,14 +14,13 @@ shader_parameter/color = Color(0.17263556, 0.32759517, 0.4881662, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1svla"]
 lightmap_size_hint = Vector2i(509, 509)
-size = Vector2(1000, 1000)
+size = Vector2(5000, 5000)
 subdivide_width = 1
 subdivide_depth = 1
 
 [node name="Node3D" type="Node3D" unique_id=580951283]
 
 [node name="OceanUnder" type="MeshInstance3D" parent="." unique_id=1169054515]
-visible = false
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_a1ohp")
 surface_material_override/0 = SubResource("ShaderMaterial_ogne1")

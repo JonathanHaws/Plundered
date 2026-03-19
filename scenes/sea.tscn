@@ -8,23 +8,12 @@
 [ext_resource type="Environment" uid="uid://chlcidt7t3gdg" path="res://shaders/sky.tres" id="4_hlm4b"]
 [ext_resource type="PackedScene" uid="uid://bhluruq521f8w" path="res://scenes/ocean.tscn" id="5_60wme"]
 [ext_resource type="PackedScene" uid="uid://ygu7opd5je0u" path="res://scenes/player.tscn" id="5_erah6"]
-[ext_resource type="Script" uid="uid://hrxhxddibisv" path="res://scripts/wave_spawner.gd" id="5_hlm4b"]
 [ext_resource type="PackedScene" uid="uid://cayjt37m1mgxu" path="res://scenes/ship.tscn" id="6_3x8wa"]
-[ext_resource type="Script" uid="uid://chqlwr5cyriq4" path="res://scripts/components/scene_spawner.gd" id="6_erah6"]
-[ext_resource type="Curve" uid="uid://bd0yyhircfqio" path="res://curves/spawning_difficulty/breathing_time.tres" id="8_gdg73"]
-[ext_resource type="Curve" uid="uid://ber8cfimx114t" path="res://curves/spawning_difficulty/min_ships.tres" id="8_grs42"]
-[ext_resource type="Curve" uid="uid://djywqjftc8sgr" path="res://curves/spawning_difficulty/random_breathing_time.tres" id="9_grs42"]
-[ext_resource type="Curve" uid="uid://d14mymqgb085l" path="res://curves/spawning_difficulty/spawn_distance.tres" id="12_223n2"]
-[ext_resource type="Curve" uid="uid://ctgut02bsumvf" path="res://curves/spawning_difficulty/random_spawn_distance.tres" id="13_pnam1"]
-[ext_resource type="Curve" uid="uid://dn671ccougamf" path="res://curves/mobility/speed.tres" id="14_684mg"]
-[ext_resource type="Curve" uid="uid://cg5rvhitrvfbr" path="res://curves/mobility/steer.tres" id="15_d5l4n"]
-[ext_resource type="Curve" uid="uid://6u00xat3pnke" path="res://curves/damage/cannon_cooldown.tres" id="16_eqr6v"]
-[ext_resource type="Curve" uid="uid://c6of8k4iq5rei" path="res://curves/damage/cannon_random_cooldown.tres" id="17_htb8w"]
-[ext_resource type="Curve" uid="uid://b84rkscu7wkvy" path="res://curves/damage/cannon_random_aim.tres" id="18_1m6pm"]
+[ext_resource type="PackedScene" uid="uid://1kv0584ypolt" path="res://scenes/wave_spawner.tscn" id="6_erah6"]
 
 [node name="Sea" type="Node3D" unique_id=214513969]
 
-[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=261621461]
+[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=724377844]
 process_mode = 3
 stream = ExtResource("1_erah6")
 autoplay = true
@@ -59,24 +48,7 @@ environment = ExtResource("4_hlm4b")
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=676342986]
 transform = Transform3D(-0.6868846, 0.44353354, -0.5757322, 0, 0.79218316, 0.61028343, 0.7267665, 0.41919428, -0.5441384, -3.3399532, 19.654726, 0.13701057)
 
-[node name="WaveSpawner" type="Node3D" parent="." unique_id=973792650]
-script = ExtResource("6_erah6")
-scenes = Array[PackedScene]([ExtResource("6_3x8wa")])
-add_to_scene_root = true
-
-[node name="WaveSpawner" type="AnimationPlayer" parent="WaveSpawner" unique_id=1115183922]
-root_node = NodePath("../..")
-script = ExtResource("5_hlm4b")
-curve_min_ships = ExtResource("8_grs42")
-curve_breathing_time = ExtResource("8_gdg73")
-curve_random_breathing_time = ExtResource("9_grs42")
-curve_spawn_distance = ExtResource("12_223n2")
-curve_random_spawn_distance = ExtResource("13_pnam1")
-curve_speed = ExtResource("14_684mg")
-curve_steer = ExtResource("15_d5l4n")
-curve_cannon_cooldown = ExtResource("16_eqr6v")
-curve_cannon_random_cooldown = ExtResource("17_htb8w")
-curve_cannon_random_aim = ExtResource("18_1m6pm")
+[node name="WaveSpawner" parent="." unique_id=296502299 instance=ExtResource("6_erah6")]
 
 [node name="Player" parent="." unique_id=2089436190 instance=ExtResource("5_erah6")]
 transform = Transform3D(0.9266599, 0, 0.37590083, 0, 1, 0, -0.37590083, 0, 0.9266599, 2.0667706, 5.141719, 6.043366)
