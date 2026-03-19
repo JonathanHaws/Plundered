@@ -60,7 +60,7 @@ func poll_next_wave() -> void:
 	
 	var wave_name = next_wave_pool[randi() % next_wave_pool.size()]
 	play(wave_name)
-	print('starting next wave: ', wave_name)
+	#print('starting next wave: ', wave_name)
 	
 @export_group("Auto Progress Difficulty")
 @export var auto_progress: bool = false

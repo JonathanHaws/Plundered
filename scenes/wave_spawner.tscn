@@ -1,15 +1,14 @@
 [gd_scene format=3 uid="uid://1kv0584ypolt"]
 
 [ext_resource type="Script" uid="uid://hrxhxddibisv" path="res://scripts/wave_spawner.gd" id="1_ml4fb"]
-[ext_resource type="Curve" uid="uid://d14mymqgb085l" path="res://curves/spawning_difficulty/spawn_distance.tres" id="5_ol15d"]
-[ext_resource type="Curve" uid="uid://ctgut02bsumvf" path="res://curves/spawning_difficulty/random_spawn_distance.tres" id="6_obla2"]
+[ext_resource type="Curve" uid="uid://d14mymqgb085l" path="res://curves/mobility/spawn_distance.tres" id="5_ol15d"]
 [ext_resource type="Curve" uid="uid://dn671ccougamf" path="res://curves/mobility/speed.tres" id="7_cdojq"]
 [ext_resource type="Curve" uid="uid://cg5rvhitrvfbr" path="res://curves/mobility/steer.tres" id="8_8c8bt"]
 [ext_resource type="Curve" uid="uid://6u00xat3pnke" path="res://curves/damage/cannon_cooldown.tres" id="9_ptpw0"]
 [ext_resource type="Curve" uid="uid://c6of8k4iq5rei" path="res://curves/damage/cannon_random_cooldown.tres" id="10_plyxj"]
 [ext_resource type="Curve" uid="uid://b84rkscu7wkvy" path="res://curves/damage/cannon_random_aim.tres" id="11_h0td3"]
 [ext_resource type="Script" uid="uid://chqlwr5cyriq4" path="res://scripts/components/scene_spawner.gd" id="12_1y6gg"]
-[ext_resource type="PackedScene" uid="uid://cayjt37m1mgxu" path="res://scenes/ship.tscn" id="13_csdq7"]
+[ext_resource type="PackedScene" uid="uid://cayjt37m1mgxu" path="res://scenes/ship/ship.tscn" id="13_csdq7"]
 
 [sub_resource type="Animation" id="Animation_1fnq3"]
 resource_name = "wave_easy_1"
@@ -100,13 +99,15 @@ _data = {
 &"wave_tutorial": SubResource("Animation_1m6pm")
 }
 
+[sub_resource type="Curve" id="Curve_vx3d8"]
+
 [node name="WaveSpawner" type="AnimationPlayer" unique_id=296502299]
 process_mode = 3
 libraries/ = SubResource("AnimationLibrary_1fnq3")
 autoplay = &"wave_tutorial"
 script = ExtResource("1_ml4fb")
 curve_spawn_distance = ExtResource("5_ol15d")
-curve_random_spawn_distance = ExtResource("6_obla2")
+curve_random_spawn_distance = SubResource("Curve_vx3d8")
 curve_speed = ExtResource("7_cdojq")
 curve_steer = ExtResource("8_8c8bt")
 curve_cannon_cooldown = ExtResource("9_ptpw0")

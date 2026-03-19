@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://3qle3gc6u1tk"]
+
+[ext_resource type="Script" uid="uid://cbhnq86xv7vep" path="res://scripts/sails.gd" id="1_e3m1m"]
+[ext_resource type="PackedScene" uid="uid://kvenjbsctafb" path="res://blender/sails.blend" id="2_66l7g"]
+[ext_resource type="Material" uid="uid://cmb4wdnkr65if" path="res://shaders/materials/sail.tres" id="3_66l7g"]
+[ext_resource type="Material" uid="uid://4wmac4esdrtt" path="res://shaders/materials/wood.tres" id="4_x7ods"]
+
+[node name="Sails" type="Node3D" unique_id=620150282]
+script = ExtResource("1_e3m1m")
+
+[node name="sails" parent="." unique_id=40410200 instance=ExtResource("2_66l7g")]
+
+[node name="BigMid" parent="sails" index="0" unique_id=2034003583]
+surface_material_override/0 = ExtResource("3_66l7g")
+surface_material_override/1 = ExtResource("4_x7ods")
+
+[node name="MediumMid" parent="sails" index="1" unique_id=1561189660]
+surface_material_override/0 = ExtResource("3_66l7g")
+surface_material_override/1 = ExtResource("4_x7ods")
+
+[node name="MediumFront" parent="sails" index="2" unique_id=45030604]
+surface_material_override/0 = ExtResource("3_66l7g")
+surface_material_override/1 = ExtResource("4_x7ods")
+
+[node name="MediumBack" parent="sails" index="3" unique_id=1814830590]
+surface_material_override/0 = ExtResource("3_66l7g")
+surface_material_override/1 = ExtResource("4_x7ods")
+
+[node name="BigBack" parent="sails" index="4" unique_id=64442363]
+surface_material_override/0 = ExtResource("3_66l7g")
+surface_material_override/1 = ExtResource("4_x7ods")
+
+[node name="BigFront" parent="sails" index="5" unique_id=101326554]
+surface_material_override/0 = ExtResource("3_66l7g")
+surface_material_override/1 = ExtResource("4_x7ods")
+
+[node name="SmallMid" parent="sails" index="6" unique_id=1439716008]
+surface_material_override/0 = ExtResource("3_66l7g")
+surface_material_override/1 = ExtResource("4_x7ods")
+
+[editable path="sails"]

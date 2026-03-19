@@ -1,0 +1,161 @@
+[gd_scene format=3 uid="uid://caq61atyyxveg"]
+
+[ext_resource type="Material" uid="uid://cikmcvh1yh8t1" path="res://shaders/materials/fire.tres" id="1_sxwly"]
+
+[sub_resource type="Animation" id="Animation_3sqip"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Wood:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../OmniLight3D:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [400.0]
+}
+
+[sub_resource type="Animation" id="Animation_pakj8"]
+resource_name = "emit"
+length = 1.0666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.06666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Wood:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.06666667, 9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../OmniLight3D:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [10.0, 0.0]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.0333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3sqip"]
+_data = {
+&"RESET": SubResource("Animation_3sqip"),
+&"emit": SubResource("Animation_pakj8")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s83kl"]
+albedo_color = Color(0.64, 0.4053333, 0.32, 1)
+
+[sub_resource type="Curve" id="Curve_3sqip"]
+_data = [Vector2(0, 1), 0.0, -0.5044596, 0, 0, Vector2(0.67231303, 0.6431768), -0.67024624, -0.67024624, 0, 0, Vector2(0.9807243, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3ajkw"]
+curve = SubResource("Curve_3sqip")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3ajkw"]
+particle_flag_align_y = true
+emission_shape = 1
+emission_sphere_radius = 1.95
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, 0, -1)
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+angular_velocity_min = -720.0
+angular_velocity_max = 719.99994
+scale_curve = SubResource("CurveTexture_3ajkw")
+
+[sub_resource type="BoxMesh" id="BoxMesh_s83kl"]
+size = Vector3(0.167, 1.25, 0.25)
+
+[sub_resource type="SphereMesh" id="SphereMesh_s83kl"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_pakj8"]
+radius = 0.2
+height = 0.4
+radial_segments = 4
+rings = 4
+
+[node name="Explosion" type="Node3D" unique_id=911501048]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=119903441]
+root_node = NodePath("../Fire")
+libraries/ = SubResource("AnimationLibrary_3sqip")
+autoplay = &"emit"
+
+[node name="Wood" type="GPUParticles3D" parent="." unique_id=528393642]
+material_override = SubResource("StandardMaterial3D_s83kl")
+emitting = false
+one_shot = true
+explosiveness = 1.0
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_3ajkw")
+draw_pass_1 = SubResource("BoxMesh_s83kl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=930562236]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_s83kl")
+
+[node name="Fire" type="GPUParticles3D" parent="." unique_id=1336449144]
+material_override = ExtResource("1_sxwly")
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 1.0
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_3ajkw")
+draw_pass_1 = SubResource("SphereMesh_pakj8")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=753568607]
+light_color = Color(0.9, 0.6558, 0.567, 1)
+light_energy = 400.0
+omni_range = 13.095696

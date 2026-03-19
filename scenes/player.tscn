@@ -54,7 +54,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Audio")
+tracks/2/path = NodePath("Audio/DeathMusic")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -411,10 +411,15 @@ EXIT_ANIMATION = "Idle"
 [node name="Audio" type="AnimationPlayer" parent="." unique_id=1988651747]
 libraries/ = SubResource("AnimationLibrary_a8ls1")
 script = ExtResource("2_ur7pv")
+
+[node name="DeathMusic" type="Node" parent="Audio" unique_id=46720827]
+script = ExtResource("2_ur7pv")
 SOUNDS = Array[AudioStream]([ExtResource("4_qfm1y")])
 VOLUME_MULTIPLIERS = Array[float]([2.0])
+GROUPS = Array[String](["death_music"])
 AUDIO_BUS = "Music"
 ADD_TO_ROOT = true
+DESTORY_GROUPS = Array[String](["death_music"])
 
 [node name="Music" type="AudioStreamPlayer" parent="Audio" unique_id=1388337072]
 process_mode = 3

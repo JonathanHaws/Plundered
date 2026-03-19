@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dak33xutpd0om"
-path="res://.godot/imported/ship.blend-132ea893e957d6163a0e21ae00c047f2.scn"
+uid="uid://kvenjbsctafb"
+path="res://.godot/imported/sails.blend-707a5d75f676e2ef3a267dbb91d4a396.scn"
 
 [deps]
 
-source_file="res://blender/ship.blend"
-dest_files=["res://.godot/imported/ship.blend-132ea893e957d6163a0e21ae00c047f2.scn"]
+source_file="res://blender/sails.blend"
+dest_files=["res://.godot/imported/sails.blend-707a5d75f676e2ef3a267dbb91d4a396.scn"]
 
 [params]
 
@@ -37,7 +37,13 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:_boat": {
+"import/skip_import": true
+}
+}
+}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true

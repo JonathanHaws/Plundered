@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://cr4xa15qrhqk7"]
+
+[ext_resource type="Material" uid="uid://cikmcvh1yh8t1" path="res://shaders/materials/fire.tres" id="1_3y7n6"]
+
+[sub_resource type="Animation" id="Animation_3sqip"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_pakj8"]
+resource_name = "emit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../OmniLight3D:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [30.0, 0.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.93333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3sqip"]
+_data = {
+&"RESET": SubResource("Animation_3sqip"),
+&"emit": SubResource("Animation_pakj8")
+}
+
+[sub_resource type="Curve" id="Curve_3sqip"]
+_data = [Vector2(0, 1), 0.0, -5.7703304, 0, 0, Vector2(0.28913552, 0.31208056), -0.42922163, -0.42922163, 0, 0, Vector2(0.9807243, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3ajkw"]
+curve = SubResource("Curve_3sqip")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3ajkw"]
+direction = Vector3(0, 0, -1)
+initial_velocity_max = 6.2
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_3ajkw")
+
+[sub_resource type="SphereMesh" id="SphereMesh_pakj8"]
+radius = 0.2
+height = 0.4
+radial_segments = 4
+rings = 4
+
+[node name="Explosion" type="Node3D" unique_id=911501048]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=119903441]
+root_node = NodePath("../Fire")
+libraries/ = SubResource("AnimationLibrary_3sqip")
+autoplay = &"emit"
+
+[node name="Fire" type="GPUParticles3D" parent="." unique_id=1336449144]
+material_override = ExtResource("1_3y7n6")
+amount = 32
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_3ajkw")
+draw_pass_1 = SubResource("SphereMesh_pakj8")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2098151583]
+light_color = Color(0.9, 0.6558, 0.567, 1)
+light_energy = 30.0
+omni_range = 10.691391
