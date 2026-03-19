@@ -58,12 +58,10 @@ text = "1920x1080"
 
 [node name="Increase" type="Button" parent="VBoxContainer/Resolution" unique_id=446044958 groups=["menu_hovered_sound", "menu_pressed_sound"]]
 layout_mode = 2
-theme = ExtResource("6_nub3j")
 text = "+"
 
 [node name="Decrease" type="Button" parent="VBoxContainer/Resolution" unique_id=533842765 groups=["menu_hovered_sound", "menu_pressed_sound"]]
 layout_mode = 2
-theme = ExtResource("6_nub3j")
 text = "-"
 
 [node name="OptionButton" type="OptionButton" parent="VBoxContainer" unique_id=1293843349 groups=["menu_hovered_sound", "menu_pressed_sound"]]

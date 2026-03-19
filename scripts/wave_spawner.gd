@@ -16,7 +16,7 @@ var spawner
 
 @export_group("Auto Progress Difficulty")
 @export var auto_progress: bool = true
-@export var curve_base_time: float = 20
+@export var curve_base_time: float = 100
 @export var curve_min_ships: Curve
 @export var curve_breathing_time: Curve
 @export var curve_random_breathing_time: Curve

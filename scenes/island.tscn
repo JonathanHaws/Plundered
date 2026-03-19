@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://0eteiw5oeit" path="res://audio/Ambience.ogg" id="1_migvp"]
 [ext_resource type="Script" uid="uid://pm43grwmg3qo" path="res://scripts/menu/pause_toggle.gd" id="2_jxvd6"]
 [ext_resource type="PackedScene" uid="uid://butlqj718j0gj" path="res://scenes/menu/main.tscn" id="3_migvp"]
+[ext_resource type="Theme" uid="uid://ch3ag1y51wmlm" path="res://resources/default_theme.tres" id="3_p7dfi"]
 [ext_resource type="PackedScene" uid="uid://bhluruq521f8w" path="res://scenes/ocean.tscn" id="6_mifw5"]
 [ext_resource type="Environment" uid="uid://chlcidt7t3gdg" path="res://shaders/sky.tres" id="6_p7dfi"]
 [ext_resource type="PackedScene" uid="uid://dwa335y6j7a7" path="res://blender/island.blend" id="7_ftju0"]
@@ -196,10 +197,12 @@ offset_bottom = 23.0
 
 [node name="Poster" type="Label" parent="ColorRect/Bounty" unique_id=97914123]
 layout_mode = 2
+theme = ExtResource("3_p7dfi")
 text = "WANTED DEAD OR ALIVE"
 
 [node name="Bounty" type="Label" parent="ColorRect/Bounty" unique_id=2035885012]
 layout_mode = 2
+theme = ExtResource("3_p7dfi")
 text = " 0$"
 script = ExtResource("1_mifw5")
 key = "bounty"

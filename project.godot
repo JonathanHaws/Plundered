@@ -15,6 +15,7 @@ config/description="Theft for a pirate is as essential as breathing. Living isnt
 run/main_scene="uid://safr0287hjda"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/show_image=false
+config/icon="uid://b6co8lv7n7dd5"
 
 [audio]
 

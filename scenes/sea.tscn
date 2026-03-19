@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://pm43grwmg3qo" path="res://scripts/menu/pause_toggle.gd" id="1_1gkki"]
 [ext_resource type="Script" uid="uid://dv2d1smqmvpgg" path="res://scripts/ui_label.gd" id="1_60wme"]
 [ext_resource type="AudioStream" uid="uid://0eteiw5oeit" path="res://audio/Ambience.ogg" id="1_erah6"]
+[ext_resource type="Theme" uid="uid://ch3ag1y51wmlm" path="res://resources/default_theme.tres" id="2_1m6pm"]
 [ext_resource type="PackedScene" uid="uid://butlqj718j0gj" path="res://scenes/menu/main.tscn" id="2_hfvyu"]
 [ext_resource type="Environment" uid="uid://chlcidt7t3gdg" path="res://shaders/sky.tres" id="4_hlm4b"]
 [ext_resource type="PackedScene" uid="uid://bhluruq521f8w" path="res://scenes/ocean.tscn" id="5_60wme"]
@@ -42,6 +43,7 @@ offset_bottom = 40.0
 
 [node name="Label" type="Label" parent="ColorRect/Bounty" unique_id=2035885012]
 layout_mode = 2
+theme = ExtResource("2_1m6pm")
 text = "BOUNTY - 0$"
 script = ExtResource("1_60wme")
 key = "bounty"
