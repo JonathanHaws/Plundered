@@ -24,7 +24,7 @@ bus = &"SFX"
 [node name="SteeringSound" type="AudioStreamPlayer" parent="." unique_id=1600715203]
 process_mode = 3
 stream = ExtResource("3_qfkqd")
-volume_db = -11.0
+volume_db = -9.0
 pitch_scale = 0.4
 bus = &"SFX"
 

@@ -42,7 +42,7 @@ func _process(_delta):
 func _physics_process(delta):
 	
 	#print(global_position.distance_to(player_ship.global_position))
-	if player_ship and global_position.distance_to(player_ship.global_position) > 200.0:
+	if player_ship and global_position.distance_to(player_ship.global_position) > 200.0 and not $HitShape/CollisionShape3D.disabled:
 		queue_free()
 		return
 	

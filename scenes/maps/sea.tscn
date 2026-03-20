@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://safr0287hjda"]
 
 [ext_resource type="AudioStream" uid="uid://0eteiw5oeit" path="res://audio/Ambience.ogg" id="1_r2ql0"]
-[ext_resource type="Theme" uid="uid://ch3ag1y51wmlm" path="res://resources/default_theme.tres" id="2_3jjmi"]
-[ext_resource type="Script" uid="uid://dv2d1smqmvpgg" path="res://scripts/ui_label.gd" id="3_6cwgu"]
+[ext_resource type="PackedScene" uid="uid://bkp7rr6v8cdfx" path="res://scenes/maps/bounty_counter.tscn" id="2_r2ql0"]
 [ext_resource type="PackedScene" uid="uid://bhluruq521f8w" path="res://scenes/maps/ocean.tscn" id="4_rksl4"]
 [ext_resource type="Environment" uid="uid://chlcidt7t3gdg" path="res://shaders/sky.tres" id="5_4848d"]
 [ext_resource type="PackedScene" uid="uid://1kv0584ypolt" path="res://scenes/wave_spawner.tscn" id="6_nrn1y"]
@@ -20,25 +19,7 @@ stream = ExtResource("1_r2ql0")
 autoplay = true
 bus = &"SFX"
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=640228312]
-offset_right = 174.0
-offset_bottom = 40.0
-size_flags_horizontal = 3
-color = Color(0.19, 0.19, 0.19, 0.8784314)
-
-[node name="Bounty" type="HBoxContainer" parent="ColorRect" unique_id=1538725228]
-layout_mode = 0
-offset_right = 67.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="ColorRect/Bounty" unique_id=2035885012]
-layout_mode = 2
-theme = ExtResource("2_3jjmi")
-text = "BOUNTY - 0$"
-script = ExtResource("3_6cwgu")
-key = "bounty"
-prefix = "BOUNTY - "
-suffix = "$"
+[node name="ColorRect" parent="." unique_id=1926806445 instance=ExtResource("2_r2ql0")]
 
 [node name="Ocean" parent="." unique_id=1092928726 instance=ExtResource("4_rksl4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1466732, 0)
@@ -48,6 +29,7 @@ environment = ExtResource("5_4848d")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=676342986]
 transform = Transform3D(-0.6868846, 0.44353354, -0.5757322, 0, 0.79218316, 0.61028343, 0.7267665, 0.41919428, -0.5441384, -3.3399532, 19.654726, 0.13701057)
+shadow_enabled = true
 
 [node name="WaveSpawner" parent="." unique_id=296502299 instance=ExtResource("6_nrn1y")]
 
@@ -79,17 +61,17 @@ layout_mode = 1
 [node name="Barrel" parent="BatchOfBarrels" unique_id=1198229433 instance=ExtResource("11_3jjmi")]
 transform = Transform3D(0.680351, 0.22843477, -0.6963764, -0.31829756, 0.94799083, 0, 0.66015846, 0.2216549, 0.71767676, 18.141287, 0.05921936, -1.7150702)
 
-[node name="Barrel2" parent="BatchOfBarrels" unique_id=1789774856 instance=ExtResource("11_3jjmi")]
+[node name="Barrel2" parent="BatchOfBarrels" unique_id=893142541 instance=ExtResource("11_3jjmi")]
 transform = Transform3D(0.9387579, 0, -0.34457737, 0, 1, 0, 0.34457737, 0, 0.9387579, 25.678349, 0.05921936, -13.396793)
 
-[node name="Barrel3" parent="BatchOfBarrels" unique_id=249729199 instance=ExtResource("11_3jjmi")]
+[node name="Barrel3" parent="BatchOfBarrels" unique_id=1191611137 instance=ExtResource("11_3jjmi")]
 transform = Transform3D(-0.9973704, 0.058640994, -0.04258485, 0, 0.5876017, 0.80915046, 0.07247232, 0.8070227, -0.5860566, 27.489143, 0.05921936, 1.0315762)
 
-[node name="Barrel4" parent="BatchOfBarrels" unique_id=635541882 instance=ExtResource("11_3jjmi")]
+[node name="Barrel4" parent="BatchOfBarrels" unique_id=1686453807 instance=ExtResource("11_3jjmi")]
 transform = Transform3D(0.64320886, -0.36113638, -0.6751762, 0.24909692, 0.932513, -0.26147696, 0.72403944, 0, 0.6897586, -34.313705, 0.05921936, -6.7141943)
 
-[node name="Barrel5" parent="BatchOfBarrels" unique_id=909662500 instance=ExtResource("11_3jjmi")]
+[node name="Barrel5" parent="BatchOfBarrels" unique_id=910415349 instance=ExtResource("11_3jjmi")]
 transform = Transform3D(0.6897586, 0, -0.72403944, 0.5642714, 0.62660384, 0.53755504, 0.45368588, -0.77933794, 0.43220538, -20.656925, 0.05921936, -9.314634)
 
-[node name="Barrel6" parent="BatchOfBarrels" unique_id=215316968 instance=ExtResource("11_3jjmi")]
+[node name="Barrel6" parent="BatchOfBarrels" unique_id=2075206373 instance=ExtResource("11_3jjmi")]
 transform = Transform3D(-0.2709532, 0, -0.9625925, -0.8384837, 0.49116224, 0.23601873, 0.47278908, 0.87106806, -0.13308199, -29.854622, 0.05921936, 1.948544)

@@ -449,19 +449,19 @@ script = ExtResource("2_ur7pv")
 [node name="Step1" type="AudioStreamPlayer" parent="Audio/Footsteps" unique_id=848723444]
 process_mode = 3
 stream = ExtResource("4_d2wvv")
-volume_db = -8.0
+volume_db = -4.0
 bus = &"SFX"
 
 [node name="Step2" type="AudioStreamPlayer" parent="Audio/Footsteps" unique_id=30627649]
 process_mode = 3
 stream = ExtResource("5_3v2ag")
-volume_db = -8.0
+volume_db = -4.0
 bus = &"SFX"
 
 [node name="Step3" type="AudioStreamPlayer" parent="Audio/Footsteps" unique_id=974374301]
 process_mode = 3
 stream = ExtResource("6_jej6c")
-volume_db = -8.0
+volume_db = -4.0
 bus = &"SFX"
 
 [node name="Land" type="Node" parent="Audio" unique_id=633420585]
@@ -490,19 +490,19 @@ script = ExtResource("2_ur7pv")
 
 [node name="Jump1" type="AudioStreamPlayer" parent="Audio/Jump" unique_id=1047525715]
 stream = ExtResource("11_oprun")
-volume_db = -5.0
+volume_db = -3.0
 pitch_scale = 2.0
 bus = &"SFX"
 
 [node name="Jump2" type="AudioStreamPlayer" parent="Audio/Jump" unique_id=1567802228]
 stream = ExtResource("11_f1ej7")
-volume_db = -5.0
+volume_db = -3.0
 pitch_scale = 2.0
 bus = &"SFX"
 
 [node name="Jump3" type="AudioStreamPlayer" parent="Audio/Jump" unique_id=1463186706]
 stream = ExtResource("12_oprun")
-volume_db = -5.0
+volume_db = -3.0
 pitch_scale = 2.0
 bus = &"SFX"
 

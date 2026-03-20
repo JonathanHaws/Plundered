@@ -27,14 +27,12 @@ func _ready() -> void:
 	#apply_texture(middle_sails, randi() % sail_textures.size())
 	#apply_texture(back_sails, randi() % sail_textures.size())
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	poll()
 
 func poll() -> void:
 	if not boat: return
-	var current_sigil: String = boat.sigils[boat.sigil]
-	
-	#print(current_sigil)
+	#print(boat.sigil)
 	
 	apply_texture(front_sails, boat.sigil)
 	apply_texture(middle_sails, boat.sigil)
