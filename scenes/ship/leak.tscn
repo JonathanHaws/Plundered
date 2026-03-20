@@ -184,6 +184,7 @@ script = ExtResource("1_687o7")
 [node name="Splash1" type="AudioStreamPlayer3D" parent="Audio/Repair" unique_id=805157375]
 process_mode = 3
 stream = ExtResource("7_y0vmt")
+volume_db = -8.0
 bus = &"SFX"
 
 [node name="Area3D" type="Area3D" parent="." unique_id=956915124]

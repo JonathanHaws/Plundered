@@ -1,4 +1,5 @@
 extends Node3D
+@export var boat: RigidBody3D
 @export var sail_textures: Array[Texture2D] = [] 
 @onready var shader_param_name: String = "texture_albedo" 
 @onready var front_sails: Array[String] = [
@@ -12,14 +13,32 @@ extends Node3D
 	"MediumBack",
 	"BigBack"]
 
+var sigil: String = "none"
+
 func _ready() -> void:
+	if not boat: boat = get_parent()
+	#print(boat.sigils[boat.sigil])
+	
 	_delete_extra_sails(front_sails)
 	_delete_extra_sails(middle_sails)
 	_delete_extra_sails(back_sails)
 	
-	apply_texture(front_sails, randi() % sail_textures.size())
-	apply_texture(middle_sails, randi() % sail_textures.size())
-	apply_texture(back_sails, randi() % sail_textures.size())
+	#apply_texture(front_sails, randi() % sail_textures.size())
+	#apply_texture(middle_sails, randi() % sail_textures.size())
+	#apply_texture(back_sails, randi() % sail_textures.size())
+
+func _physics_process(delta: float) -> void:
+	poll()
+
+func poll() -> void:
+	if not boat: return
+	var current_sigil: String = boat.sigils[boat.sigil]
+	
+	#print(current_sigil)
+	
+	apply_texture(front_sails, boat.sigil)
+	apply_texture(middle_sails, boat.sigil)
+	apply_texture(back_sails, boat.sigil)
 
 func _delete_extra_sails(sail_names: Array[String]) -> void:
 	while sail_names.size() > 1:
@@ -30,6 +49,11 @@ func _delete_extra_sails(sail_names: Array[String]) -> void:
 		sail_names.remove_at(index)
 		
 func apply_texture(sail_names: Array[String], texture_index: int = 0) -> void:
+	if sail_textures.size() == 0: return
+
+	texture_index = clamp(texture_index, 0, sail_textures.size() - 1)
+	
+	
 	for ship_name in sail_names:
 		var sail_node = $sails.get_node_or_null(ship_name)
 		

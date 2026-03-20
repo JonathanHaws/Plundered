@@ -7,6 +7,9 @@ extends RigidBody3D
 @export var cannon_random_cooldown: float = 4.0 ## Add this to the mimum duration and its maximum duration
 @export var cannon_random_aim: Vector2 = Vector2(5, 5) ## How inaccurate Enemies shots will be. 
 
+@export var sigil: int = 0
+var sigils: Array = ["none", "beer", "doliphin", "shark", "turtle", "whale", "jolly_roger"]
+
 @export_group('Physics')
 #@export var is_docked: bool = true add if wanting sails to be own control
 @export var sink_free_y: float = -50.0
@@ -72,6 +75,9 @@ func apply_boat_controls(forward: float, right: float, _delta: float) -> void:
 	apply_torque_impulse(Vector3.UP * right * steer * _delta)
 	
 func _ready():
+	
+	sigil = randi() % sigils.size()
+	if name == player_ship_name: sigil = 0
 	
 	add_to_group('boats')
 	add_to_group(name)

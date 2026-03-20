@@ -2,14 +2,17 @@
 
 [ext_resource type="Script" uid="uid://cbhnq86xv7vep" path="res://scripts/sails.gd" id="1_e3m1m"]
 [ext_resource type="PackedScene" uid="uid://kvenjbsctafb" path="res://blender/sails.blend" id="2_66l7g"]
-[ext_resource type="Texture2D" uid="uid://shlf5n8c5iua" path="res://textures/test_texture.jpg" id="2_t0fnl"]
+[ext_resource type="Texture2D" uid="uid://c404m47i27i5d" path="res://textures/beer.jpg" id="2_v1dfq"]
 [ext_resource type="Material" uid="uid://cmb4wdnkr65if" path="res://shaders/materials/sail.tres" id="3_66l7g"]
-[ext_resource type="Texture2D" uid="uid://djp6rnxtcsxo7" path="res://textures/test_texture_2.PNG" id="3_bbwc8"]
+[ext_resource type="Texture2D" uid="uid://dhx7oc8w4q12x" path="res://textures/doliphin.jpg" id="3_es8wy"]
+[ext_resource type="Texture2D" uid="uid://dp54ys4b5wswl" path="res://textures/shark.jpg" id="4_n4apx"]
 [ext_resource type="Material" uid="uid://4wmac4esdrtt" path="res://shaders/materials/wood.tres" id="4_x7ods"]
+[ext_resource type="Texture2D" uid="uid://ddknite7rvtbo" path="res://textures/turtle.jpg" id="5_jjh78"]
+[ext_resource type="Texture2D" uid="uid://dpo3d423dbigy" path="res://textures/whale.jpg" id="6_4ueoe"]
 
 [node name="Sails" type="Node3D" unique_id=620150282]
 script = ExtResource("1_e3m1m")
-sail_textures = Array[Texture2D]([ExtResource("2_t0fnl"), ExtResource("3_bbwc8")])
+sail_textures = Array[Texture2D]([null, ExtResource("2_v1dfq"), ExtResource("3_es8wy"), ExtResource("4_n4apx"), ExtResource("5_jjh78"), ExtResource("6_4ueoe")])
 
 [node name="sails" parent="." unique_id=1443422415 instance=ExtResource("2_66l7g")]
 

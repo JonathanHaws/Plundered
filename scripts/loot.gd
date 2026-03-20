@@ -19,8 +19,8 @@ func apply_random_force():
 	))
 
 	velocity = Vector3(
-		randf_range(-13.0, 13.0),
-		randf_range(4.0, 10.0),
+		randf_range(-15.0, 13.0),
+		randf_range(7.0, 13.0),
 		randf_range(-13.0, 13.0)
 	)
 
@@ -32,6 +32,11 @@ func apply_random_force():
 
 func _ready():
 	player_ship = get_tree().get_first_node_in_group("PlayerShip")
+
+func _process(_delta):
+
+	$Light.global_rotation = Vector3.ZERO  # reset orientation
+	$Light.global_position = global_position + Vector3(-3, 2, 3)
 
 
 func _physics_process(delta):
@@ -54,3 +59,6 @@ func _physics_process(delta):
 	rotate_object_local(Vector3(1,0,0), angular_velocity.x * delta)
 	rotate_object_local(Vector3(0,1,0), angular_velocity.y * delta)
 	rotate_object_local(Vector3(0,0,1), angular_velocity.z * delta)
+
+	$Light.global_position = global_position + Vector3.UP * 5.0  
+	$Light.global_rotation = Vector3.ZERO  # reset orientation

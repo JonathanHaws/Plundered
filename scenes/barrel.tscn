@@ -86,14 +86,44 @@ tracks/4/keys = {
 "method": &"queue_free"
 }]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Light:light_energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_043oi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Light:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p63pu"]
 _data = {
-&"BROKEN": SubResource("Animation_qowtj")
+&"BROKEN": SubResource("Animation_qowtj"),
+&"RESET": SubResource("Animation_043oi")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gdyii"]
 size = Vector3(1.5092773, 1.7814941, 1.7219238)
+
+[sub_resource type="BoxMesh" id="BoxMesh_043oi"]
 
 [node name="Barrel" type="Node3D" unique_id=1198229433]
 script = ExtResource("1_mhtw8")
@@ -140,5 +170,15 @@ DEATH_ANIM = "BROKEN"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitShape" unique_id=1187911042]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06062132, 0.26501465, 0.013549805)
 shape = SubResource("BoxShape3D_gdyii")
+
+[node name="Light" type="OmniLight3D" parent="." unique_id=1216653444]
+light_color = Color(0.80297756, 0.61355454, 0.5690359, 1)
+light_energy = 3.0
+light_specular = 0.0
+omni_range = 20.55991
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Light" unique_id=137755011]
+visible = false
+mesh = SubResource("BoxMesh_043oi")
 
 [editable path="barrel"]
