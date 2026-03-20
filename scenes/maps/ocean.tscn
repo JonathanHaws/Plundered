@@ -11,6 +11,7 @@ size = Vector2(2, 2)
 render_priority = 0
 shader = ExtResource("3_mn261")
 shader_parameter/color = Color(0.17263556, 0.32759517, 0.4881662, 1)
+shader_parameter/thickness_fade_distance = 50.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1svla"]
 lightmap_size_hint = Vector2i(509, 509)
