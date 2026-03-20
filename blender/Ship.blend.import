@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dak33xutpd0om"
-path="res://.godot/imported/ship.blend-132ea893e957d6163a0e21ae00c047f2.scn"
+uid="uid://bpn1burwm3wqq"
+path="res://.godot/imported/Ship.blend-cab4c5d02521f888f368b8d883233841.scn"
 
 [deps]
 
-source_file="res://blender/ship.blend"
-dest_files=["res://.godot/imported/ship.blend-132ea893e957d6163a0e21ae00c047f2.scn"]
+source_file="res://blender/Ship.blend"
+dest_files=["res://.godot/imported/Ship.blend-cab4c5d02521f888f368b8d883233841.scn"]
 
 [params]
 

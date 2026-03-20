@@ -101,7 +101,7 @@ roughness = 0.15
 
 [sub_resource type="SphereMesh" id="SphereMesh_4105j"]
 
-[node name="HurtArea" type="Area3D" unique_id=1770059089 node_paths=PackedStringArray("hit_animation_player")]
+[node name="HurtArea" type="Area3D" unique_id=1770059089 node_paths=PackedStringArray("hit_animation_player") groups=["cannon_balls"]]
 script = ExtResource("2_tqdv6")
 damage = 150.0
 hit_anim = "explode"

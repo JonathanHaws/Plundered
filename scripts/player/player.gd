@@ -35,6 +35,21 @@ func is_player_ship_sunk() -> bool:
 			return false
 	return true
 
+func get_nearest_enemy_distance() -> float:
+	var min_distance := INF
+	for b in get_tree().get_nodes_in_group("boats"):
+		if b.name != "PlayerShip" and not b.sunk:
+			var distance := global_position.distance_to(b.global_position)
+			if distance < min_distance:
+				min_distance = distance
+	return min_distance
+
+func is_wave_cleared() -> bool:
+	return get_tree().get_nodes_in_group("boats").size() <= 1
+
+func is_cannon_balls() -> bool:
+	return get_tree().get_nodes_in_group("cannon_balls").size() > 0
+
 func _free_movement(_d):
 	if Input.is_action_just_pressed("jump"): jump_buffer = jump_buffer_time;
 	elif jump_buffer > 0: jump_buffer -= _d	
@@ -92,8 +107,26 @@ func _free_movement(_d):
 		
 func _physics_process(_delta):
 	
-	#print(anim.current_animation)
-	
+	if not anim.current_animation in ["Death"]:
+		var dist := get_nearest_enemy_distance()
+
+		if dist < 40.0 or (is_cannon_balls() and dist < 80.0):
+			if not $Audio/CombatMusic.playing:
+				var t := create_tween()
+				t.tween_property($Audio/CalmMusic, "volume_db", -40.0, 0.6)
+				t.tween_callback($Audio/CalmMusic.stop)
+				$Audio/CombatMusic.volume_db = 0.0
+				$Audio/CombatMusic.play()
+				t.tween_property($Audio/CombatMusic, "volume_db", 0.0, 0.6)
+		else:
+			if not $Audio/CalmMusic.playing and is_wave_cleared():
+				var t := create_tween()
+				t.tween_property($Audio/CombatMusic, "volume_db", -40.0, 6.0)
+				t.tween_callback($Audio/CombatMusic.stop)
+				$Audio/CalmMusic.volume_db = -40.0
+				$Audio/CalmMusic.play()
+				t.tween_property($Audio/CalmMusic, "volume_db", 0.0, 0.6)
+		
 	if anim.current_animation in ["Steer", "God"]:
 		_move_camera()
 	
@@ -106,3 +139,5 @@ func _physics_process(_delta):
 	if anim.current_animation != "Death" and (global_position.y < kill_y or is_player_ship_sunk()):
 		anim.play("Death")
 		
+		
+	

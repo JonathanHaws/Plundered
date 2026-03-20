@@ -52,12 +52,20 @@ transform = Transform3D(-0.6868846, 0.44353354, -0.5757322, 0, 0.79218316, 0.610
 
 [node name="Player" parent="." unique_id=2089436190 instance=ExtResource("7_c8up5")]
 transform = Transform3D(0.9266599, 0, 0.37590083, 0, 1, 0, -0.37590083, 0, 0.9266599, 2.0667706, 5.141719, 6.043366)
+kill_y = -5.0
+speed = 3.0
+jump_height = 4.0
+sprint_multiplier = 2.0
+sens = 0.002
+gravity = 9.8
+jump_buffer_time = 0.2
+coyote_time = 0.25
 
 [node name="PlayerShip" parent="." unique_id=768453608 instance=ExtResource("8_6e64u")]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
 
-[node name="Ship2" parent="." unique_id=1875089958 instance=ExtResource("8_6e64u")]
-transform = Transform3D(0.9811951, 0, 0.19301862, 0, 1, 0, -0.19301862, 0, 0.9811951, 44.994, 0, -5.5903645)
+[node name="Ship2" parent="." unique_id=470330133 instance=ExtResource("8_6e64u")]
+transform = Transform3D(0.82328504, 0, 0.56762826, 0, 1, 0, -0.56762826, 0, 0.82328504, 96.25257, 0, -94.53635)
 speed = 0.0
 steer = 0.0
 

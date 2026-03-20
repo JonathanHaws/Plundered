@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://caq61atyyxveg" path="res://scenes/ship/boat_destruction.tscn" id="4_wkb1m"]
 [ext_resource type="PackedScene" uid="uid://crf7v51qwlgff" path="res://scenes/ship/steering_wheel.tscn" id="5_r75st"]
 [ext_resource type="PackedScene" uid="uid://3qle3gc6u1tk" path="res://scenes/ship/sails.tscn" id="6_8ks32"]
-[ext_resource type="PackedScene" uid="uid://dak33xutpd0om" path="res://blender/ship.blend" id="6_q6f52"]
+[ext_resource type="PackedScene" uid="uid://b6airyu2yekfh" path="res://blender/ship.blend" id="6_q6f52"]
 [ext_resource type="Material" uid="uid://4wmac4esdrtt" path="res://shaders/materials/wood.tres" id="7_xvsf7"]
 [ext_resource type="Script" uid="uid://bqehmyoma1axh" path="res://scripts/components/audio_spawner.gd" id="9_woufe"]
 [ext_resource type="AudioStream" uid="uid://0wye6421c487" path="res://audio/bounty_increased.ogg" id="10_sakv4"]
@@ -164,19 +164,25 @@ scenes = Array[PackedScene]([ExtResource("4_wkb1m")])
 add_to_global_root = true
 
 [node name="SteeringWheel" parent="." unique_id=1453918494 instance=ExtResource("5_r75st")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.863283, 5.297)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.902465, 5.7476196)
 
 [node name="Sails" parent="." unique_id=620150282 instance=ExtResource("6_8ks32")]
 
-[node name="Ship" parent="." unique_id=1969722885 instance=ExtResource("6_q6f52")]
+[node name="Ship" parent="." unique_id=1780272304 instance=ExtResource("6_q6f52")]
 
-[node name="Hull" parent="Ship" index="0" unique_id=1418788997]
+[node name="Hull" parent="Ship" index="0" unique_id=180004666]
 surface_material_override/0 = ExtResource("7_xvsf7")
 
-[node name="Sprit" parent="Ship" index="1" unique_id=1632689021]
+[node name="FrontRailing" parent="Ship" index="1" unique_id=976632532]
+material_override = ExtResource("7_xvsf7")
+
+[node name="Stairs" parent="Ship" index="2" unique_id=1389246886]
 surface_material_override/0 = ExtResource("7_xvsf7")
 
-[node name="Stairs" parent="Ship" index="2" unique_id=515664824]
+[node name="Windows" parent="Ship" index="3" unique_id=1797239535]
+surface_material_override/0 = ExtResource("7_xvsf7")
+
+[node name="BackRailing" parent="Ship" index="4" unique_id=92243509]
 surface_material_override/0 = ExtResource("7_xvsf7")
 
 [node name="Audio" type="Node3D" parent="." unique_id=1358291165]
