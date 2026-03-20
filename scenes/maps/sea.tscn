@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cayjt37m1mgxu" path="res://scenes/ship/ship.tscn" id="8_6e64u"]
 [ext_resource type="Script" uid="uid://pm43grwmg3qo" path="res://scripts/menu/pause_toggle.gd" id="9_uq6qg"]
 [ext_resource type="PackedScene" uid="uid://butlqj718j0gj" path="res://scenes/ui/main.tscn" id="10_24y3c"]
+[ext_resource type="PackedScene" uid="uid://be3qjeh20v4i2" path="res://scenes/barrel.tscn" id="11_3jjmi"]
 
 [node name="Sea" type="Node3D" unique_id=214513969]
 
@@ -52,20 +53,12 @@ transform = Transform3D(-0.6868846, 0.44353354, -0.5757322, 0, 0.79218316, 0.610
 
 [node name="Player" parent="." unique_id=2089436190 instance=ExtResource("7_c8up5")]
 transform = Transform3D(0.9266599, 0, 0.37590083, 0, 1, 0, -0.37590083, 0, 0.9266599, 2.0667706, 5.141719, 6.043366)
-kill_y = -5.0
-speed = 3.0
-jump_height = 4.0
-sprint_multiplier = 2.0
-sens = 0.002
-gravity = 9.8
-jump_buffer_time = 0.2
-coyote_time = 0.25
 
 [node name="PlayerShip" parent="." unique_id=768453608 instance=ExtResource("8_6e64u")]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="Ship2" parent="." unique_id=470330133 instance=ExtResource("8_6e64u")]
-transform = Transform3D(0.82328504, 0, 0.56762826, 0, 1, 0, -0.56762826, 0, 0.82328504, 96.25257, 0, -94.53635)
+transform = Transform3D(0.82328504, 0, 0.56762826, 0, 1, 0, -0.56762826, 0, 0.82328504, 124.974556, 0, -170.83768)
 speed = 0.0
 steer = 0.0
 
@@ -80,3 +73,23 @@ script = ExtResource("9_uq6qg")
 
 [node name="Main" parent="Pause" unique_id=1127001201 instance=ExtResource("10_24y3c")]
 layout_mode = 1
+
+[node name="BatchOfBarrels" type="Node3D" parent="." unique_id=1132342578]
+
+[node name="Barrel" parent="BatchOfBarrels" unique_id=1198229433 instance=ExtResource("11_3jjmi")]
+transform = Transform3D(0.680351, 0.22843477, -0.6963764, -0.31829756, 0.94799083, 0, 0.66015846, 0.2216549, 0.71767676, 18.141287, 0.05921936, -1.7150702)
+
+[node name="Barrel2" parent="BatchOfBarrels" unique_id=1789774856 instance=ExtResource("11_3jjmi")]
+transform = Transform3D(0.9387579, 0, -0.34457737, 0, 1, 0, 0.34457737, 0, 0.9387579, 25.678349, 0.05921936, -13.396793)
+
+[node name="Barrel3" parent="BatchOfBarrels" unique_id=249729199 instance=ExtResource("11_3jjmi")]
+transform = Transform3D(1, 0, 0, 0, 0.58760166, 0.80915034, 0, -0.80915034, 0.58760166, 27.489143, 0.05921936, 1.0315762)
+
+[node name="Barrel4" parent="BatchOfBarrels" unique_id=635541882 instance=ExtResource("11_3jjmi")]
+transform = Transform3D(0.64320886, -0.36113638, -0.6751762, 0.24909692, 0.932513, -0.26147696, 0.72403944, 0, 0.6897586, -34.313705, 0.05921936, -6.7141943)
+
+[node name="Barrel5" parent="BatchOfBarrels" unique_id=909662500 instance=ExtResource("11_3jjmi")]
+transform = Transform3D(0.6897586, 0, -0.72403944, 0.5642714, 0.62660384, 0.53755504, 0.45368588, -0.77933794, 0.43220538, -20.656925, 0.05921936, -9.314634)
+
+[node name="Barrel6" parent="BatchOfBarrels" unique_id=215316968 instance=ExtResource("11_3jjmi")]
+transform = Transform3D(-0.2709532, 0, -0.9625925, -0.8384837, 0.49116224, 0.23601873, 0.47278908, 0.87106806, -0.13308199, -29.854622, 0.05921936, 1.948544)

@@ -129,14 +129,23 @@ script = ExtResource("2_ovdco")
 [node name="Splash1" type="AudioStreamPlayer3D" parent="Splash" unique_id=1311061690]
 process_mode = 3
 stream = ExtResource("3_f7q7i")
+volume_db = -8.0
+unit_size = 20.0
+max_db = 0.0
 bus = &"SFX"
 
 [node name="Splash2" type="AudioStreamPlayer3D" parent="Splash" unique_id=661595781]
 process_mode = 3
 stream = ExtResource("4_4sx1t")
+volume_db = -8.0
+unit_size = 20.0
+max_db = 0.0
 bus = &"SFX"
 
 [node name="Splash3" type="AudioStreamPlayer3D" parent="Splash" unique_id=1689021018]
 process_mode = 3
 stream = ExtResource("5_hbgbp")
+volume_db = -8.0
+unit_size = 20.0
+max_db = 0.0
 bus = &"SFX"

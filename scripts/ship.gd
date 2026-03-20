@@ -43,7 +43,19 @@ func on_ship_sunk() -> void:
 		Save.data["bounty"] = Save.data.get("bounty", 0) + 100
 		Save.save_game()
 		$Audio/Bounty.play()
-	
+		
+		
+	for i in 5:
+		var loot = $HitArea/LootSpawner.spawn()	# spawn loot
+		if loot:
+			
+			#$RamArea.add_immune_group("loot_hitarea")
+			
+			loot.get_node("HitShape").add_immune_group("enemy_ram_area")
+			loot.apply_random_force()
+			#print(loot.global_position)
+
+
 func impact(strength: float) -> void:
 	var impulse = Vector3(randf_range(-1,1), randf_range(-1,1), randf_range(-1,1)).normalized() * strength
 	var offset = Vector3(randf_range(-1,1), randf_range(-1,1), randf_range(-1,1))
@@ -73,6 +85,7 @@ func _ready():
 	
 	if name != player_ship_name:
 		$Targets.queue_free()
+		$RamArea.add_to_group("enemy_ram_area")
 	
 	#print(name)
 	
@@ -120,6 +133,10 @@ func _ready():
 				
 				mesh.add_child(new_body)
 				child.queue_free()
+	
+	$RamArea.add_to_group(name + "_ram_area")
+	$HitArea.add_immune_group(name + "_ram_area")
+	
 	
 func _process(_delta):
 	

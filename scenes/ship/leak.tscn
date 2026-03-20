@@ -140,8 +140,9 @@ anim_player = NodePath("AnimationPlayer")
 [node name="Water" type="GPUParticles3D" parent="." unique_id=1336449144]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0061482787, 0)
 material_override = ExtResource("2_y0vmt")
-amount = 32
+amount = 64
 lifetime = 0.5
+fixed_fps = 60
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_3ajkw")
 draw_pass_1 = SubResource("SphereMesh_ou55p")
