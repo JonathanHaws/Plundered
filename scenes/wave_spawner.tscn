@@ -34,10 +34,10 @@ tracks/1/path = NodePath("WaveSpawner")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(2.9333334),
+"times": PackedFloat32Array(8),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [100.0, 10.0, 400.0, 80.0, 8.0, 4.0, Vector2(5, 5)],
+"args": [200.0, 100.0, 400.0, 80.0, 8.0, 4.0, Vector2(5, 5)],
 "method": &"spawn_boat_out_of_view"
 }]
 }
@@ -66,10 +66,10 @@ tracks/1/path = NodePath("WaveSpawner")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(3.1),
+"times": PackedFloat32Array(8),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [],
+"args": [200.0, 100.0, 400.0, 80.0, 8.0, 4.0, Vector2(5, 5)],
 "method": &"spawn_boat_out_of_view"
 }]
 }

@@ -36,10 +36,10 @@ func _ready():
 
 func _physics_process(delta):
 	
-	if player_ship and global_position.distance_to(player_ship.global_position) > 300.0:
+	#print(global_position.distance_to(player_ship.global_position))
+	if player_ship and global_position.distance_to(player_ship.global_position) > 200.0:
 		queue_free()
 		return
-	
 	
 	if global_position.y > 0.0:
 		velocity.y -= gravity * delta

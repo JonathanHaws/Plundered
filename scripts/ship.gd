@@ -23,7 +23,7 @@ var sunk: bool = false
 @export var player_ship_name: String = "PlayerShip"
 @export var player_group: String = "player"
 @export var player_animator_group: String = "player_anim"
-@export var leak_per_second: float = 10.0  ## HP lost per second when not at max health
+@export var leak_per_second: float = 20.0  ## HP lost per second when not at max health
 var player: CharacterBody3D
 var player_anim: AnimationPlayer
 

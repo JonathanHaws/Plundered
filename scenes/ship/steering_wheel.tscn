@@ -15,15 +15,17 @@ size = Vector3(1.6854248, 1.8083496, 1.3911743)
 script = ExtResource("1_u0205")
 
 [node name="SteerSound" type="AudioStreamPlayer" parent="." unique_id=710704672]
+process_mode = 3
 stream = ExtResource("2_m2w2j")
+volume_db = -5.0
 pitch_scale = 0.5
 bus = &"SFX"
 
 [node name="SteeringSound" type="AudioStreamPlayer" parent="." unique_id=1600715203]
 process_mode = 3
 stream = ExtResource("3_qfkqd")
-volume_db = -3.0
-pitch_scale = 0.6
+volume_db = -11.0
+pitch_scale = 0.4
 bus = &"SFX"
 
 [node name="SailSound" type="AudioStreamPlayer" parent="." unique_id=232869917]
@@ -38,10 +40,10 @@ transform = Transform3D(1, 0, 0, 0, 0.99933475, 0.036469296, 0, -0.036469296, 0.
 
 [node name="wheel" parent="." unique_id=698593471 instance=ExtResource("3_0ihdb")]
 
-[node name="Wheel" parent="wheel" index="0" unique_id=855662408]
+[node name="Wheel" parent="wheel" index="0" unique_id=91892352]
 surface_material_override/0 = ExtResource("5_4taih")
 
-[node name="Stand" parent="wheel" index="1" unique_id=670559463]
+[node name="Stand" parent="wheel" index="1" unique_id=1605469391]
 surface_material_override/0 = ExtResource("4_u0205")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1550117771]

@@ -96,6 +96,7 @@ amount = 32
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
+fixed_fps = 60
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_3ajkw")
 draw_pass_1 = SubResource("SphereMesh_pakj8")
