@@ -3,7 +3,7 @@ extends CharacterBody3D
 @export var anim: AnimationPlayer 
 
 @export var speed_multiplier := 1.0
-@export var jump_height := 4.0
+@export var jump_height := 5.0
 @export var sens := 0.002
 @export var cam : Camera3D
 @export var gravity := 9.8
@@ -196,7 +196,7 @@ func _free_movement(_d):
 		
 func _physics_process(_delta):
 	
-	print(global_position)
+	#print(global_position)
 	
 	if not anim.current_animation in ["Death"]:
 		var dist := get_nearest_enemy_distance()

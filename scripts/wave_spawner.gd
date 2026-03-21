@@ -12,7 +12,7 @@ func set_distance_min_and_max(
 ) -> void:
 	distance_min = _new_distance_min
 	distance_max = _new_distance_max
-func set_sigil_pool(new_sigils: Array[String]) -> void:
+func set_sigil_pool(new_sigils: Array = []) -> void:
 	sigils = new_sigils.duplicate()
 
 @export_group("Boat")
@@ -76,6 +76,8 @@ func spawn_boat_out_of_view(
 				break
 
 	spawner.global_position = spawn_position
+	#await get_tree().physics_frame
+	#await get_tree().physics_frame
 	spawner.rotation.y = randf_range(0.0, TAU)
 	spawner.global_position.y = 0.0
 
@@ -85,18 +87,22 @@ func spawn_boat_out_of_view(
 	boat.cannon_cooldown_min = _cannon_cooldown_min
 	boat.cannon_cooldown_max= _cannon_cooldown_max
 	boat.cannon_aim = _cannon_aim
-	boat.sigil = sigils[randi() % sigils.size()]
+	
+	var sigil_name: String = sigils[randi() % sigils.size()]
+	var idx: int = boat.sigils.find(sigil_name)
+	if idx != -1: boat.sigil = idx
+	
 	boat.set_health_and_max_health(_health)
 	
-	print("Boat:",
-		" speed=", _speed,
-		" steer=", _steer,
-		" health=", _health,
-		" cooldown_min=", _cannon_cooldown_min,
-		" cooldown_max=", _cannon_cooldown_max,
-		" aim=", _cannon_aim,
-		" sigil=", boat.sigil
-	)
+	#print("Boat:",
+		#" speed=", _speed,
+		#" steer=", _steer,
+		#" health=", _health,
+		#" cooldown_min=", _cannon_cooldown_min,
+		#" cooldown_max=", _cannon_cooldown_max,
+		#" aim=", _cannon_aim,
+		#" sigil=", boat.sigil
+	#)
 	
 	
 	
@@ -113,8 +119,9 @@ func poll_next_wave() -> void:
 	if next_wave_pool.is_empty(): return
 	
 	var wave_name = next_wave_pool[randi() % next_wave_pool.size()]
-	play(wave_name)
-	#print('starting next wave: ', wave_name)
+	if has_animation(wave_name):
+		play(wave_name)
+		#print('starting next wave: ', wave_name)
 	
 @export_group("Auto Progress Difficulty")
 @export var auto_progress: bool = false

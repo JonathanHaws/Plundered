@@ -10,8 +10,26 @@
 [ext_resource type="Script" uid="uid://chqlwr5cyriq4" path="res://scripts/components/scene_spawner.gd" id="12_1y6gg"]
 [ext_resource type="PackedScene" uid="uid://cayjt37m1mgxu" path="res://scenes/ship/ship.tscn" id="13_csdq7"]
 
+[sub_resource type="Animation" id="Animation_1m6pm"]
+resource_name = "beer"
+length = 6.0333333
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaveSpawner")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [["turtle", ""]],
+"method": &"set_next_wave_pool"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_vx3d8"]
-resource_name = "easy1"
+resource_name = "doliphin"
 length = 10.0
 tracks/0/type = "method"
 tracks/0/imported = false
@@ -23,7 +41,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [["hard1", "hard1", "hard1", "hard1", "hard1"]],
+"args": [["whale", "", "", "", ""]],
 "method": &"set_next_wave_pool"
 }]
 }
@@ -37,7 +55,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [400.0, 80.0, 3000.0],
+"args": [1500.0, 150.0, 3000.0],
 "method": &"set_speed_steer_and_health"
 }]
 }
@@ -51,7 +69,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [8.0, 12.0, Vector2(5, 5)],
+"args": [6.0, 10.0, Vector2(5, 5)],
 "method": &"set_cannon_cooldown_and_aim"
 }]
 }
@@ -76,6 +94,20 @@ tracks/4/path = NodePath("WaveSpawner")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [["doliphin"]],
+"method": &"set_sigil_pool"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WaveSpawner")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(6),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -85,7 +117,7 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_mj8by"]
-resource_name = "hard1"
+resource_name = "shark"
 length = 10.0
 tracks/0/type = "method"
 tracks/0/imported = false
@@ -97,7 +129,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [["hard1", "hard1", "hard1", "hard1", "hard1"]],
+"args": [["shark", "", "", "", ""]],
 "method": &"set_next_wave_pool"
 }]
 }
@@ -150,23 +182,31 @@ tracks/4/path = NodePath("WaveSpawner")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(5.1666665, 7.4333334, 9.733334),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "values": [{
-"args": [],
-"method": &"spawn_boat_out_of_view"
-}, {
-"args": [],
-"method": &"spawn_boat_out_of_view"
-}, {
+"args": [["shark"]],
+"method": &"set_sigil_pool"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WaveSpawner")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(5.1666665),
+"transitions": PackedFloat32Array(1),
+"values": [{
 "args": [],
 "method": &"spawn_boat_out_of_view"
 }]
 }
 
-[sub_resource type="Animation" id="Animation_1m6pm"]
-resource_name = "tutorial"
-length = 6.0333333
+[sub_resource type="Animation" id="Animation_aml5y"]
+resource_name = "turtle"
+length = 10.0
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -177,16 +217,176 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [["easy1", "easy2"]],
+"args": [["doliphin", "", "", "", ""]],
 "method": &"set_next_wave_pool"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WaveSpawner")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [300.0, 50.0, 2000.0],
+"method": &"set_speed_steer_and_health"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WaveSpawner")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [7.0, 11.0, Vector2(5, 5)],
+"method": &"set_cannon_cooldown_and_aim"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WaveSpawner")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [300.0, 400.0],
+"method": &"set_distance_min_and_max"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WaveSpawner")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [["turtle"]],
+"method": &"set_sigil_pool"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WaveSpawner")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_boat_out_of_view"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_2rgyf"]
+resource_name = "whale"
+length = 10.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaveSpawner")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [["shark", "", "", "", ""]],
+"method": &"set_next_wave_pool"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WaveSpawner")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [400.0, 100.0, 6000.0],
+"method": &"set_speed_steer_and_health"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WaveSpawner")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [6.0, 10.0, Vector2(5, 5)],
+"method": &"set_cannon_cooldown_and_aim"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WaveSpawner")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [300.0, 400.0],
+"method": &"set_distance_min_and_max"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WaveSpawner")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [["whale"]],
+"method": &"set_sigil_pool"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WaveSpawner")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_boat_out_of_view"
 }]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1fnq3"]
 _data = {
-&"easy1": SubResource("Animation_vx3d8"),
-&"hard1": SubResource("Animation_mj8by"),
-&"tutorial": SubResource("Animation_1m6pm")
+&"beer": SubResource("Animation_1m6pm"),
+&"doliphin": SubResource("Animation_vx3d8"),
+&"shark": SubResource("Animation_mj8by"),
+&"turtle": SubResource("Animation_aml5y"),
+&"whale": SubResource("Animation_2rgyf")
 }
 
 [sub_resource type="Curve" id="Curve_vx3d8"]
@@ -194,7 +394,7 @@ _data = {
 [node name="WaveSpawner" type="AnimationPlayer" unique_id=296502299]
 process_mode = 3
 libraries/ = SubResource("AnimationLibrary_1fnq3")
-autoplay = &"hard1"
+autoplay = &"beer"
 script = ExtResource("1_ml4fb")
 curve_spawn_distance = ExtResource("5_ol15d")
 curve_random_spawn_distance = SubResource("Curve_vx3d8")

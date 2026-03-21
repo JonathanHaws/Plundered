@@ -82,6 +82,8 @@ func apply_boat_controls(forward: float, right: float, _delta: float) -> void:
 	
 func _ready():
 	
+	# replaces static meshses with animatable bodies as they carry momentu
+	
 	set_health_and_max_health(health)
 	
 	if name == player_ship_name: sigil = 0
@@ -132,11 +134,14 @@ func _ready():
 		#mesh.scale = Vector3.ONE * 20
 		#target.add_child(mesh)
 	
-	# replaces static meshses with animatable bodies as they carry momentu
+
+	
+	$RamArea.add_to_group(name + "_ram_area")
+	$HitArea.add_immune_group(name + "_ram_area")
+	
 	for mesh in $Ship.get_children():
 		for child in mesh.get_children():
 			if child is StaticBody3D:
-				#print('test')
 				var new_body = AnimatableBody3D.new()
 				new_body.sync_to_physics = false
 				new_body.transform = child.transform
@@ -145,11 +150,8 @@ func _ready():
 					child.remove_child(c)
 					new_body.add_child(c)
 				
-				mesh.add_child(new_body)
-				child.queue_free()
-	
-	$RamArea.add_to_group(name + "_ram_area")
-	$HitArea.add_immune_group(name + "_ram_area")
+				mesh.call_deferred("add_child", new_body)
+				child.call_deferred("queue_free")
 	
 	
 func _process(_delta):

@@ -391,7 +391,7 @@ _data = {
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ur7pv"]
 
-[node name="Player" type="CharacterBody3D" unique_id=2089436190 node_paths=PackedStringArray("anim", "cam", "fov_lerp", "audio_spawner", "STEP_UP_RAY") groups=["player", "player_ship"]]
+[node name="Player" type="CharacterBody3D" unique_id=2089436190 node_paths=PackedStringArray("anim", "cam", "fov_lerp", "audio_spawner", "STEP_UP_RAY") groups=["player"]]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 script = ExtResource("1_smehm")
 anim = NodePath("State")
@@ -516,8 +516,8 @@ shape = SubResource("CapsuleShape3D_0auqf")
 debug_color = Color(0.9719481, 0.8566966, 0.8773978, 1)
 
 [node name="RayCast3D" type="RayCast3D" parent="CollisionShape3D" unique_id=383091343]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1141958e-08, -0.12007946, -0.4836716)
-target_position = Vector3(0, -0.63, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, -0.484)
+target_position = Vector3(0, -0.7, 0)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=808998871]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2607082, 0)
