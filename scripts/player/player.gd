@@ -19,7 +19,6 @@ var pitch := 0.0
 var mouse_delta := Vector2.ZERO
 var in_combat_music: bool = false
 
-
 @export var speed := 1.9
 @export var sprint_multiplier := 2.0
 @export var max_speed := 2.0
@@ -30,16 +29,21 @@ var in_combat_music: bool = false
 
 @export_group("StepUp")
 @export var STEP_UP_RAY: RayCast3D
-@onready var step_up_initial_transform: Transform3D = transform 
+@onready var step_up_y: float = STEP_UP_RAY.position.y
+@onready var step_up_z: float = STEP_UP_RAY.position.z
 func try_step_up() -> void:
 	
-	##STEP_UP_RAY.position = get_flat_forward_vector(get_movement_vector())
+	var dir := -Vector3(velocity.x, 0, velocity.z) 
+	if dir.length() > 0.01:
+		dir = dir.normalized() * step_up_z
+		STEP_UP_RAY.global_position = global_position + (dir) 
+		STEP_UP_RAY.position.y = step_up_y
 
 	if not STEP_UP_RAY: return
 	if not STEP_UP_RAY.is_colliding(): return
 	if velocity.y > 1: return # Jumping ignore
 	
-	
+
 	var hit_y: float = STEP_UP_RAY.get_collision_point().y
 	var body_y: float = global_position.y
 	if hit_y <= body_y: return
@@ -110,9 +114,6 @@ func is_cannon_balls() -> bool:
 	return get_tree().get_nodes_in_group("cannon_balls").size() > 0
 
 func _free_movement(_d):
-	
-	
-	
 	
 	try_step_up()
 	

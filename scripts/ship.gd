@@ -76,7 +76,6 @@ func apply_boat_controls(forward: float, right: float, _delta: float) -> void:
 	
 func _ready():
 	
-	sigil = randi() % sigils.size()
 	if name == player_ship_name: sigil = 0
 	
 	add_to_group('boats')

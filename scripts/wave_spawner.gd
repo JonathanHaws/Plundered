@@ -45,7 +45,8 @@ func spawn_boat_out_of_view(
 	boat.cannon_cooldown = _cannon_cool_down
 	boat.cannon_random_cooldown = _cannon_random_cooldown
 	boat.cannon_random_aim = _cannon_aim
-
+	boat.sigil = randi() % boat.sigils.size()
+	
 @export_group("Waves")	
 @export var next_wave_pool: Array = []
 func is_wave_cleared() -> bool:
