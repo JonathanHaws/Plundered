@@ -48,27 +48,27 @@ func _ready() -> void:
 	
 func _process(_delta: float) -> void:
 		
-	if boat.name == "PlayerShip": # Can Only Aim Your Ship
-		if Input.is_action_just_pressed("interact"):
-			if aiming:
-				aiming = false
-				player_anim.play("Idle")
-				player.speed_multiplier = 1
-				player.mouse_delta = Vector2.ZERO
-				player.global_position = $AimSpot.global_position
-				$cannon/Barrel/Camera3D.current = false
-					
-			elif in_range_of_aiming: 
-				aiming = true
-				$AimSound.play()
-				$cannon/Barrel/Camera3D.current = true
-				player_anim.play("Aim")
-				player.speed_multiplier = 0
-				player.global_position = $AimSpot.global_position
-				#print('test')
-		
 	ai_aim(_delta)	
-	aim()
+	aim()	
+		
+	if boat.name == "PlayerShip": # Can Only Aim Your Ship
+		
+		if Input.is_action_just_pressed("interact") and not aiming and in_range_of_aiming: 
+			aiming = true
+			$AimSound.play()
+			$cannon/Barrel/Camera3D.current = true
+			player_anim.play("Aim")
+			player.speed_multiplier = 0
+			player.global_position = $AimSpot.global_position
+			#print('test')
+			
+		elif Input.is_action_just_pressed("stop_interacting") and aiming:
+			aiming = false
+			player_anim.play("Idle")
+			player.speed_multiplier = 1
+			player.mouse_delta = Vector2.ZERO
+			player.global_position = $AimSpot.global_position
+			$cannon/Barrel/Camera3D.current = false
 		
 func _input(event):
 	if not aiming: return
@@ -130,6 +130,6 @@ func ai_aim(delta: float) -> void:
 	
 func aim() -> void:
 	if not aiming: return
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("shoot"):
 		player.global_position = $AimSpot.global_position
 		$AnimationPlayer.play("fire")	

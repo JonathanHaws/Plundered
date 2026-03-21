@@ -17,6 +17,8 @@ var was_on_floor : bool = true
 var ignore_first_was_on_floor : bool = true
 var pitch := 0.0
 var mouse_delta := Vector2.ZERO
+var in_combat_music: bool = false
+
 
 @export var speed := 1.9
 @export var sprint_multiplier := 2.0
@@ -99,7 +101,10 @@ func get_nearest_enemy_distance() -> float:
 	return min_distance
 
 func is_wave_cleared() -> bool:
-	return get_tree().get_nodes_in_group("boats").size() <= 1
+	var count := 0
+	for b in get_tree().get_nodes_in_group("boats"):
+		if not b.sunk:	count += 1
+	return count <= 1
 
 func is_cannon_balls() -> bool:
 	return get_tree().get_nodes_in_group("cannon_balls").size() > 0
@@ -193,19 +198,19 @@ func _physics_process(_delta):
 	if not anim.current_animation in ["Death"]:
 		var dist := get_nearest_enemy_distance()
 
-		if dist < 40.0 or (is_cannon_balls() and dist < 80.0):
-			if not $Audio/CombatMusic.playing:
-				var t := create_tween()
-				t.tween_property($Audio/CalmMusic, "volume_db", -40.0, 0.6)
-				t.tween_callback($Audio/CalmMusic.stop)
-				$Audio/CombatMusic.volume_db = 0.0
+		if dist < 75.0 or (is_cannon_balls() and dist < 100.0):
+			if not in_combat_music:
+				in_combat_music = true
+				var t := create_tween().set_parallel(true)
+				t.tween_property($Audio/CalmMusic, "volume_db", -40.0, 5.0)
+				$Audio/CombatMusic.volume_db = -40.0
 				$Audio/CombatMusic.play()
-				t.tween_property($Audio/CombatMusic, "volume_db", 0.0, 0.6)
+				t.tween_property($Audio/CombatMusic, "volume_db", 0.0, 5.0)
 		else:
-			if not $Audio/CalmMusic.playing and is_wave_cleared():
-				var t := create_tween()
+			if in_combat_music and is_wave_cleared():
+				in_combat_music = false
+				var t := create_tween().set_parallel(true)
 				t.tween_property($Audio/CombatMusic, "volume_db", -40.0, 6.0)
-				t.tween_callback($Audio/CombatMusic.stop)
 				$Audio/CalmMusic.volume_db = -40.0
 				$Audio/CalmMusic.play()
 				t.tween_property($Audio/CalmMusic, "volume_db", 0.0, 0.6)
