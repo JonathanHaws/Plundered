@@ -10,9 +10,19 @@
 [ext_resource type="Environment" uid="uid://chlcidt7t3gdg" path="res://shaders/sky.tres" id="6_p7dfi"]
 [ext_resource type="PackedScene" uid="uid://dwa335y6j7a7" path="res://blender/island.blend" id="7_ftju0"]
 [ext_resource type="Material" uid="uid://d17vei8pbuxpa" path="res://shaders/materials/sand.tres" id="7_qtqbj"]
-[ext_resource type="Material" uid="uid://4wmac4esdrtt" path="res://shaders/materials/wood.tres" id="8_p7dfi"]
-[ext_resource type="Material" uid="uid://b5ia2dbqqipj6" path="res://shaders/materials/grass.tres" id="9_8ke6f"]
 [ext_resource type="Script" uid="uid://bb314me35cbis" path="res://scripts/menu/redirect.gd" id="9_jxvd6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqu5n"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.1, 0.1, 0.1, 0.29803923)
+border_color = Color(0, 0, 0, 0)
+border_blend = true
+corner_radius_bottom_right = 62
+expand_margin_left = 20.0
+expand_margin_top = 25.0
 
 [sub_resource type="Animation" id="Animation_ftju0"]
 length = 0.001
@@ -71,11 +81,11 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../ColorRect:modulate")
+tracks/2/path = NodePath("../BountyCounter:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 2.3769248, 4.110258),
+"times": PackedFloat32Array(-0.010258164, 2.3666666, 4.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -184,25 +194,27 @@ volume_db = -20.0
 autoplay = true
 bus = &"SFX"
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=640228312]
+[node name="BountyCounter" type="ProgressBar" parent="." unique_id=1559732256]
 modulate = Color(1, 1, 1, 0)
-offset_right = 300.0
-offset_bottom = 36.1
-size_flags_horizontal = 3
-color = Color(0.19, 0.19, 0.19, 0.8784314)
+offset_right = 262.0
+offset_bottom = 46.0
+theme_override_styles/background = SubResource("StyleBoxFlat_qqu5n")
+show_percentage = false
 script = ExtResource("1_jxvd6")
 
-[node name="Bounty" type="HBoxContainer" parent="ColorRect" unique_id=1538725228]
+[node name="Bounty" type="HBoxContainer" parent="BountyCounter" unique_id=1538725228]
 layout_mode = 0
-offset_right = 217.0
-offset_bottom = 23.0
+offset_left = 6.0
+offset_top = 8.0
+offset_right = 293.0
+offset_bottom = 32.0
 
-[node name="Poster" type="Label" parent="ColorRect/Bounty" unique_id=97914123]
+[node name="Poster" type="Label" parent="BountyCounter/Bounty" unique_id=97914123]
 layout_mode = 2
 theme = ExtResource("3_p7dfi")
-text = "WANTED DEAD OR ALIVE"
+text = "FINAL BOUNTY -"
 
-[node name="Bounty" type="Label" parent="ColorRect/Bounty" unique_id=2035885012]
+[node name="Bounty" type="Label" parent="BountyCounter/Bounty" unique_id=2035885012]
 layout_mode = 2
 theme = ExtResource("3_p7dfi")
 text = " 0$"
@@ -241,20 +253,8 @@ autoplay = &"fade_in"
 [node name="island" parent="." unique_id=1265616051 instance=ExtResource("7_ftju0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9822388, -0.6415441, -0.669152)
 
-[node name="Island" parent="island" index="0" unique_id=43970752]
+[node name="Island" parent="island" index="0" unique_id=1635187372]
 material_override = ExtResource("7_qtqbj")
-
-[node name="Cylinder" parent="island" index="1" unique_id=868292886]
-material_override = ExtResource("8_p7dfi")
-
-[node name="Cone" parent="island" index="2" unique_id=1276725809]
-surface_material_override/0 = ExtResource("9_8ke6f")
-
-[node name="Cone_001" parent="island" index="3" unique_id=1945724176]
-surface_material_override/0 = ExtResource("9_8ke6f")
-
-[node name="Cone_002" parent="island" index="4" unique_id=1570025629]
-surface_material_override/0 = ExtResource("9_8ke6f")
 
 [node name="Redirect" type="Control" parent="." unique_id=1984340890]
 layout_mode = 3

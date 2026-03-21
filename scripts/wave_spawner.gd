@@ -1,6 +1,5 @@
 extends AnimationPlayer
 @onready var spawner: Node3D = $SceneSpawner
-
 var boat_presets = {
 	"beer": {
 		"speed": 100,
@@ -77,8 +76,6 @@ func spawn_preset_boat(preset_name: String) -> void:
 		preset.get("cannon_aim", Vector2(5, 5)),
 		preset.get("sigils", [preset_name])
 	)
-
-
 
 @export_group("Spawning")
 func get_random_backward_direction(node:Node3D) -> Vector3:

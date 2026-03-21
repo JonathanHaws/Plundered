@@ -38,9 +38,9 @@ script = ExtResource("2_6cwgu")
 
 [node name="BountyCounter" parent="BountyCounter" unique_id=1926806445 instance=ExtResource("2_r2ql0")]
 layout_mode = 0
-offset_left = 11.0
+offset_left = 15.0
 offset_top = 12.0
-offset_right = 414.0
+offset_right = 418.0
 offset_bottom = 47.0
 
 [node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=724377844]
