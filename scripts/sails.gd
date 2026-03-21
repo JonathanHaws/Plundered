@@ -38,7 +38,6 @@ func poll() -> void:
 	apply_sigil(middle_sails, boat.sigil)
 	apply_sigil(back_sails, boat.sigil)
 	
-	print(boat.sigil)
 	#print(boat.sigil)
 	
 func apply_sigil(sail_names: Array[String], sail_index: int = 0) -> void:
@@ -67,8 +66,10 @@ func apply_sigil(sail_names: Array[String], sail_index: int = 0) -> void:
 				new_mat.set_shader_parameter("has_sigil_texture", false)
 		
 		if not sail_colors.size() == 0:
-			print('assigning color: ', sail_colors[color_index])
+
 			new_mat.set_shader_parameter("background_color", sail_colors[color_index])
+			#print('assigning color: ', sail_colors[color_index])
+		
 		#print('getting here')
 
 		

@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://safr0287hjda"]
 
 [ext_resource type="AudioStream" uid="uid://0eteiw5oeit" path="res://audio/Ambience.ogg" id="1_r2ql0"]
-[ext_resource type="PackedScene" uid="uid://bkp7rr6v8cdfx" path="res://scenes/maps/bounty_counter.tscn" id="2_r2ql0"]
+[ext_resource type="Script" uid="uid://cljkg1218oi1y" path="res://scenes/ui/ui_scale.gd" id="2_6cwgu"]
+[ext_resource type="PackedScene" uid="uid://bkp7rr6v8cdfx" path="res://scenes/ui/bounty_counter.tscn" id="2_r2ql0"]
+[ext_resource type="PackedScene" uid="uid://bl5ck8y65kk5l" path="res://scenes/ui/enemy_sigils.tscn" id="3_3jjmi"]
 [ext_resource type="PackedScene" uid="uid://bhluruq521f8w" path="res://scenes/maps/ocean.tscn" id="4_rksl4"]
 [ext_resource type="Environment" uid="uid://chlcidt7t3gdg" path="res://shaders/sky.tres" id="5_4848d"]
 [ext_resource type="PackedScene" uid="uid://1kv0584ypolt" path="res://scenes/wave_spawner.tscn" id="6_nrn1y"]
@@ -11,15 +13,41 @@
 [ext_resource type="PackedScene" uid="uid://butlqj718j0gj" path="res://scenes/ui/main.tscn" id="10_24y3c"]
 [ext_resource type="PackedScene" uid="uid://be3qjeh20v4i2" path="res://scenes/barrel.tscn" id="11_3jjmi"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6cwgu"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.1, 0.1, 0.1, 0.29803923)
+border_color = Color(0, 0, 0, 0)
+border_blend = true
+corner_radius_bottom_right = 62
+expand_margin_left = 20.0
+expand_margin_top = 25.0
+
 [node name="Sea" type="Node3D" unique_id=214513969]
+
+[node name="EnemySigils" parent="." unique_id=263343557 instance=ExtResource("3_3jjmi")]
+
+[node name="BountyCounter" type="ProgressBar" parent="." unique_id=776972734]
+offset_right = 290.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_6cwgu")
+show_percentage = false
+script = ExtResource("2_6cwgu")
+
+[node name="BountyCounter" parent="BountyCounter" unique_id=1926806445 instance=ExtResource("2_r2ql0")]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 12.0
+offset_right = 414.0
+offset_bottom = 47.0
 
 [node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=724377844]
 process_mode = 3
 stream = ExtResource("1_r2ql0")
 autoplay = true
 bus = &"SFX"
-
-[node name="ColorRect" parent="." unique_id=1926806445 instance=ExtResource("2_r2ql0")]
 
 [node name="Ocean" parent="." unique_id=1092928726 instance=ExtResource("4_rksl4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1466732, 0)

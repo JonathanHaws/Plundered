@@ -12,8 +12,8 @@
 
 [node name="Sails" type="Node3D" unique_id=620150282]
 script = ExtResource("1_e3m1m")
-sail_textures = Array[Texture2D]([null, ExtResource("2_v1dfq"), ExtResource("3_es8wy"), ExtResource("4_n4apx"), ExtResource("5_jjh78"), ExtResource("6_4ueoe")])
-sail_colors = Array[Color]([Color(0.28925207, 0.2892521, 0.28925207, 1), Color(0.5019608, 0.4627451, 0.2627451, 1), Color(0.26666668, 0.33333334, 0.5019608, 1), Color(0.33333334, 0.5058824, 0.26666668, 1), Color(0.50980395, 0.3764706, 0.27058825, 1), Color(0.4862745, 0.27058825, 0.2509804, 1)])
+sail_textures = Array[Texture2D]([null, ExtResource("2_v1dfq"), ExtResource("3_es8wy"), ExtResource("6_4ueoe"), ExtResource("5_jjh78"), ExtResource("4_n4apx")])
+sail_colors = Array[Color]([Color(0.28925207, 0.2892521, 0.28925207, 1), Color(0.5019608, 0.4627451, 0.2627451, 1), Color(0.26666668, 0.33333334, 0.5019608, 1), Color(0.4862745, 0.27058825, 0.2509804, 1), Color(0.50980395, 0.3764706, 0.27058825, 1), Color(0.33333334, 0.5058824, 0.26666668, 1)])
 
 [node name="sails" parent="." unique_id=1443422415 instance=ExtResource("2_66l7g")]
 

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bl5ck8y65kk5l"]
+
+[ext_resource type="Script" uid="uid://dtkku1ad4tjkc" path="res://scripts/enemy_sigils.gd" id="1_c8wot"]
+[ext_resource type="Texture2D" uid="uid://dlpcwp6g4sku1" path="res://textures/sigils/beer.png" id="2_pynyt"]
+[ext_resource type="Texture2D" uid="uid://b1h8tkc3p88tm" path="res://textures/sigils/turtle.png" id="3_1i7sx"]
+[ext_resource type="Texture2D" uid="uid://c7qnbm7kc4ek3" path="res://textures/sigils/shark.png" id="4_7i40w"]
+[ext_resource type="Texture2D" uid="uid://cc18cp8dx8s2y" path="res://textures/sigils/whale.png" id="5_kqykd"]
+[ext_resource type="Texture2D" uid="uid://cpcs6hsxx8kos" path="res://textures/sigils/doliphin.png" id="6_lgsu2"]
+
+[node name="EnemySigils" type="HBoxContainer" unique_id=382708925]
+offset_right = 414.0
+offset_bottom = 159.0
+script = ExtResource("1_c8wot")
+sail_textures = Array[Texture2D]([null, ExtResource("2_pynyt"), ExtResource("3_1i7sx"), ExtResource("4_7i40w"), ExtResource("5_kqykd"), ExtResource("6_lgsu2")])
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1318225546]
+layout_mode = 2
+texture = ExtResource("6_lgsu2")
+expand_mode = 2
