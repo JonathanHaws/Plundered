@@ -31,7 +31,7 @@ var player_anim: AnimationPlayer
 
 @export_group("Ai")
 func get_random_cooldown() -> float:
-	return get_parent().cannon_cooldown + (randf() * get_parent().cannon_random_cooldown)
+	return randf_range(get_parent().cannon_cooldown_min, get_parent().cannon_cooldown_max)
 var ai_aim_offset = Vector3(0, 2.0, 0)
 var ai_cooldown_remaining: float
 
@@ -111,12 +111,12 @@ func ai_aim(delta: float) -> void:
 	var aim_pos = target + player_ship.linear_velocity * t + Vector3(0, 0.5*g*t*t, 0)
 
 	stand.look_at(aim_pos, Vector3.UP)
-	stand.rotation_degrees.y += randf_range(-get_parent().cannon_random_aim.y, get_parent().cannon_random_aim.y)
+	stand.rotation_degrees.y += randf_range(-get_parent().cannon_aim.y, get_parent().cannon_aim.y)
 	var optimal_stand_rotation = stand.rotation_degrees.y
 	clamp_aim()
 
 	barrel.look_at(aim_pos, Vector3.UP)
-	barrel.rotation_degrees.x += randf_range(-get_parent().cannon_random_aim.x, get_parent().cannon_random_aim.x)
+	barrel.rotation_degrees.x += randf_range(-get_parent().cannon_aim.x, get_parent().cannon_aim.x)
 	var optimal_barrel_rotation = barrel.rotation_degrees.x
 	clamp_aim()
 

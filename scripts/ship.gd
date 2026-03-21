@@ -1,11 +1,17 @@
 extends RigidBody3D
 
 @export_group('Stats')
-@export var speed: float = 1200
-@export var steer: float = 160
-@export var cannon_cooldown: float = 8.0 ## Minimum duration enemy ships will wait between shots
-@export var cannon_random_cooldown: float = 4.0 ## Add this to the mimum duration and its maximum duration
-@export var cannon_random_aim: Vector2 = Vector2(5, 5) ## How inaccurate Enemies shots will be. 
+@export var health: float = 1000.0
+@export var speed: float = 1000
+@export var steer: float = 100
+@export var cannon_cooldown_min: float = 8.0 ## Minimum duration enemy ships will wait between shots
+@export var cannon_cooldown_max: float = 12.0 ## Add this to the mimum duration and its maximum duration
+@export var cannon_aim: Vector2 = Vector2(5, 5) ## How inaccurate Enemies shots will be. 
+func set_health_and_max_health(value: float) -> void:
+	health = value
+	$HitArea.HEALTH = health
+	$HitArea.MAX_HEALTH = health
+
 
 @export var sigil: int = 0
 var sigils: Array = ["none", "beer", "doliphin", "shark", "turtle", "whale", "jolly_roger"]
@@ -48,15 +54,15 @@ func on_ship_sunk() -> void:
 		$Audio/Bounty.play()
 		
 		
-	for i in 5:
-		var loot = $HitArea/LootSpawner.spawn()	# spawn loot
-		if loot:
-			
-			#$RamArea.add_immune_group("loot_hitarea")
-			
-			loot.get_node("HitShape").add_immune_group("enemy_ram_area")
-			loot.apply_random_force()
-			#print(loot.global_position)
+		for i in 5:
+			var loot = $HitArea/LootSpawner.spawn()	# spawn loot
+			if loot:
+				
+				#$RamArea.add_immune_group("loot_hitarea")
+				
+				loot.get_node("HitShape").add_immune_group("enemy_ram_area")
+				loot.apply_random_force()
+				#print(loot.global_position)
 
 
 func impact(strength: float) -> void:
@@ -76,6 +82,8 @@ func apply_boat_controls(forward: float, right: float, _delta: float) -> void:
 	
 func _ready():
 	
+	set_health_and_max_health(health)
+	
 	if name == player_ship_name: sigil = 0
 	
 	add_to_group('boats')
@@ -89,6 +97,7 @@ func _ready():
 		Save.save_game()
 	
 	if name != player_ship_name:
+		$Leaks.queue_free()
 		$Targets.queue_free()
 		$RamArea.add_to_group("enemy_ram_area")
 	

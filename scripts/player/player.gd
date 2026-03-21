@@ -196,6 +196,8 @@ func _free_movement(_d):
 		
 func _physics_process(_delta):
 	
+	print(global_position)
+	
 	if not anim.current_animation in ["Death"]:
 		var dist := get_nearest_enemy_distance()
 
@@ -214,7 +216,7 @@ func _physics_process(_delta):
 				t.tween_property($Audio/CombatMusic, "volume_db", -40.0, 6.0)
 				$Audio/CalmMusic.volume_db = -40.0
 				$Audio/CalmMusic.play()
-				t.tween_property($Audio/CalmMusic, "volume_db", 0.0, 0.6)
+				t.tween_property($Audio/CalmMusic, "volume_db", 0.0, 6.0)
 		
 	if anim.current_animation in ["Steer", "God"]:
 		_move_camera()
