@@ -1,7 +1,13 @@
 // NOTE: Shader automatically converted from Godot Engine 4.6.stable's StandardMaterial3D.
 
+
+
 shader_type spatial;
 render_mode blend_mix, depth_draw_always, cull_disabled, diffuse_burley, specular_schlick_ggx;
+
+uniform vec3 background_color : source_color = vec3(0.8, 0.8, 0.8);
+uniform bool has_sigil_texture = false;
+
 group_uniforms regular_shader_material; // Converted from regular shader to make use of triplanar mapping
 uniform vec4 albedo : source_color;
 uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
@@ -62,9 +68,13 @@ vec4 triplanar_texture(sampler2D p_sampler, vec3 p_weights, vec3 p_triplanar_pos
 }
 
 void fragment() {
-	// Standard
-	vec4 albedo_tex = texture(texture_albedo, UV);
-	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	ALBEDO = background_color; // sail color and sigil
+	vec4 albedo_tex = texture(texture_albedo, UV); 
+	if (has_sigil_texture) { // only apply albedo color modulation if there is a texture
+		vec4 albedo_tex = texture(texture_albedo, UV);
+		ALBEDO += albedo.rgb * albedo_tex.rgb;
+	}
+
 	float metallic_tex = dot(texture(texture_metallic, UV), metallic_texture_channel);
 	METALLIC = metallic_tex * metallic;
 	SPECULAR = specular;

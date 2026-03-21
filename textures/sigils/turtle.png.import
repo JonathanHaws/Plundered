@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhx7oc8w4q12x"
-path="res://.godot/imported/doliphin.jpg-70d3f25e1c8df1ae06ef72171f5a5e9d.ctex"
+uid="uid://b1h8tkc3p88tm"
+path="res://.godot/imported/turtle.png-8ccab1c73fb52a143be9db44845e4e70.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/doliphin.jpg"
-dest_files=["res://.godot/imported/doliphin.jpg-70d3f25e1c8df1ae06ef72171f5a5e9d.ctex"]
+source_file="res://textures/sigils/turtle.png"
+dest_files=["res://.godot/imported/turtle.png-8ccab1c73fb52a143be9db44845e4e70.ctex"]
 
 [params]
 

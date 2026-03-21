@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://cmb4wdnkr65if"]
 
-[ext_resource type="Shader" uid="uid://bck3ws21ssm" path="res://shaders/custom/crayon_back_face.gdshader" id="1_pftem"]
+[ext_resource type="Shader" uid="uid://bck3ws21ssm" path="res://shaders/custom/sail.gdshader" id="1_pftem"]
 [ext_resource type="Texture2D" uid="uid://2rhsqc0irh3v" path="res://textures/crayon_2.jpg" id="2_hi7bf"]
 [ext_resource type="Texture2D" uid="uid://b07uenqitqt1e" path="res://textures/crayon_1.jpg" id="3_e2mmd"]
 

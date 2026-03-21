@@ -1,7 +1,8 @@
 extends Node3D
 @export var boat: RigidBody3D
 @export var sail_textures: Array[Texture2D] = [] 
-@onready var shader_param_name: String = "texture_albedo" 
+@export var sail_colors: Array[Color] = []	
+
 @onready var front_sails: Array[String] = [
 	"MediumFront",
 	"BigFront"]
@@ -12,8 +13,13 @@ extends Node3D
 @onready var back_sails: Array[String] = [
 	"MediumBack",
 	"BigBack"]
-
-var sigil: String = "none"
+func _delete_extra_sails(sail_names: Array[String]) -> void:
+	while sail_names.size() > 1:
+		var index = randi() % sail_names.size()
+		var sail_node = $sails.get_node_or_null(sail_names[index])
+		if sail_node and sail_node is MeshInstance3D:
+			sail_node.queue_free()
+		sail_names.remove_at(index)
 
 func _ready() -> void:
 	if not boat: boat = get_parent()
@@ -22,35 +28,20 @@ func _ready() -> void:
 	_delete_extra_sails(front_sails)
 	_delete_extra_sails(middle_sails)
 	_delete_extra_sails(back_sails)
-	
-	#apply_texture(front_sails, randi() % sail_textures.size())
-	#apply_texture(middle_sails, randi() % sail_textures.size())
-	#apply_texture(back_sails, randi() % sail_textures.size())
 
 func _physics_process(_delta: float) -> void:
 	poll()
 
 func poll() -> void:
 	if not boat: return
+	apply_sigil(front_sails, boat.sigil)
+	apply_sigil(middle_sails, boat.sigil)
+	apply_sigil(back_sails, boat.sigil)
+	
+	print(boat.sigil)
 	#print(boat.sigil)
 	
-	apply_texture(front_sails, boat.sigil)
-	apply_texture(middle_sails, boat.sigil)
-	apply_texture(back_sails, boat.sigil)
-
-func _delete_extra_sails(sail_names: Array[String]) -> void:
-	while sail_names.size() > 1:
-		var index = randi() % sail_names.size()
-		var sail_node = $sails.get_node_or_null(sail_names[index])
-		if sail_node and sail_node is MeshInstance3D:
-			sail_node.queue_free()
-		sail_names.remove_at(index)
-		
-func apply_texture(sail_names: Array[String], texture_index: int = 0) -> void:
-	if sail_textures.size() == 0: return
-
-	texture_index = clamp(texture_index, 0, sail_textures.size() - 1)
-	
+func apply_sigil(sail_names: Array[String], sail_index: int = 0) -> void:
 	
 	for ship_name in sail_names:
 		var sail_node = $sails.get_node_or_null(ship_name)
@@ -65,9 +56,19 @@ func apply_texture(sail_names: Array[String], texture_index: int = 0) -> void:
 		var new_mat = mat.duplicate() as ShaderMaterial
 		sail_node.set_surface_override_material(0, new_mat)
 
-		new_mat.set_shader_parameter(shader_param_name, sail_textures[texture_index])
-		#print('getting here')
+		var texture_index = clamp(sail_index, 0, sail_textures.size() - 1)
+		var color_index = clamp(sail_index, 0, sail_colors.size() - 1)
 
+		if not sail_textures.size() == 0:
+			if sail_textures[texture_index]:
+				new_mat.set_shader_parameter("texture_albedo", sail_textures[texture_index])
+				new_mat.set_shader_parameter("has_sigil_texture", true)
+			else:
+				new_mat.set_shader_parameter("has_sigil_texture", false)
 		
+		if not sail_colors.size() == 0:
+			print('assigning color: ', sail_colors[color_index])
+			new_mat.set_shader_parameter("background_color", sail_colors[color_index])
+		#print('getting here')
 
 		

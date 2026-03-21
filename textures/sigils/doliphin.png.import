@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c404m47i27i5d"
-path="res://.godot/imported/beer.jpg-e5d88d40a2812e04b29f92c6206ad7b2.ctex"
+uid="uid://cpcs6hsxx8kos"
+path="res://.godot/imported/doliphin.png-9b5033e6adf6bc3babc2682b891e082e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/beer.jpg"
-dest_files=["res://.godot/imported/beer.jpg-e5d88d40a2812e04b29f92c6206ad7b2.ctex"]
+source_file="res://textures/sigils/doliphin.png"
+dest_files=["res://.godot/imported/doliphin.png-9b5033e6adf6bc3babc2682b891e082e.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddknite7rvtbo"
-path="res://.godot/imported/turtle.jpg-c6df265c2c004a07da95344345444ba8.ctex"
+uid="uid://dlpcwp6g4sku1"
+path="res://.godot/imported/beer.png-573f4a9b8cb21f6faba86ded58601445.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/turtle.jpg"
-dest_files=["res://.godot/imported/turtle.jpg-c6df265c2c004a07da95344345444ba8.ctex"]
+source_file="res://textures/sigils/beer.png"
+dest_files=["res://.godot/imported/beer.png-573f4a9b8cb21f6faba86ded58601445.ctex"]
 
 [params]
 

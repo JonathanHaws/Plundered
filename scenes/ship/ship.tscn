@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://cjm1uedwordvb" path="res://audio/destruction/destruction.ogg" id="11_3lg4r"]
 [ext_resource type="PackedScene" uid="uid://5gu0itei5s6b" path="res://scenes/ship/cannon/cannon.tscn" id="12_2xkf5"]
 [ext_resource type="PackedScene" uid="uid://dhiwjfe1tbiqe" path="res://scenes/ship/leak.tscn" id="13_0616w"]
+[ext_resource type="AudioStream" uid="uid://dyc1hsgdn3bf5" path="res://audio/destruction/final_blow.ogg" id="14_r75st"]
 [ext_resource type="Script" uid="uid://b061ha4j5c6lt" path="res://scripts/components/hurt_shape.gd" id="15_roibb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2gnfn"]
@@ -90,6 +91,20 @@ tracks/4/keys = {
 "values": [{
 "args": [8.0],
 "method": &"impact"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Audio/FinalBlow")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
 }]
 }
 
@@ -245,6 +260,15 @@ script = ExtResource("9_woufe")
 process_mode = 3
 stream = ExtResource("11_3lg4r")
 unit_size = 50.0
+max_distance = 4000.0
+bus = &"SFX"
+
+[node name="FinalBlow" type="AudioStreamPlayer3D" parent="Audio" unique_id=1995068322]
+process_mode = 3
+stream = ExtResource("14_r75st")
+unit_size = 50.0
+max_db = -3.0
+pitch_scale = 0.7
 max_distance = 4000.0
 bus = &"SFX"
 

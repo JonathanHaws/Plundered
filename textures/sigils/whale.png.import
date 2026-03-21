@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpo3d423dbigy"
-path="res://.godot/imported/whale.jpg-822760693fa202a01aa0d6d0665df445.ctex"
+uid="uid://cc18cp8dx8s2y"
+path="res://.godot/imported/whale.png-e2a49a07524d3c73e1441b693e4202bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/whale.jpg"
-dest_files=["res://.godot/imported/whale.jpg-822760693fa202a01aa0d6d0665df445.ctex"]
+source_file="res://textures/sigils/whale.png"
+dest_files=["res://.godot/imported/whale.png-e2a49a07524d3c73e1441b693e4202bb.ctex"]
 
 [params]
 
