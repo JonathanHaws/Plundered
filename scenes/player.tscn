@@ -516,8 +516,8 @@ shape = SubResource("CapsuleShape3D_0auqf")
 debug_color = Color(0.9719481, 0.8566966, 0.8773978, 1)
 
 [node name="RayCast3D" type="RayCast3D" parent="CollisionShape3D" unique_id=383091343]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, -0.484)
-target_position = Vector3(0, -0.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.670486e-10, -0.0024154782, -0.47560292)
+target_position = Vector3(0, -0.75, 0)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=808998871]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2607082, 0)

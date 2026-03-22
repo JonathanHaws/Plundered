@@ -7,7 +7,7 @@
 
 [sub_resource type="Animation" id="Animation_rd538"]
 resource_name = "armada"
-length = 30.0
+length = 60.0
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -29,7 +29,7 @@ tracks/1/path = NodePath("WaveSpawner")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(2.4, 5.4333334, 8.7, 12.166667, 15.133333),
+"times": PackedFloat32Array(2.4, 16.9, 29.066668, 41.3, 54.966667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "values": [{
 "args": ["beer"],

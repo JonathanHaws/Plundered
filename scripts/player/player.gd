@@ -33,7 +33,7 @@ var in_combat_music: bool = false
 @onready var step_up_z: float = STEP_UP_RAY.position.z
 func try_step_up() -> void:
 	
-	var dir := -Vector3(velocity.x, 0, velocity.z) 
+	var dir := -Vector3(get_flat_forward_vector(get_movement_vector())) 
 	if dir.length() > 0.01:
 		dir = dir.normalized() * step_up_z
 		STEP_UP_RAY.global_position = global_position + (dir) 
