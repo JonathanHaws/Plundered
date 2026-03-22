@@ -86,6 +86,9 @@ func _ready():
 	
 	# replaces static meshses with animatable bodies as they carry momentu
 	
+	if name != player_ship_name: # only have crow on player ship
+		$Ship/crow.queue_free()
+	
 	set_health_and_max_health(health)
 	
 	if name == player_ship_name: sigil = 0

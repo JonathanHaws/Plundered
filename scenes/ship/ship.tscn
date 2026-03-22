@@ -10,10 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://3qle3gc6u1tk" path="res://scenes/ship/sails.tscn" id="6_8ks32"]
 [ext_resource type="PackedScene" uid="uid://bpn1burwm3wqq" path="res://blender/Ship.blend" id="6_q6f52"]
 [ext_resource type="Material" uid="uid://4wmac4esdrtt" path="res://shaders/materials/wood.tres" id="7_xvsf7"]
+[ext_resource type="PackedScene" uid="uid://bgxba85x6kjvd" path="res://blender/crow.blend" id="9_6qm8q"]
 [ext_resource type="Script" uid="uid://bqehmyoma1axh" path="res://scripts/components/audio_spawner.gd" id="9_woufe"]
 [ext_resource type="AudioStream" uid="uid://0wye6421c487" path="res://audio/bounty_increased.ogg" id="10_sakv4"]
+[ext_resource type="Material" uid="uid://c07u71j8wvm1a" path="res://shaders/materials/crow.tres" id="10_woufe"]
 [ext_resource type="AudioStream" uid="uid://cjm1uedwordvb" path="res://audio/destruction/destruction.ogg" id="11_3lg4r"]
 [ext_resource type="Material" uid="uid://bdqd05r0122jr" path="res://shaders/materials/dark_wood.tres" id="11_q6f52"]
+[ext_resource type="Material" uid="uid://u0vgwivkvds4" path="res://shaders/materials/crow_feet.tres" id="11_woufe"]
 [ext_resource type="PackedScene" uid="uid://5gu0itei5s6b" path="res://scenes/ship/cannon/cannon.tscn" id="12_2xkf5"]
 [ext_resource type="PackedScene" uid="uid://dhiwjfe1tbiqe" path="res://scenes/ship/leak.tscn" id="13_0616w"]
 [ext_resource type="AudioStream" uid="uid://dyc1hsgdn3bf5" path="res://audio/destruction/final_blow.ogg" id="14_r75st"]
@@ -178,6 +181,40 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_4tobq"]
 size = Vector3(8.332031, 7.7306366, 22)
 
+[sub_resource type="Animation" id="Animation_woufe"]
+resource_name = "bobble"
+length = 1.6
+tracks/0/type = "animation"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Ship/crow/AnimationPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": PackedStringArray("Bobble"),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_sakv4"]
+resource_name = "chirp"
+length = 1.6
+tracks/0/type = "animation"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Ship/crow/AnimationPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": PackedStringArray("Chirp"),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3lg4r"]
+_data = {
+&"bobble": SubResource("Animation_woufe"),
+&"chirp": SubResource("Animation_sakv4")
+}
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_wkb1m"]
 size = Vector3(8.387314, 6.131592, 20.746857)
 
@@ -251,6 +288,21 @@ surface_material_override/0 = ExtResource("11_q6f52")
 
 [node name="Door" parent="Ship" index="8" unique_id=891478617]
 surface_material_override/0 = ExtResource("11_q6f52")
+
+[node name="crow" parent="Ship" unique_id=1150498876 instance=ExtResource("9_6qm8q")]
+transform = Transform3D(-0.1785215, 0, -0.100772396, 0, 0.20499998, 0, 0.100772396, 0, -0.1785215, 3.16299, 7.5240707, 9.5961)
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Ship/crow" unique_id=1306612505]
+root_node = NodePath("../../../Sails")
+libraries/ = SubResource("AnimationLibrary_3lg4r")
+autoplay = &"bobble"
+next/bobble = &"chirp"
+next/chirp = &"bobble"
+
+[node name="Crow" parent="Ship/crow/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1150498876, 577715765) index="0" unique_id=1666416377]
+transform = Transform3D(0.99935037, 0.034178913, -0.011427984, -0.035242096, 0.99313074, -0.11157773, 0.0075359493, 0.11190796, 0.9936901, -0.053534694, -0.04704083, 0.07705303)
+surface_material_override/0 = ExtResource("10_woufe")
+surface_material_override/1 = ExtResource("11_woufe")
 
 [node name="Audio" type="Node3D" parent="." unique_id=1358291165]
 script = ExtResource("9_woufe")
@@ -347,3 +399,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04976654, 1.2801514, -0.080
 shape = SubResource("BoxShape3D_wkb1m")
 
 [editable path="Ship"]
+[editable path="Ship/crow"]

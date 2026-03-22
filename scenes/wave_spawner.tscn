@@ -51,7 +51,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_1m6pm"]
 resource_name = "beer"
-length = 6.0333333
+length = 3.0
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -316,7 +316,7 @@ _data = {
 [node name="WaveSpawner" type="AnimationPlayer" unique_id=296502299]
 process_mode = 3
 libraries/ = SubResource("AnimationLibrary_1fnq3")
-autoplay = &"shark"
+autoplay = &"beer"
 script = ExtResource("1_ml4fb")
 
 [node name="SceneSpawner" type="Node3D" parent="." unique_id=1361637462]
