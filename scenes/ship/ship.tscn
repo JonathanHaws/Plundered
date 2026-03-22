@@ -228,21 +228,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.902465, 5.7476196)
 
 [node name="Sails" parent="." unique_id=620150282 instance=ExtResource("6_8ks32")]
 
-[node name="Ship" parent="." unique_id=1780272304 instance=ExtResource("6_q6f52")]
+[node name="Ship" parent="." unique_id=1314934356 instance=ExtResource("6_q6f52")]
 
-[node name="FrontRailing" parent="Ship" index="0" unique_id=1944986263]
-material_override = ExtResource("7_xvsf7")
-
-[node name="Stairs" parent="Ship" index="1" unique_id=1030186889]
+[node name="Stairs" parent="Ship" index="0" unique_id=512882697]
 surface_material_override/0 = ExtResource("7_xvsf7")
 
-[node name="Windows" parent="Ship" index="2" unique_id=1865989860]
+[node name="Windows" parent="Ship" index="1" unique_id=782809499]
 surface_material_override/0 = ExtResource("7_xvsf7")
 
-[node name="BackRailing" parent="Ship" index="3" unique_id=346637085]
+[node name="BackRailing" parent="Ship" index="2" unique_id=1563483399]
 surface_material_override/0 = ExtResource("7_xvsf7")
 
-[node name="Hull" parent="Ship" index="4" unique_id=1312054761]
+[node name="Hull" parent="Ship" index="3" unique_id=1844581095]
 surface_material_override/0 = ExtResource("7_xvsf7")
 
 [node name="Audio" type="Node3D" parent="." unique_id=1358291165]
