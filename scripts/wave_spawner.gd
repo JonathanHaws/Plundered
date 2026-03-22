@@ -48,7 +48,7 @@ var boat_presets = {
 		"speed": 1000,
 		"steer": 50,
 		"health": 3000,
-		"cannon_cooldown_min": 1.0,
+		"cannon_cooldown_min": 2.0,
 		"cannon_cooldown_max": 3.0,
 		"cannon_aim": Vector2(5, 5),
 		"distance_min": 300.0,
@@ -59,6 +59,9 @@ var boat_presets = {
 }
 
 @export var min_separation: float = 25.0
+
+func spawn_random_preset(presets: Array) -> void:
+	spawn_preset_boat(presets[randi() % presets.size()])
 
 func spawn_preset_boat(preset_name: String) -> void:
 	if not boat_presets.has(preset_name):

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://2rhsqc0irh3v"
 path.s3tc="res://.godot/imported/crayon_2.jpg-16d38c0f099f74e7eafa4bfedd54f6fc.s3tc.ctex"
+path.etc2="res://.godot/imported/crayon_2.jpg-16d38c0f099f74e7eafa4bfedd54f6fc.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/crayon_2.jpg"
-dest_files=["res://.godot/imported/crayon_2.jpg-16d38c0f099f74e7eafa4bfedd54f6fc.s3tc.ctex"]
+dest_files=["res://.godot/imported/crayon_2.jpg-16d38c0f099f74e7eafa4bfedd54f6fc.s3tc.ctex", "res://.godot/imported/crayon_2.jpg-16d38c0f099f74e7eafa4bfedd54f6fc.etc2.ctex"]
 
 [params]
 
