@@ -292,17 +292,17 @@ surface_material_override/0 = ExtResource("11_q6f52")
 [node name="crow" parent="Ship" unique_id=1150498876 instance=ExtResource("9_6qm8q")]
 transform = Transform3D(-0.1785215, 0, -0.100772396, 0, 0.20499998, 0, 0.100772396, 0, -0.1785215, 3.16299, 7.5240707, 9.5961)
 
+[node name="Crow" parent="Ship/crow/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1150498876, 577715765) index="0" unique_id=1666416377]
+transform = Transform3D(0.99935037, 0.034178913, -0.011427984, -0.035242096, 0.99313074, -0.11157773, 0.0075359493, 0.11190796, 0.9936901, -0.053534694, -0.04704083, 0.07705303)
+surface_material_override/0 = ExtResource("10_woufe")
+surface_material_override/1 = ExtResource("11_woufe")
+
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Ship/crow" unique_id=1306612505]
 root_node = NodePath("../../../Sails")
 libraries/ = SubResource("AnimationLibrary_3lg4r")
 autoplay = &"bobble"
 next/bobble = &"chirp"
 next/chirp = &"bobble"
-
-[node name="Crow" parent="Ship/crow/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1150498876, 577715765) index="0" unique_id=1666416377]
-transform = Transform3D(0.99935037, 0.034178913, -0.011427984, -0.035242096, 0.99313074, -0.11157773, 0.0075359493, 0.11190796, 0.9936901, -0.053534694, -0.04704083, 0.07705303)
-surface_material_override/0 = ExtResource("10_woufe")
-surface_material_override/1 = ExtResource("11_woufe")
 
 [node name="Audio" type="Node3D" parent="." unique_id=1358291165]
 script = ExtResource("9_woufe")

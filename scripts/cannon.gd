@@ -129,7 +129,10 @@ func ai_aim(delta: float) -> void:
 	ai_cooldown_remaining = get_random_cooldown()
 	
 func aim() -> void:
+	
 	if not aiming: return
 	if Input.is_action_just_pressed("shoot"):
 		player.global_position = $AimSpot.global_position
+		
+		$AnimationPlayer.speed_scale = 1.0 / boat.cannon_cooldown_min
 		$AnimationPlayer.play("fire")	

@@ -21,6 +21,16 @@ func _delete_extra_sails(sail_names: Array[String]) -> void:
 			sail_node.queue_free()
 		sail_names.remove_at(index)
 
+@export var player_group: String = "player"
+var in_range_of_sail
+func _on_enter_sail(body):
+	if body.is_in_group(player_group):
+		in_range_of_sail = true
+func _on_exit_sail(body):
+	if body.is_in_group(player_group):
+		in_range_of_sail= false
+
+
 func _ready() -> void:
 	if not boat: boat = get_parent()
 	#print(boat.sigils[boat.sigil])
@@ -28,7 +38,19 @@ func _ready() -> void:
 	_delete_extra_sails(front_sails)
 	_delete_extra_sails(middle_sails)
 	_delete_extra_sails(back_sails)
-
+	
+	if boat.name == "PlayerShip":
+		$Area3D.body_entered.connect(_on_enter_sail)
+		$Area3D.body_exited.connect(_on_exit_sail)
+		$Area3D2.body_entered.connect(_on_enter_sail)
+		$Area3D2.body_exited.connect(_on_exit_sail)
+		$Area3D3.body_entered.connect(_on_enter_sail)
+		$Area3D3.body_exited.connect(_on_exit_sail)
+	else: 
+		$Area3D.queue_free()
+		$Area3D2.queue_free()
+		$Area3D3.queue_free()
+		
 func _physics_process(_delta: float) -> void:
 	poll()
 
@@ -38,6 +60,60 @@ func poll() -> void:
 	apply_sigil(middle_sails, boat.sigil)
 	apply_sigil(back_sails, boat.sigil)
 	
+	
+	if boat.name == "PlayerShip":
+		if Input.is_action_just_pressed("interact") and in_range_of_sail: # Change sail
+			var owned: Array = Save.data.get("collected_sigils", [])
+			var next = boat.sigil
+			
+			var unlock_all_sigils: bool = false # easy toggle for testing
+			
+			for i in boat.sigils.size():
+				next = (next + 1) % boat.sigils.size()
+				if unlock_all_sigils or boat.sigils[next] == "none" or owned.has(boat.sigils[next]):
+					break
+			
+			boat.sigil = next
+			$Audio.play_random_child()
+			
+			var sigil_name: String = boat.sigils[boat.sigil]
+			if sigil_name == "none":
+				boat.speed = 1000
+				boat.steer = 100
+				boat.cannon_cooldown_min = 0.8
+				
+			if sigil_name == "beer":
+				boat.speed = 800
+				boat.steer = 80
+				boat.cannon_cooldown_min = 0.8
+				boat.set_max_health(800)
+				
+			if sigil_name == "turtle":
+				boat.speed = 500
+				boat.steer = 50	
+				boat.cannon_cooldown_min = 0.8
+				boat.set_max_health(1250)
+				
+			if sigil_name == "doliphin":
+				
+				#print('here', boat.speed, boat.steer)
+				boat.speed = 1500
+				boat.steer = 150
+				boat.cannon_cooldown_min = 0.8
+				boat.set_max_health(1000)
+				
+			if sigil_name == "whale":
+				boat.speed = 900
+				boat.steer = 90
+				boat.cannon_cooldown_min = 0.8
+				boat.set_max_health(1500)
+				
+			if sigil_name == "shark":
+				boat.speed = 1000
+				boat.steer = 100
+				boat.cannon_cooldown_min = 0.3
+				boat.set_max_health(1000)
+
 	#print(boat.sigil)
 	
 func apply_sigil(sail_names: Array[String], sail_index: int = 0) -> void:

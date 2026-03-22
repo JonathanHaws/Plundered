@@ -69,6 +69,7 @@ transform = Transform3D(0.9266599, 0, 0.37590083, 0, 1, 0, -0.37590083, 0, 0.926
 
 [node name="PlayerShip" parent="." unique_id=768453608 instance=ExtResource("8_6e64u")]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
+cannon_cooldown_min = 0.8
 
 [node name="TutorialShip" parent="." unique_id=470330133 instance=ExtResource("8_6e64u")]
 transform = Transform3D(0.82328504, 0, 0.56762826, 0, 1, 0, -0.56762826, 0, 0.82328504, 124.974556, 0, -170.83768)

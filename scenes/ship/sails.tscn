@@ -9,6 +9,12 @@
 [ext_resource type="Material" uid="uid://4wmac4esdrtt" path="res://shaders/materials/wood.tres" id="4_x7ods"]
 [ext_resource type="Texture2D" uid="uid://b1h8tkc3p88tm" path="res://textures/sigils/turtle.png" id="5_jjh78"]
 [ext_resource type="Texture2D" uid="uid://c7qnbm7kc4ek3" path="res://textures/sigils/shark.png" id="6_4ueoe"]
+[ext_resource type="Script" uid="uid://bqehmyoma1axh" path="res://scripts/components/audio_spawner.gd" id="10_jjh78"]
+[ext_resource type="AudioStream" uid="uid://dx6xllai3aapl" path="res://audio/sail/change_sail_1.ogg" id="11_4ueoe"]
+[ext_resource type="AudioStream" uid="uid://cxt6i0pufsnlr" path="res://audio/sail/change_sail_2.ogg" id="12_0cc41"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v1dfq"]
+size = Vector3(0.68217564, 4.4779663, 0.80422777)
 
 [node name="Sails" type="Node3D" unique_id=620150282]
 script = ExtResource("1_e3m1m")
@@ -44,5 +50,41 @@ surface_material_override/1 = ExtResource("4_x7ods")
 [node name="SmallMid" parent="sails" index="6" unique_id=1487524637]
 surface_material_override/0 = ExtResource("3_66l7g")
 surface_material_override/1 = ExtResource("4_x7ods")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=416507607]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1069830895]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.021276712, 2.1491091, 0.29659522)
+shape = SubResource("BoxShape3D_v1dfq")
+debug_color = Color(0.8052622, 0.37007275, 0.5093696, 0.41960785)
+
+[node name="Area3D2" type="Area3D" parent="." unique_id=96726634]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6883106, 8.069982)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=1623109253]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.021276712, 2.1491091, 0.29659522)
+shape = SubResource("BoxShape3D_v1dfq")
+debug_color = Color(0.8052622, 0.37007275, 0.5093696, 0.41960785)
+
+[node name="Area3D3" type="Area3D" parent="." unique_id=397789248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.246954, -5.499509)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D3" unique_id=2036766712]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033216238, 2.0658267, 0.2719226)
+shape = SubResource("BoxShape3D_v1dfq")
+debug_color = Color(0.8052622, 0.37007275, 0.5093696, 0.41960785)
+
+[node name="Audio" type="Node" parent="." unique_id=356829309]
+script = ExtResource("10_jjh78")
+
+[node name="ChangeSail1" type="AudioStreamPlayer" parent="Audio" unique_id=1358945496]
+stream = ExtResource("11_4ueoe")
+volume_db = -12.0
+bus = &"SFX"
+
+[node name="ChangeSail2" type="AudioStreamPlayer" parent="Audio" unique_id=1124103340]
+stream = ExtResource("12_0cc41")
+volume_db = -12.0
+bus = &"SFX"
 
 [editable path="sails"]

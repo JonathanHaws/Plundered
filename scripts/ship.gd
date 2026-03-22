@@ -12,9 +12,12 @@ func set_health_and_max_health(value: float) -> void:
 	health = value
 	$HitArea.HEALTH = health
 	$HitArea.MAX_HEALTH = health
+	
+func set_max_health(value: float) -> void:
+	$HitArea.MAX_HEALTH = value
 
 @export var sigil: int = 0
-var sigils: Array = ["none", "beer", "doliphin", "shark", "turtle", "whale", "jolly_roger"]
+var sigils: Array = ["none", "beer", "doliphin", "shark", "turtle", "whale"]
 
 @export_group('Physics')
 #@export var is_docked: bool = true add if wanting sails to be own control
@@ -50,13 +53,22 @@ func on_ship_sunk() -> void:
 	#print("sunk")
 	sunk = true
 	remove_from_group("boats")
+	
+	
+	var collected: Array = Save.data.get("collected_sigils", []) # ADD SIGIL
+	var sigil_name: String = sigils[sigil]
+	if not collected.has(sigil_name):
+		collected.append(sigil_name)
+		Save.data["collected_sigils"] = collected
+	Save.save_game()
+	
+	
 	if name != player_ship_name:
 		Save.data["bounty"] = Save.data.get("bounty", 0) + 100
 		Save.save_game()
 		$Audio/Bounty.play()
 		
-		
-		for i in 5:
+		for i in randi_range(4, 6):
 			var loot = $HitArea/LootSpawner.spawn()	# spawn loot
 			if loot:
 				
@@ -85,6 +97,12 @@ func apply_boat_controls(forward: float, right: float, _delta: float) -> void:
 func _ready():
 	
 	# replaces static meshses with animatable bodies as they carry momentu
+	
+	if name == player_ship_name:
+		sigil = 0
+		Save.data["collected_sigils"] = []
+		Save.save_game()
+	
 	
 	if name != player_ship_name: # only have crow on player ship
 		$Ship/crow.queue_free()

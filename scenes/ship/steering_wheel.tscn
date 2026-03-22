@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://put8jhjiqpkm" path="res://audio/steer.ogg" id="2_m2w2j"]
 [ext_resource type="PackedScene" uid="uid://cjll2da7x15rp" path="res://blender/wheel.blend" id="3_0ihdb"]
 [ext_resource type="AudioStream" uid="uid://dwemksn0uw6go" path="res://audio/movement/wheel.ogg" id="3_qfkqd"]
-[ext_resource type="AudioStream" uid="uid://cx3p5q6m4a82l" path="res://audio/sail.ogg" id="4_m2w2j"]
+[ext_resource type="AudioStream" uid="uid://cx3p5q6m4a82l" path="res://audio/sail/sail.ogg" id="4_m2w2j"]
 [ext_resource type="Material" uid="uid://4wmac4esdrtt" path="res://shaders/materials/wood.tres" id="4_u0205"]
 [ext_resource type="Material" uid="uid://bdqd05r0122jr" path="res://shaders/materials/dark_wood.tres" id="5_4taih"]
 
