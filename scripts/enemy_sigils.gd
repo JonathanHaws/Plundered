@@ -21,7 +21,7 @@ func _physics_process(_delta: float) -> void:
 		sigil.size = sigil_size
 		
 		sigil.position.x = i * x_offset
-		sigil.modulate.a = 0.75  # 50% transparent
+		sigil.modulate = Color(0, 0, 0, 0.3)
 		
 		add_child(sigil)
 				

@@ -8,9 +8,10 @@
 [ext_resource type="Environment" uid="uid://chlcidt7t3gdg" path="res://shaders/sky.tres" id="5_4848d"]
 [ext_resource type="PackedScene" uid="uid://1kv0584ypolt" path="res://scenes/wave_spawner.tscn" id="6_nrn1y"]
 [ext_resource type="PackedScene" uid="uid://ygu7opd5je0u" path="res://scenes/player.tscn" id="7_c8up5"]
+[ext_resource type="Script" uid="uid://bwo4hhsdoul73" path="res://scripts/enviroment.gd" id="7_rksl4"]
 [ext_resource type="PackedScene" uid="uid://cayjt37m1mgxu" path="res://scenes/ship/ship.tscn" id="8_6e64u"]
 [ext_resource type="Script" uid="uid://pm43grwmg3qo" path="res://scripts/menu/pause_toggle.gd" id="9_uq6qg"]
-[ext_resource type="PackedScene" uid="uid://butlqj718j0gj" path="res://scenes/ui/main.tscn" id="10_24y3c"]
+[ext_resource type="PackedScene" uid="uid://butlqj718j0gj" path="res://scenes/ui/pause.tscn" id="10_24y3c"]
 [ext_resource type="PackedScene" uid="uid://be3qjeh20v4i2" path="res://scenes/barrel.tscn" id="11_3jjmi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6cwgu"]
@@ -46,6 +47,7 @@ offset_bottom = 47.0
 [node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=724377844]
 process_mode = 3
 stream = ExtResource("1_r2ql0")
+volume_db = -5.0
 autoplay = true
 bus = &"SFX"
 
@@ -54,6 +56,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1466732, 0)
 
 [node name="Sky" type="WorldEnvironment" parent="." unique_id=1211110995]
 environment = ExtResource("5_4848d")
+script = ExtResource("7_rksl4")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=676342986]
 transform = Transform3D(-0.6868846, 0.44353354, -0.5757322, 0, 0.79218316, 0.61028343, 0.7267665, 0.41919428, -0.5441384, -3.3399532, 19.654726, 0.13701057)

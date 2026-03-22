@@ -130,7 +130,7 @@ func spawn_boat_out_of_view(
 	if idx != -1: boat.sigil = idx
 	
 	boat.set_health_and_max_health(_health)
-	
+	$SpawnSound.play()
 	#print("Boat:",
 		#" speed=", _speed,
 		#" steer=", _steer,

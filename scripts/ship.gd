@@ -4,6 +4,7 @@ extends RigidBody3D
 @export var health: float = 1000.0
 @export var speed: float = 1000
 @export var steer: float = 100
+
 @export var cannon_cooldown_min: float = 8.0 ## Minimum duration enemy ships will wait between shots
 @export var cannon_cooldown_max: float = 12.0 ## Add this to the mimum duration and its maximum duration
 @export var cannon_aim: Vector2 = Vector2(5, 5) ## How inaccurate Enemies shots will be. 
@@ -11,7 +12,6 @@ func set_health_and_max_health(value: float) -> void:
 	health = value
 	$HitArea.HEALTH = health
 	$HitArea.MAX_HEALTH = health
-
 
 @export var sigil: int = 0
 var sigils: Array = ["none", "beer", "doliphin", "shark", "turtle", "whale", "jolly_roger"]
@@ -21,10 +21,12 @@ var sigils: Array = ["none", "beer", "doliphin", "shark", "turtle", "whale", "jo
 @export var sink_free_y: float = -50.0
 @export var gravity: float = 9.8
 @export var buoyancy: float = 3.1
-@export var water_drag: float = 0.02
+@export var water_drag: float = 0.015
 @export var air_drag: float = 0.01
-@export var water_angular_drag: float = 0.05
+@export var water_angular_drag: float = 0.04
 @export var air_angular_drag: float = 0.01
+@export var speed_multiplier: float = 0.8 ## BANDAID FINAL TWEAKS
+@export var steer_multiplier: float = 0.8 ## BANDAID FINAL TWEAKS
 var submerged: bool = false
 var sunk: bool = false
 
@@ -77,8 +79,8 @@ func apply_boat_controls(forward: float, right: float, _delta: float) -> void:
 	forward_direction.y = 0 # avoid flying ships going to vahalla... only apply force x / y
 	forward_direction = forward_direction.normalized()
 	
-	apply_central_force(forward_direction * forward * speed * _delta)
-	apply_torque_impulse(Vector3.UP * right * steer * _delta)
+	apply_central_force(forward_direction * forward * (speed * speed_multiplier) * _delta)
+	apply_torque_impulse(Vector3.UP * right * (steer * steer_multiplier) * _delta)
 	
 func _ready():
 	

@@ -67,11 +67,11 @@ script = ExtResource("2_ynvfx")
 scene_file = "uid://c120cg3r8x66m"
 node_to_replace = NodePath("../..")
 
-[node name="Graphics" type="Button" parent="VBoxContainer" unique_id=2018019839 node_paths=PackedStringArray("node_to_replace") groups=["menu_hovered_sound", "menu_pressed_sound"]]
+[node name="Video" type="Button" parent="VBoxContainer" unique_id=2018019839 node_paths=PackedStringArray("node_to_replace") groups=["menu_hovered_sound", "menu_pressed_sound"]]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("5_ec7jh")
-text = "GRAPHICS"
+text = "VIDEO"
 script = ExtResource("2_ynvfx")
 scene_file = "uid://nquefxh3rvg3"
 node_to_replace = NodePath("../..")

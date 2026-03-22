@@ -115,25 +115,29 @@ script = ExtResource("2_0285d")
 [node name="Shoot1" type="AudioStreamPlayer3D" parent="Audio" unique_id=1685231180]
 process_mode = 3
 stream = ExtResource("3_uvlre")
-volume_db = -5.0
+volume_db = -8.0
+max_db = -1.5
 bus = &"SFX"
 
 [node name="Shoot2" type="AudioStreamPlayer3D" parent="Audio" unique_id=1199407024]
 process_mode = 3
 stream = ExtResource("4_ogt75")
-volume_db = -5.0
+volume_db = -8.0
+max_db = -1.5
 bus = &"SFX"
 
 [node name="Shoot3" type="AudioStreamPlayer3D" parent="Audio" unique_id=1580190067]
 process_mode = 3
 stream = ExtResource("5_4a4je")
-volume_db = -5.0
+volume_db = -8.0
+max_db = -1.5
 bus = &"SFX"
 
 [node name="Shoot4" type="AudioStreamPlayer3D" parent="Audio" unique_id=615868463]
 process_mode = 3
 stream = ExtResource("6_ediu4")
-volume_db = -5.0
+volume_db = -8.0
+max_db = -1.5
 bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1380559551]

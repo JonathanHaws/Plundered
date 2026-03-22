@@ -177,8 +177,11 @@ surface_material_override/1 = ExtResource("3_mhtw8")
 script = ExtResource("5_gdyii")
 HEALTH = 1.0
 MAX_HEALTH = 1.0
+PERSISTENT_HEALTH = false
 REACTION_ANIM_PLAYER = NodePath("../AnimationPlayer")
 DEATH_ANIM = "BROKEN"
+RESPAWN_WHEN_DEATHS_INCREMENT = false
+RESPAWN_WHEN_RESTS_INCREMENT = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitShape" unique_id=1187911042]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06062132, 0.26501465, 0.013549805)
