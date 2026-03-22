@@ -12,9 +12,11 @@
 [ext_resource type="Script" uid="uid://bqehmyoma1axh" path="res://scripts/components/audio_spawner.gd" id="10_jjh78"]
 [ext_resource type="AudioStream" uid="uid://dx6xllai3aapl" path="res://audio/sail/change_sail_1.ogg" id="11_4ueoe"]
 [ext_resource type="AudioStream" uid="uid://cxt6i0pufsnlr" path="res://audio/sail/change_sail_2.ogg" id="12_0cc41"]
+[ext_resource type="Theme" uid="uid://ch3ag1y51wmlm" path="res://resources/default_theme.tres" id="13_4ueoe"]
+[ext_resource type="Script" uid="uid://cljkg1218oi1y" path="res://scenes/ui/ui_scale.gd" id="14_0cc41"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v1dfq"]
-size = Vector3(0.68217564, 4.4779663, 0.80422777)
+size = Vector3(0.8358271, 7.432831, 1.0122142)
 
 [node name="Sails" type="Node3D" unique_id=620150282]
 script = ExtResource("1_e3m1m")
@@ -70,9 +72,37 @@ debug_color = Color(0.8052622, 0.37007275, 0.5093696, 0.41960785)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.246954, -5.499509)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D3" unique_id=2036766712]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033216238, 2.0658267, 0.2719226)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.021930575, 3.5432587, 0.27851772)
 shape = SubResource("BoxShape3D_v1dfq")
 debug_color = Color(0.8052622, 0.37007275, 0.5093696, 0.41960785)
+
+[node name="Prompt" type="Control" parent="." unique_id=1711350859]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Prompt" unique_id=653434929]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -67.0
+offset_top = -37.0
+offset_right = 68.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 1.5)
+theme = ExtResource("13_4ueoe")
+theme_override_colors/font_color = Color(0.97, 0.97, 0.97, 0.5411765)
+text = "CYCLE SAIL POWERUPS..."
+script = ExtResource("14_0cc41")
 
 [node name="Audio" type="Node" parent="." unique_id=356829309]
 script = ExtResource("10_jjh78")

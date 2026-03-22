@@ -61,7 +61,15 @@ func poll() -> void:
 	apply_sigil(back_sails, boat.sigil)
 	
 	
+
+	
 	if boat.name == "PlayerShip":
+		
+		if in_range_of_sail:
+			$Prompt.visible = true
+		else:
+			$Prompt.visible = false
+		
 		if Input.is_action_just_pressed("interact") and in_range_of_sail: # Change sail
 			var owned: Array = Save.data.get("collected_sigils", [])
 			var next = boat.sigil
